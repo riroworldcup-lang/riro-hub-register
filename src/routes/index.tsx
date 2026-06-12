@@ -1,8 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
 import heroRobot from "@/assets/hero-robot.jpg";
-import { COMPETITIONS } from "@/lib/competitions";
+import { COMPETITIONS as FALLBACK_COMPETITIONS } from "@/lib/competitions";
 import { RegistrationForm } from "@/components/RegistrationForm";
+import { listCompetitions, listGallery } from "@/lib/content.functions";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from "@/components/ui/carousel";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
