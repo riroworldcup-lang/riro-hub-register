@@ -173,40 +173,84 @@ function Home() {
               </h3>
             </div>
             <div className="text-left sm:text-right">
-              <p className="font-mono text-xs text-muted-foreground">17 CORE COMPETITIONS</p>
+              <p className="font-mono text-xs text-muted-foreground">{competitions.length} CORE COMPETITIONS</p>
               <p className="font-mono text-xs text-muted-foreground">SENIOR / JUNIOR DIVISIONS</p>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-px bg-border border border-border">
-            {COMPETITIONS.map((c, i) => (
-              <div
-                key={c.name}
-                className="bg-background p-6 sm:p-7 group hover:bg-primary/5 transition-colors flex flex-col"
-              >
-                <div className="flex justify-between items-start mb-4">
-                  <span className="font-mono text-[10px] text-primary block">
-                    {String(i + 1).padStart(2, "0")} / {c.category.toUpperCase()}
-                  </span>
-                  {c.levels && (
-                    <span className="font-mono text-[9px] text-muted-foreground border border-border px-1.5 py-0.5">
-                      {c.levels.join(" • ")}
-                    </span>
-                  )}
-                </div>
-                <h4 className="text-lg sm:text-xl font-bold uppercase mb-2 leading-tight">{c.name}</h4>
-                <p className="text-xs sm:text-sm text-muted-foreground flex-1">{c.description}</p>
-                <div className="mt-4 pt-4 border-t border-border font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-                  Rules → Soon
-                </div>
-              </div>
-            ))}
-          </div>
+          <Carousel opts={{ align: "start", loop: false }} className="relative px-2 sm:px-12">
+            <CarouselContent className="-ml-4">
+              {competitions.map((c: any, i: number) => (
+                <CarouselItem key={c.id ?? c.name} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                  <div className="bg-background border border-border p-6 sm:p-7 h-full flex flex-col hover:bg-primary/5 transition-colors rounded-sm">
+                    <div className="flex justify-between items-start mb-4 gap-2">
+                      <span className="font-mono text-[10px] text-primary block">
+                        {String(i + 1).padStart(2, "0")} / {c.category.toUpperCase()}
+                      </span>
+                      {c.levels && c.levels.length > 0 && (
+                        <span className="font-mono text-[9px] text-muted-foreground border border-border px-1.5 py-0.5">
+                          {c.levels.join(" • ")}
+                        </span>
+                      )}
+                    </div>
+                    <h4 className="text-lg sm:text-xl font-bold uppercase mb-2 leading-tight">{c.name}</h4>
+                    <p className="text-xs sm:text-sm text-muted-foreground flex-1">{c.description}</p>
+                    <div className="mt-4 pt-4 border-t border-border font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                      Rules → Soon
+                    </div>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="hidden sm:flex -left-2" />
+            <CarouselNext className="hidden sm:flex -right-2" />
+          </Carousel>
           <p className="mt-8 font-mono text-xs sm:text-sm text-muted-foreground italic text-center">
-            Registration fees and competition rules will be updated soon.
+            Swipe or use the arrows to browse all competitions.
           </p>
         </div>
       </section>
+
+      {/* Gallery */}
+      {gallery.length > 0 && (
+        <section id="gallery" className="py-20 sm:py-28 px-4 sm:px-6 bg-white/[0.02] border-y border-border">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-6 mb-12">
+              <div>
+                <h2 className="font-mono text-primary text-sm mb-2">[ GALLERY ]</h2>
+                <h3 className="text-3xl sm:text-5xl font-black uppercase tracking-tighter italic">
+                  From The Arena
+                </h3>
+              </div>
+              <p className="font-mono text-xs text-muted-foreground">{gallery.length} PHOTOS</p>
+            </div>
+            <Carousel opts={{ align: "start", loop: true }} className="relative px-2 sm:px-12">
+              <CarouselContent className="-ml-4">
+                {gallery.map((img: any) => (
+                  <CarouselItem key={img.id} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
+                    <figure className="border border-border rounded-sm overflow-hidden bg-background">
+                      <img
+                        src={img.image_url}
+                        alt={img.caption || "RIRO World Cup 2026 gallery image"}
+                        loading="lazy"
+                        className="w-full aspect-[4/3] object-cover"
+                      />
+                      {img.caption && (
+                        <figcaption className="p-3 font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+                          {img.caption}
+                        </figcaption>
+                      )}
+                    </figure>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="hidden sm:flex -left-2" />
+              <CarouselNext className="hidden sm:flex -right-2" />
+            </Carousel>
+          </div>
+        </section>
+      )}
+
 
       {/* Registration */}
       <section id="register" className="py-20 sm:py-28 px-4 sm:px-6 bg-white/[0.02] border-y border-border">
