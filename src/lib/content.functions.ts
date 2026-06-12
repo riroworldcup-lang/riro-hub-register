@@ -27,7 +27,7 @@ export const listCompetitions = createServerFn({ method: "GET" }).handler(async 
   const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
   const { data, error } = await supabaseAdmin
     .from("competitions")
-    .select("id,name,category,description,levels,sort_order")
+    .select("id,name,category,description,levels,sort_order,image_url")
     .order("sort_order", { ascending: true })
     .order("created_at", { ascending: true });
   if (error) throw new Error(error.message);
@@ -84,6 +84,7 @@ const competitionSchema = z.object({
   description: z.string().min(1).max(500),
   levels: z.array(z.string().min(1).max(40)).max(8).default([]),
   sort_order: z.number().int().min(0).max(100000).default(0),
+  image_url: z.string().url().max(2000).optional().nullable(),
 });
 
 export const createCompetition = createServerFn({ method: "POST" })
