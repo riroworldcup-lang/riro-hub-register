@@ -141,6 +141,9 @@ function AdminPage() {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-10">
         <ChargesPanel updateCharges={updateCharges} />
+        <GalleryPanel />
+        <CompetitionsPanel />
+
 
         <section>
           <div className="flex items-center justify-between mb-4">
