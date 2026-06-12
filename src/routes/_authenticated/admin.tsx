@@ -373,7 +373,7 @@ function CompetitionsPanel() {
 
   const q = useQuery({ queryKey: ["admin-competitions"], queryFn: () => fetchList() });
 
-  const [form, setForm] = useState({ name: "", category: "Robotics", description: "", levels: "", sort_order: 0 });
+  const [form, setForm] = useState({ name: "", category: "Robotics", description: "", levels: "", sort_order: 0, image_url: "" });
 
   const invalidate = () => {
     qc.invalidateQueries({ queryKey: ["admin-competitions"] });
@@ -391,11 +391,12 @@ function CompetitionsPanel() {
         description: form.description,
         levels: parseLevels(form.levels),
         sort_order: form.sort_order,
+        image_url: form.image_url || null,
       },
     }),
     onSuccess: () => {
       toast.success("Competition added.");
-      setForm({ name: "", category: "Robotics", description: "", levels: "", sort_order: 0 });
+      setForm({ name: "", category: "Robotics", description: "", levels: "", sort_order: 0, image_url: "" });
       invalidate();
     },
     onError: (e: Error) => toast.error(e.message),
@@ -434,6 +435,8 @@ function CompetitionsPanel() {
           className="px-4 py-2 bg-primary text-primary-foreground font-mono font-bold uppercase tracking-widest text-[10px] rounded-sm disabled:opacity-50">
           {addMut.isPending ? "Adding..." : "Add"}
         </button>
+        <input value={form.image_url} onChange={(e) => setForm({ ...form, image_url: e.target.value })}
+          placeholder="Image URL (optional)" className="lg:col-span-3 bg-white/5 border border-border rounded-sm px-3 py-2 text-sm" />
         <textarea value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })}
           placeholder="Description" rows={2}
           className="lg:col-span-6 bg-white/5 border border-border rounded-sm px-3 py-2 text-sm" />
@@ -461,9 +464,15 @@ function CompetitionRow({ comp, onSave, onDelete }: any) {
   const [v, setV] = useState({
     name: comp.name, category: comp.category, description: comp.description,
     levels: (comp.levels || []).join(", "), sort_order: comp.sort_order ?? 0,
+    image_url: comp.image_url || "",
   });
   return (
     <div className="border border-border rounded-sm p-3 grid sm:grid-cols-2 lg:grid-cols-6 gap-2">
+      {v.image_url && (
+        <div className="lg:col-span-6">
+          <img src={v.image_url} alt={v.name} className="w-full h-24 object-cover rounded-sm" />
+        </div>
+      )}
       <input value={v.name} onChange={(e) => setV({ ...v, name: e.target.value })}
         className="lg:col-span-2 bg-white/5 border border-border rounded-sm px-2 py-1.5 text-xs" />
       <input value={v.category} onChange={(e) => setV({ ...v, category: e.target.value })}
@@ -478,6 +487,7 @@ function CompetitionRow({ comp, onSave, onDelete }: any) {
           name: v.name, category: v.category, description: v.description,
           levels: v.levels.split(",").map((x: string) => x.trim()).filter(Boolean),
           sort_order: v.sort_order,
+          image_url: v.image_url || null,
         })}
           className="flex-1 px-3 py-1.5 bg-primary text-primary-foreground font-mono font-bold uppercase tracking-widest text-[10px] rounded-sm">
           Save
@@ -487,6 +497,9 @@ function CompetitionRow({ comp, onSave, onDelete }: any) {
           Del
         </button>
       </div>
+      <input value={v.image_url} onChange={(e) => setV({ ...v, image_url: e.target.value })}
+        placeholder="Image URL"
+        className="lg:col-span-3 bg-white/5 border border-border rounded-sm px-2 py-1.5 text-xs" />
       <textarea value={v.description} onChange={(e) => setV({ ...v, description: e.target.value })}
         rows={2}
         className="lg:col-span-6 bg-white/5 border border-border rounded-sm px-2 py-1.5 text-xs" />
