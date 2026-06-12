@@ -327,7 +327,7 @@ function GalleryPanel() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {images.map((img: any) => (
             <GalleryEditCard key={img.id} img={img}
-              onSave={(caption, order) => updMut.mutate({ id: img.id, caption, sort_order: order })}
+              onSave={(caption: string, order: number) => updMut.mutate({ id: img.id, caption, sort_order: order })}
               onDelete={() => { if (confirm("Delete this image?")) delMut.mutate(img.id); }}
             />
           ))}
