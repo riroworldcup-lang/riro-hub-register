@@ -35,6 +35,21 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
+  const fetchComps = useServerFn(listCompetitions);
+  const fetchGallery = useServerFn(listGallery);
+  const compsQuery = useQuery({
+    queryKey: ["competitions"],
+    queryFn: () => fetchComps(),
+  });
+  const galleryQuery = useQuery({
+    queryKey: ["gallery"],
+    queryFn: () => fetchGallery(),
+  });
+  const competitions = compsQuery.data?.competitions?.length
+    ? compsQuery.data.competitions
+    : FALLBACK_COMPETITIONS.map((c, i) => ({ ...c, id: String(i), levels: c.levels ?? [] }));
+  const gallery = galleryQuery.data?.images ?? [];
+
   return (
     <div className="bg-background text-foreground font-sans selection:bg-primary selection:text-primary-foreground">
       {/* Marquee Banner */}
