@@ -38,6 +38,7 @@ export type Database = {
           created_at: string
           description: string
           id: string
+          image_url: string | null
           levels: string[]
           name: string
           sort_order: number
@@ -48,6 +49,7 @@ export type Database = {
           created_at?: string
           description: string
           id?: string
+          image_url?: string | null
           levels?: string[]
           name: string
           sort_order?: number
@@ -58,6 +60,7 @@ export type Database = {
           created_at?: string
           description?: string
           id?: string
+          image_url?: string | null
           levels?: string[]
           name?: string
           sort_order?: number
