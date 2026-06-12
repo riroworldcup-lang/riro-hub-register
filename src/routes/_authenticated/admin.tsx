@@ -11,6 +11,17 @@ import {
   checkIsAdmin,
   updateChargesSetting,
 } from "@/lib/admin.functions";
+import {
+  listGallery,
+  createGalleryImage,
+  updateGalleryImage,
+  deleteGalleryImage,
+  listCompetitions,
+  createCompetition,
+  updateCompetition,
+  deleteCompetition,
+} from "@/lib/content.functions";
+
 
 export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({
