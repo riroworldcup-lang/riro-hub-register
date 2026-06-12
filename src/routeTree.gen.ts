@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as GalleryRouteImport } from './routes/gallery'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CompetitionsRouteImport } from './routes/competitions'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AboutRouteImport } from './routes/about'
@@ -32,6 +33,11 @@ const RegisterRoute = RegisterRouteImport.update({
 const GalleryRoute = GalleryRouteImport.update({
   id: '/gallery',
   path: '/gallery',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CompetitionsRoute = CompetitionsRouteImport.update({
@@ -69,6 +75,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
   '/competitions': typeof CompetitionsRoute
+  '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
   '/register': typeof RegisterRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -79,6 +86,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
   '/competitions': typeof CompetitionsRoute
+  '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
   '/register': typeof RegisterRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -91,6 +99,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
   '/competitions': typeof CompetitionsRoute
+  '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
   '/register': typeof RegisterRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -103,6 +112,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/auth'
     | '/competitions'
+    | '/contact'
     | '/gallery'
     | '/register'
     | '/sitemap.xml'
@@ -113,6 +123,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/auth'
     | '/competitions'
+    | '/contact'
     | '/gallery'
     | '/register'
     | '/sitemap.xml'
@@ -124,6 +135,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/auth'
     | '/competitions'
+    | '/contact'
     | '/gallery'
     | '/register'
     | '/sitemap.xml'
@@ -136,6 +148,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   AuthRoute: typeof AuthRoute
   CompetitionsRoute: typeof CompetitionsRoute
+  ContactRoute: typeof ContactRoute
   GalleryRoute: typeof GalleryRoute
   RegisterRoute: typeof RegisterRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -162,6 +175,13 @@ declare module '@tanstack/react-router' {
       path: '/gallery'
       fullPath: '/gallery'
       preLoaderRoute: typeof GalleryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/competitions': {
@@ -226,6 +246,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   AuthRoute: AuthRoute,
   CompetitionsRoute: CompetitionsRoute,
+  ContactRoute: ContactRoute,
   GalleryRoute: GalleryRoute,
   RegisterRoute: RegisterRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
