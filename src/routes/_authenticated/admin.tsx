@@ -447,7 +447,7 @@ function CompetitionsPanel() {
         <div className="space-y-2">
           {rows.map((c: any) => (
             <CompetitionRow key={c.id} comp={c}
-              onSave={(v) => updMut.mutate({ id: c.id, ...v })}
+              onSave={(v: any) => updMut.mutate({ id: c.id, ...v })}
               onDelete={() => { if (confirm(`Delete "${c.name}"?`)) delMut.mutate(c.id); }}
             />
           ))}
