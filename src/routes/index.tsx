@@ -182,21 +182,31 @@ function Home() {
             <CarouselContent className="-ml-4">
               {competitions.map((c: any, i: number) => (
                 <CarouselItem key={c.id ?? c.name} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
-                  <div className="bg-background border border-border p-6 sm:p-7 h-full flex flex-col hover:bg-primary/5 transition-colors rounded-sm">
-                    <div className="flex justify-between items-start mb-4 gap-2">
-                      <span className="font-mono text-[10px] text-primary block">
-                        {String(i + 1).padStart(2, "0")} / {c.category.toUpperCase()}
-                      </span>
-                      {c.levels && c.levels.length > 0 && (
-                        <span className="font-mono text-[9px] text-muted-foreground border border-border px-1.5 py-0.5">
-                          {c.levels.join(" • ")}
+                  <div className="bg-background border border-border h-full flex flex-col hover:bg-primary/5 transition-colors rounded-sm overflow-hidden">
+                    {c.image_url && (
+                      <img
+                        src={c.image_url}
+                        alt={c.name}
+                        loading="lazy"
+                        className="w-full h-40 object-cover"
+                      />
+                    )}
+                    <div className="p-6 sm:p-7 flex flex-col flex-1">
+                      <div className="flex justify-between items-start mb-4 gap-2">
+                        <span className="font-mono text-[10px] text-primary block">
+                          {String(i + 1).padStart(2, "0")} / {c.category.toUpperCase()}
                         </span>
-                      )}
-                    </div>
-                    <h4 className="text-lg sm:text-xl font-bold uppercase mb-2 leading-tight">{c.name}</h4>
-                    <p className="text-xs sm:text-sm text-muted-foreground flex-1">{c.description}</p>
-                    <div className="mt-4 pt-4 border-t border-border font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-                      Rules → Soon
+                        {c.levels && c.levels.length > 0 && (
+                          <span className="font-mono text-[9px] text-muted-foreground border border-border px-1.5 py-0.5">
+                            {c.levels.join(" • ")}
+                          </span>
+                        )}
+                      </div>
+                      <h4 className="text-lg sm:text-xl font-bold uppercase mb-2 leading-tight">{c.name}</h4>
+                      <p className="text-xs sm:text-sm text-muted-foreground flex-1">{c.description}</p>
+                      <div className="mt-4 pt-4 border-t border-border font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                        Rules → Soon
+                      </div>
                     </div>
                   </div>
                 </CarouselItem>
