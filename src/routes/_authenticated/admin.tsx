@@ -11,6 +11,17 @@ import {
   checkIsAdmin,
   updateChargesSetting,
 } from "@/lib/admin.functions";
+import {
+  listGallery,
+  createGalleryImage,
+  updateGalleryImage,
+  deleteGalleryImage,
+  listCompetitions,
+  createCompetition,
+  updateCompetition,
+  deleteCompetition,
+} from "@/lib/content.functions";
+
 
 export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({
@@ -130,6 +141,9 @@ function AdminPage() {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-10">
         <ChargesPanel updateCharges={updateCharges} />
+        <GalleryPanel />
+        <CompetitionsPanel />
+
 
         <section>
           <div className="flex items-center justify-between mb-4">
@@ -238,5 +252,244 @@ function ChargesPanel({ updateCharges }: { updateCharges: any }) {
         />
       </div>
     </section>
+  );
+}
+
+function GalleryPanel() {
+  const qc = useQueryClient();
+  const fetchList = useServerFn(listGallery);
+  const create = useServerFn(createGalleryImage);
+  const update = useServerFn(updateGalleryImage);
+  const del = useServerFn(deleteGalleryImage);
+
+  const q = useQuery({ queryKey: ["admin-gallery"], queryFn: () => fetchList() });
+  const [url, setUrl] = useState("");
+  const [caption, setCaption] = useState("");
+  const [sort, setSort] = useState(0);
+
+  const invalidate = () => {
+    qc.invalidateQueries({ queryKey: ["admin-gallery"] });
+    qc.invalidateQueries({ queryKey: ["gallery"] });
+  };
+
+  const addMut = useMutation({
+    mutationFn: () =>
+      create({ data: { image_url: url, caption: caption || null, sort_order: sort } }),
+    onSuccess: () => {
+      toast.success("Image added.");
+      setUrl(""); setCaption(""); setSort(0);
+      invalidate();
+    },
+    onError: (e: Error) => toast.error(e.message),
+  });
+
+  const delMut = useMutation({
+    mutationFn: (id: string) => del({ data: { id } }),
+    onSuccess: () => { toast.success("Removed."); invalidate(); },
+    onError: (e: Error) => toast.error(e.message),
+  });
+
+  const updMut = useMutation({
+    mutationFn: (v: { id: string; caption: string; sort_order: number }) =>
+      update({ data: v }),
+    onSuccess: () => { toast.success("Updated."); invalidate(); },
+    onError: (e: Error) => toast.error(e.message),
+  });
+
+  const images = q.data?.images ?? [];
+
+  return (
+    <section className="border border-border rounded-sm p-6">
+      <h2 className="font-mono text-primary text-sm mb-2">[ HOMEPAGE GALLERY ]</h2>
+      <p className="text-sm text-muted-foreground mb-5">
+        Paste any public image URL. Images appear as a slider on the homepage.
+      </p>
+      <div className="grid sm:grid-cols-[2fr_1.4fr_80px_auto] gap-3 mb-6">
+        <input value={url} onChange={(e) => setUrl(e.target.value)}
+          placeholder="https://image.url/photo.jpg"
+          className="bg-white/5 border border-border rounded-sm px-3 py-2 text-sm" />
+        <input value={caption} onChange={(e) => setCaption(e.target.value)}
+          placeholder="Caption (optional)"
+          className="bg-white/5 border border-border rounded-sm px-3 py-2 text-sm" />
+        <input type="number" value={sort} onChange={(e) => setSort(Number(e.target.value))}
+          placeholder="Order"
+          className="bg-white/5 border border-border rounded-sm px-3 py-2 text-sm" />
+        <button onClick={() => url && addMut.mutate()} disabled={addMut.isPending || !url}
+          className="px-4 py-2 bg-primary text-primary-foreground font-mono font-bold uppercase tracking-widest text-[10px] rounded-sm disabled:opacity-50">
+          {addMut.isPending ? "Adding..." : "Add"}
+        </button>
+      </div>
+      {q.isLoading ? (
+        <div className="p-6 text-center text-muted-foreground font-mono">Loading...</div>
+      ) : images.length === 0 ? (
+        <div className="p-8 text-center text-muted-foreground font-mono border border-border rounded-sm">No images yet.</div>
+      ) : (
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {images.map((img: any) => (
+            <GalleryEditCard key={img.id} img={img}
+              onSave={(caption, order) => updMut.mutate({ id: img.id, caption, sort_order: order })}
+              onDelete={() => { if (confirm("Delete this image?")) delMut.mutate(img.id); }}
+            />
+          ))}
+        </div>
+      )}
+    </section>
+  );
+}
+
+function GalleryEditCard({ img, onSave, onDelete }: any) {
+  const [caption, setCaption] = useState(img.caption || "");
+  const [order, setOrder] = useState(img.sort_order ?? 0);
+  return (
+    <div className="border border-border rounded-sm overflow-hidden bg-background">
+      <img src={img.image_url} alt={img.caption || ""} className="w-full aspect-[4/3] object-cover" />
+      <div className="p-3 space-y-2">
+        <input value={caption} onChange={(e) => setCaption(e.target.value)}
+          placeholder="Caption"
+          className="w-full bg-white/5 border border-border rounded-sm px-2 py-1.5 text-xs" />
+        <div className="flex gap-2">
+          <input type="number" value={order} onChange={(e) => setOrder(Number(e.target.value))}
+            className="w-20 bg-white/5 border border-border rounded-sm px-2 py-1.5 text-xs" />
+          <button onClick={() => onSave(caption, order)}
+            className="flex-1 px-3 py-1.5 bg-primary text-primary-foreground font-mono font-bold uppercase tracking-widest text-[10px] rounded-sm">
+            Save
+          </button>
+          <button onClick={onDelete}
+            className="px-3 py-1.5 border border-destructive text-destructive font-mono font-bold uppercase tracking-widest text-[10px] rounded-sm">
+            Del
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function CompetitionsPanel() {
+  const qc = useQueryClient();
+  const fetchList = useServerFn(listCompetitions);
+  const create = useServerFn(createCompetition);
+  const update = useServerFn(updateCompetition);
+  const del = useServerFn(deleteCompetition);
+
+  const q = useQuery({ queryKey: ["admin-competitions"], queryFn: () => fetchList() });
+
+  const [form, setForm] = useState({ name: "", category: "Robotics", description: "", levels: "", sort_order: 0 });
+
+  const invalidate = () => {
+    qc.invalidateQueries({ queryKey: ["admin-competitions"] });
+    qc.invalidateQueries({ queryKey: ["competitions"] });
+  };
+
+  const parseLevels = (s: string) =>
+    s.split(",").map((x) => x.trim()).filter(Boolean);
+
+  const addMut = useMutation({
+    mutationFn: () => create({
+      data: {
+        name: form.name,
+        category: form.category,
+        description: form.description,
+        levels: parseLevels(form.levels),
+        sort_order: form.sort_order,
+      },
+    }),
+    onSuccess: () => {
+      toast.success("Competition added.");
+      setForm({ name: "", category: "Robotics", description: "", levels: "", sort_order: 0 });
+      invalidate();
+    },
+    onError: (e: Error) => toast.error(e.message),
+  });
+
+  const delMut = useMutation({
+    mutationFn: (id: string) => del({ data: { id } }),
+    onSuccess: () => { toast.success("Deleted."); invalidate(); },
+    onError: (e: Error) => toast.error(e.message),
+  });
+
+  const updMut = useMutation({
+    mutationFn: (v: any) => update({ data: v }),
+    onSuccess: () => { toast.success("Saved."); invalidate(); },
+    onError: (e: Error) => toast.error(e.message),
+  });
+
+  const rows = q.data?.competitions ?? [];
+
+  return (
+    <section className="border border-border rounded-sm p-6">
+      <h2 className="font-mono text-primary text-sm mb-2">[ COMPETITIONS ]</h2>
+      <p className="text-sm text-muted-foreground mb-5">
+        Add, edit, or remove competitions shown on the homepage carousel.
+      </p>
+      <div className="grid sm:grid-cols-2 lg:grid-cols-6 gap-3 mb-6">
+        <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })}
+          placeholder="Name" className="lg:col-span-2 bg-white/5 border border-border rounded-sm px-3 py-2 text-sm" />
+        <input value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })}
+          placeholder="Category" className="bg-white/5 border border-border rounded-sm px-3 py-2 text-sm" />
+        <input value={form.levels} onChange={(e) => setForm({ ...form, levels: e.target.value })}
+          placeholder="Levels (comma)" className="bg-white/5 border border-border rounded-sm px-3 py-2 text-sm" />
+        <input type="number" value={form.sort_order} onChange={(e) => setForm({ ...form, sort_order: Number(e.target.value) })}
+          placeholder="Order" className="bg-white/5 border border-border rounded-sm px-3 py-2 text-sm" />
+        <button onClick={() => form.name && form.description && addMut.mutate()} disabled={addMut.isPending}
+          className="px-4 py-2 bg-primary text-primary-foreground font-mono font-bold uppercase tracking-widest text-[10px] rounded-sm disabled:opacity-50">
+          {addMut.isPending ? "Adding..." : "Add"}
+        </button>
+        <textarea value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })}
+          placeholder="Description" rows={2}
+          className="lg:col-span-6 bg-white/5 border border-border rounded-sm px-3 py-2 text-sm" />
+      </div>
+
+      {q.isLoading ? (
+        <div className="p-6 text-center text-muted-foreground font-mono">Loading...</div>
+      ) : rows.length === 0 ? (
+        <div className="p-8 text-center text-muted-foreground font-mono border border-border rounded-sm">No competitions yet.</div>
+      ) : (
+        <div className="space-y-2">
+          {rows.map((c: any) => (
+            <CompetitionRow key={c.id} comp={c}
+              onSave={(v) => updMut.mutate({ id: c.id, ...v })}
+              onDelete={() => { if (confirm(`Delete "${c.name}"?`)) delMut.mutate(c.id); }}
+            />
+          ))}
+        </div>
+      )}
+    </section>
+  );
+}
+
+function CompetitionRow({ comp, onSave, onDelete }: any) {
+  const [v, setV] = useState({
+    name: comp.name, category: comp.category, description: comp.description,
+    levels: (comp.levels || []).join(", "), sort_order: comp.sort_order ?? 0,
+  });
+  return (
+    <div className="border border-border rounded-sm p-3 grid sm:grid-cols-2 lg:grid-cols-6 gap-2">
+      <input value={v.name} onChange={(e) => setV({ ...v, name: e.target.value })}
+        className="lg:col-span-2 bg-white/5 border border-border rounded-sm px-2 py-1.5 text-xs" />
+      <input value={v.category} onChange={(e) => setV({ ...v, category: e.target.value })}
+        className="bg-white/5 border border-border rounded-sm px-2 py-1.5 text-xs" />
+      <input value={v.levels} onChange={(e) => setV({ ...v, levels: e.target.value })}
+        placeholder="Junior, Senior"
+        className="bg-white/5 border border-border rounded-sm px-2 py-1.5 text-xs" />
+      <input type="number" value={v.sort_order} onChange={(e) => setV({ ...v, sort_order: Number(e.target.value) })}
+        className="bg-white/5 border border-border rounded-sm px-2 py-1.5 text-xs" />
+      <div className="flex gap-2">
+        <button onClick={() => onSave({
+          name: v.name, category: v.category, description: v.description,
+          levels: v.levels.split(",").map((x: string) => x.trim()).filter(Boolean),
+          sort_order: v.sort_order,
+        })}
+          className="flex-1 px-3 py-1.5 bg-primary text-primary-foreground font-mono font-bold uppercase tracking-widest text-[10px] rounded-sm">
+          Save
+        </button>
+        <button onClick={onDelete}
+          className="px-3 py-1.5 border border-destructive text-destructive font-mono font-bold uppercase tracking-widest text-[10px] rounded-sm">
+          Del
+        </button>
+      </div>
+      <textarea value={v.description} onChange={(e) => setV({ ...v, description: e.target.value })}
+        rows={2}
+        className="lg:col-span-6 bg-white/5 border border-border rounded-sm px-2 py-1.5 text-xs" />
+    </div>
   );
 }
