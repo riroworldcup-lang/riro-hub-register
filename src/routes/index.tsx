@@ -1,7 +1,26 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
 import heroRobot from "@/assets/hero-robot.jpg";
+import riro1 from "@/assets/riro-1.webp.asset.json";
+import riro2 from "@/assets/riro-2.webp.asset.json";
+import riro3 from "@/assets/riro-3.webp.asset.json";
+import riro4 from "@/assets/riro-4.webp.asset.json";
 import { SiteShell } from "@/components/SiteNav";
 import { CompetitionsGrid } from "@/components/CompetitionsGrid";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+
+const GALLERY_SLIDES = [
+  { src: riro1.url, alt: "RIRO Robotics World Cup arena with humanoid robot" },
+  { src: riro2.url, alt: "Robotics World Cup stadium with cheering crowd" },
+  { src: riro3.url, alt: "RIRO Robotics World Cup team of robots" },
+  { src: riro4.url, alt: "RIRO World Cup champion robot with trophy" },
+];
 
 export const Route = createFileRoute("/")({
   head: () => ({
