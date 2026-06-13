@@ -98,6 +98,8 @@ function Home() {
         </div>
       </header>
 
+      <Leaderboard />
+
       {/* Stats */}
       <section className="py-20 sm:py-28 px-4 sm:px-6 bg-white/[0.02] border-y border-border">
         <div className="max-w-5xl mx-auto">
@@ -163,8 +165,6 @@ function Home() {
 
       {/* Video Showcase */}
       <VideoShowcase />
-
-      <Leaderboard />
 
       {/* Championship Grid */}
       <section id="competitions" className="py-20 sm:py-28 px-4 sm:px-6">
