@@ -76,6 +76,9 @@ function Home() {
               <Link to="/register" className="px-6 sm:px-8 py-3 sm:py-4 bg-primary text-primary-foreground font-mono font-bold uppercase tracking-widest text-xs sm:text-sm hover:bg-white transition-colors cursor-pointer rounded-sm">
                 Register Now
               </Link>
+              <div className="flex flex-col justify-center">
+                <span className="font-mono text-xs uppercase tracking-widest text-primary font-bold">Register for Free</span>
+              </div>
               <Link to="/competitions" className="px-6 sm:px-8 py-3 sm:py-4 border border-white/20 font-mono font-bold uppercase tracking-widest text-xs sm:text-sm hover:border-primary transition-colors cursor-pointer rounded-sm">
                 View Competitions
               </Link>
