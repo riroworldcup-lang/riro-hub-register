@@ -164,7 +164,7 @@ function Home() {
       {/* Video Showcase */}
       <VideoShowcase />
 
-
+      <Leaderboard />
 
       {/* Championship Grid */}
       <section id="competitions" className="py-20 sm:py-28 px-4 sm:px-6">
