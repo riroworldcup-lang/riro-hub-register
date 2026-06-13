@@ -1,7 +1,26 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
 import heroRobot from "@/assets/hero-robot.jpg";
+import riro1 from "@/assets/riro-1.webp.asset.json";
+import riro2 from "@/assets/riro-2.webp.asset.json";
+import riro3 from "@/assets/riro-3.webp.asset.json";
+import riro4 from "@/assets/riro-4.webp.asset.json";
 import { SiteShell } from "@/components/SiteNav";
 import { CompetitionsGrid } from "@/components/CompetitionsGrid";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+
+const GALLERY_SLIDES = [
+  { src: riro1.url, alt: "RIRO Robotics World Cup arena with humanoid robot" },
+  { src: riro2.url, alt: "Robotics World Cup stadium with cheering crowd" },
+  { src: riro3.url, alt: "RIRO Robotics World Cup team of robots" },
+  { src: riro4.url, alt: "RIRO World Cup champion robot with trophy" },
+];
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -111,6 +130,41 @@ function Home() {
         </div>
       </section>
 
+      {/* Gallery Slider */}
+      <section className="py-20 sm:py-28 px-4 sm:px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="mb-10 sm:mb-14">
+            <h2 className="font-mono text-primary text-sm mb-2">[ GALLERY ]</h2>
+            <h3 className="text-3xl sm:text-5xl font-black uppercase tracking-tighter italic">
+              Inside The Arena
+            </h3>
+          </div>
+          <Carousel opts={{ loop: true }} className="px-10 sm:px-12">
+            <CarouselContent>
+              {GALLERY_SLIDES.map((s) => (
+                <CarouselItem key={s.src}>
+                  <div className="border border-border rounded-sm overflow-hidden bg-white/[0.02]">
+                    <img
+                      src={s.src}
+                      alt={s.alt}
+                      loading="lazy"
+                      className="w-full aspect-video object-cover"
+                    />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
+        </div>
+      </section>
+
+      {/* Video Showcase */}
+      <VideoShowcase />
+
+
+
       {/* Championship Grid */}
       <section id="competitions" className="py-20 sm:py-28 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
@@ -155,3 +209,90 @@ function Home() {
     </SiteShell>
   );
 }
+
+function VideoShowcase() {
+  const [url, setUrl] = useState<string>("");
+  const [submitted, setSubmitted] = useState<string | null>(null);
+
+  function toEmbed(input: string): string | null {
+    try {
+      const u = new URL(input);
+      if (u.hostname.includes("youtube.com")) {
+        const id = u.searchParams.get("v");
+        if (id) return `https://www.youtube.com/embed/${id}`;
+      }
+      if (u.hostname === "youtu.be") {
+        return `https://www.youtube.com/embed/${u.pathname.slice(1)}`;
+      }
+      if (u.hostname.includes("vimeo.com")) {
+        const id = u.pathname.split("/").filter(Boolean)[0];
+        if (id) return `https://player.vimeo.com/video/${id}`;
+      }
+      if (/\.(mp4|webm|ogg)$/i.test(u.pathname)) return input;
+      return input;
+    } catch {
+      return null;
+    }
+  }
+
+  const embed = submitted ? toEmbed(submitted) : null;
+
+  return (
+    <section className="py-20 sm:py-28 px-4 sm:px-6 bg-white/[0.02] border-y border-border">
+      <div className="max-w-5xl mx-auto">
+        <div className="mb-8">
+          <h2 className="font-mono text-primary text-sm mb-2">[ VIDEO ]</h2>
+          <h3 className="text-3xl sm:text-5xl font-black uppercase tracking-tighter italic">
+            Watch The Action
+          </h3>
+          <p className="text-muted-foreground mt-3 text-sm sm:text-base">
+            Paste a YouTube, Vimeo, or direct video URL to preview it here.
+          </p>
+        </div>
+
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            setSubmitted(url.trim() || null);
+          }}
+          className="flex flex-col sm:flex-row gap-3 mb-8"
+        >
+          <input
+            type="url"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+            placeholder="https://youtube.com/watch?v=..."
+            className="flex-1 px-4 py-3 bg-background border border-border rounded-sm font-mono text-sm focus:border-primary outline-none"
+          />
+          <button
+            type="submit"
+            className="px-6 py-3 bg-primary text-primary-foreground font-mono font-bold uppercase tracking-widest text-xs hover:bg-white transition-colors rounded-sm"
+          >
+            Load Video
+          </button>
+        </form>
+
+        <div className="aspect-video w-full bg-background border border-border rounded-sm overflow-hidden flex items-center justify-center">
+          {embed ? (
+            /\.(mp4|webm|ogg)$/i.test(embed) ? (
+              <video src={embed} controls className="w-full h-full object-contain" />
+            ) : (
+              <iframe
+                src={embed}
+                title="Video player"
+                className="w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            )
+          ) : (
+            <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground px-4 text-center">
+              Video preview will appear here
+            </p>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
