@@ -130,6 +130,41 @@ function Home() {
         </div>
       </section>
 
+      {/* Gallery Slider */}
+      <section className="py-20 sm:py-28 px-4 sm:px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="mb-10 sm:mb-14">
+            <h2 className="font-mono text-primary text-sm mb-2">[ GALLERY ]</h2>
+            <h3 className="text-3xl sm:text-5xl font-black uppercase tracking-tighter italic">
+              Inside The Arena
+            </h3>
+          </div>
+          <Carousel opts={{ loop: true }} className="px-10 sm:px-12">
+            <CarouselContent>
+              {GALLERY_SLIDES.map((s) => (
+                <CarouselItem key={s.src}>
+                  <div className="border border-border rounded-sm overflow-hidden bg-white/[0.02]">
+                    <img
+                      src={s.src}
+                      alt={s.alt}
+                      loading="lazy"
+                      className="w-full aspect-video object-cover"
+                    />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
+        </div>
+      </section>
+
+      {/* Video Showcase */}
+      <VideoShowcase />
+
+
+
       {/* Championship Grid */}
       <section id="competitions" className="py-20 sm:py-28 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
