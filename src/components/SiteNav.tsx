@@ -1,5 +1,6 @@
-import { Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { Link, useNavigate } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 export function MarqueeBanner() {
   return (
@@ -24,8 +25,28 @@ const NAV_LINKS = [
   { to: "/contact", label: "Contact" },
 ] as const;
 
+function useAuthed() {
+  const [authed, setAuthed] = useState<boolean | null>(null);
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => setAuthed(!!data.session));
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) =>
+      setAuthed(!!session?.user),
+    );
+    return () => sub.subscription.unsubscribe();
+  }, []);
+  return authed;
+}
+
 export function SiteNav() {
   const [open, setOpen] = useState(false);
+  const authed = useAuthed();
+  const navigate = useNavigate();
+
+  const signOut = async () => {
+    await supabase.auth.signOut();
+    navigate({ to: "/" });
+  };
+
   return (
     <nav className="px-4 sm:px-6 py-5 border-b border-border max-w-7xl mx-auto">
       <div className="flex justify-between items-center">
@@ -35,7 +56,7 @@ export function SiteNav() {
           </div>
           <span className="font-mono font-bold text-sm sm:text-lg tracking-tighter uppercase">RIRO 2026</span>
         </Link>
-        <div className="hidden md:flex gap-8 font-mono text-xs uppercase tracking-widest text-muted-foreground">
+        <div className="hidden md:flex gap-8 font-mono text-xs uppercase tracking-widest text-muted-foreground items-center">
           {NAV_LINKS.map((l) => (
             <Link
               key={l.to}
@@ -47,7 +68,18 @@ export function SiteNav() {
               {l.label}
             </Link>
           ))}
-          <Link to="/auth" className="hover:text-primary transition-colors">Admin</Link>
+          {authed ? (
+            <>
+              <Link to="/dashboard" className="hover:text-primary transition-colors" activeProps={{ className: "text-primary" }}>
+                Dashboard
+              </Link>
+              <button onClick={signOut} className="hover:text-primary transition-colors">
+                Sign Out
+              </button>
+            </>
+          ) : (
+            <Link to="/auth" className="hover:text-primary transition-colors">Sign In</Link>
+          )}
         </div>
         <button
           className="md:hidden font-mono text-xs uppercase tracking-widest text-foreground border border-border px-3 py-2 rounded-sm"
@@ -71,7 +103,18 @@ export function SiteNav() {
               {l.label}
             </Link>
           ))}
-          <Link to="/auth" onClick={() => setOpen(false)} className="hover:text-primary transition-colors">Admin</Link>
+          {authed ? (
+            <>
+              <Link to="/dashboard" onClick={() => setOpen(false)} className="hover:text-primary transition-colors">
+                Dashboard
+              </Link>
+              <button onClick={() => { setOpen(false); signOut(); }} className="text-left hover:text-primary transition-colors">
+                Sign Out
+              </button>
+            </>
+          ) : (
+            <Link to="/auth" onClick={() => setOpen(false)} className="hover:text-primary transition-colors">Sign In</Link>
+          )}
         </div>
       )}
     </nav>
@@ -93,7 +136,7 @@ export function SiteFooter() {
           {NAV_LINKS.map((l) => (
             <Link key={l.to} to={l.to} className="hover:text-primary">{l.label}</Link>
           ))}
-          <Link to="/auth" className="hover:text-primary">Admin</Link>
+          <Link to="/auth" className="hover:text-primary">Sign In</Link>
         </div>
       </div>
       <div className="max-w-7xl mx-auto mt-10 pt-6 border-t border-border text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground text-center">

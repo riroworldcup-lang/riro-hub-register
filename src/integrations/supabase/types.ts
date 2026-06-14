@@ -108,9 +108,31 @@ export type Database = {
           science_teacher_contact: string
           science_teacher_name: string
           standard_class: string
+          team_mate_1_contact: string | null
+          team_mate_1_name: string | null
+          team_mate_10_contact: string | null
+          team_mate_10_name: string | null
+          team_mate_2_contact: string | null
+          team_mate_2_name: string | null
+          team_mate_3_contact: string | null
+          team_mate_3_name: string | null
+          team_mate_4_contact: string | null
+          team_mate_4_name: string | null
+          team_mate_5_contact: string | null
+          team_mate_5_name: string | null
+          team_mate_6_contact: string | null
+          team_mate_6_name: string | null
+          team_mate_7_contact: string | null
+          team_mate_7_name: string | null
+          team_mate_8_contact: string | null
+          team_mate_8_name: string | null
+          team_mate_9_contact: string | null
+          team_mate_9_name: string | null
           team_mate_numbers: string | null
           team_mates: string | null
           team_name: string | null
+          updated_at: string
+          user_id: string | null
         }
         Insert: {
           comments?: string | null
@@ -124,9 +146,31 @@ export type Database = {
           science_teacher_contact: string
           science_teacher_name: string
           standard_class: string
+          team_mate_1_contact?: string | null
+          team_mate_1_name?: string | null
+          team_mate_10_contact?: string | null
+          team_mate_10_name?: string | null
+          team_mate_2_contact?: string | null
+          team_mate_2_name?: string | null
+          team_mate_3_contact?: string | null
+          team_mate_3_name?: string | null
+          team_mate_4_contact?: string | null
+          team_mate_4_name?: string | null
+          team_mate_5_contact?: string | null
+          team_mate_5_name?: string | null
+          team_mate_6_contact?: string | null
+          team_mate_6_name?: string | null
+          team_mate_7_contact?: string | null
+          team_mate_7_name?: string | null
+          team_mate_8_contact?: string | null
+          team_mate_8_name?: string | null
+          team_mate_9_contact?: string | null
+          team_mate_9_name?: string | null
           team_mate_numbers?: string | null
           team_mates?: string | null
           team_name?: string | null
+          updated_at?: string
+          user_id?: string | null
         }
         Update: {
           comments?: string | null
@@ -140,9 +184,31 @@ export type Database = {
           science_teacher_contact?: string
           science_teacher_name?: string
           standard_class?: string
+          team_mate_1_contact?: string | null
+          team_mate_1_name?: string | null
+          team_mate_10_contact?: string | null
+          team_mate_10_name?: string | null
+          team_mate_2_contact?: string | null
+          team_mate_2_name?: string | null
+          team_mate_3_contact?: string | null
+          team_mate_3_name?: string | null
+          team_mate_4_contact?: string | null
+          team_mate_4_name?: string | null
+          team_mate_5_contact?: string | null
+          team_mate_5_name?: string | null
+          team_mate_6_contact?: string | null
+          team_mate_6_name?: string | null
+          team_mate_7_contact?: string | null
+          team_mate_7_name?: string | null
+          team_mate_8_contact?: string | null
+          team_mate_8_name?: string | null
+          team_mate_9_contact?: string | null
+          team_mate_9_name?: string | null
           team_mate_numbers?: string | null
           team_mates?: string | null
           team_name?: string | null
+          updated_at?: string
+          user_id?: string | null
         }
         Relationships: []
       }
