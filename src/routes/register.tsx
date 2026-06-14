@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteShell } from "@/components/SiteNav";
 import { RegistrationForm } from "@/components/RegistrationForm";
+import { FeesTable } from "@/components/FeesTable";
 
 export const Route = createFileRoute("/register")({
   head: () => ({
@@ -24,15 +25,15 @@ function RegisterPage() {
             Secure Your Slot.
           </h1>
           <p className="text-muted-foreground mb-8">
-            Lock in your spot in the championship. Registration fees and the official rulebook
-            will be released soon — submit your details now to receive priority updates.
+            Lock in your spot in the championship. Sign in, submit your details, and manage your
+            team any time from your dashboard.
           </p>
-          <ul className="space-y-3 text-sm">
+          <ul className="space-y-3 text-sm mb-10">
             {[
               "Free pre-registration",
               "Confirmation email after submission",
+              "Edit teammates & competition anytime from your dashboard",
               "Official rulebook delivered direct to your inbox",
-              "Priority slot booking once fees are announced",
             ].map((t) => (
               <li key={t} className="flex items-start gap-3">
                 <span className="size-1.5 bg-primary mt-2 shrink-0" />
@@ -40,6 +41,7 @@ function RegisterPage() {
               </li>
             ))}
           </ul>
+          <FeesTable />
         </div>
         <div className="bg-surface border border-border p-6 sm:p-8 rounded-sm">
           <RegistrationForm />
