@@ -68,9 +68,18 @@ function Home() {
             <p className="max-w-xl text-base sm:text-lg text-muted-foreground mb-3 animate-slide-up [animation-delay:200ms]">
               International Robotics, Innovation & Technology Championship.
             </p>
-            <p className="max-w-xl text-sm font-mono uppercase tracking-wider text-foreground/80 mb-10 animate-slide-up [animation-delay:250ms]">
+            <p className="max-w-xl text-sm font-mono uppercase tracking-wider text-foreground/80 mb-4 animate-slide-up [animation-delay:250ms]">
               4-Day Mega Event • October–November 2026
             </p>
+
+            <div className="max-w-xl mb-8 animate-slide-up [animation-delay:280ms]">
+              <div className="relative inline-flex items-center gap-3 px-5 py-3 bg-gradient-to-r from-primary/20 via-primary/10 to-transparent border-l-4 border-primary rounded-r">
+                <span className="text-2xl">🎓</span>
+                <span className="text-xl sm:text-2xl font-black uppercase tracking-tight text-primary leading-tight">
+                  50 FREE COURSES TO ALL PARTICIPANTS
+                </span>
+              </div>
+            </div>
 
             <div className="flex flex-wrap gap-4 animate-slide-up [animation-delay:300ms]">
               <Link to="/register" className="px-6 sm:px-8 py-3 sm:py-4 bg-primary text-primary-foreground font-mono font-bold uppercase tracking-widest text-xs sm:text-sm hover:bg-white transition-colors cursor-pointer rounded-sm">
