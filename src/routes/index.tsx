@@ -5,6 +5,7 @@ import riro1 from "@/assets/riro-1.webp.asset.json";
 import riro2 from "@/assets/riro-2.webp.asset.json";
 import riro3 from "@/assets/riro-3.webp.asset.json";
 import riro4 from "@/assets/riro-4.webp.asset.json";
+import riroIntro from "@/assets/riro-intro.mp4.asset.json";
 import { SiteShell } from "@/components/SiteNav";
 import { CompetitionsGrid } from "@/components/CompetitionsGrid";
 import { Leaderboard } from "@/components/Leaderboard";
