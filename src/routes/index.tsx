@@ -46,22 +46,45 @@ function Home() {
   return (
     <SiteShell>
       {/* Hero */}
-      <header id="top" className="relative min-h-[85vh] flex flex-col justify-center px-4 sm:px-6 py-16 overflow-hidden">
+      <header id="top" className="relative min-h-[90vh] flex flex-col justify-center px-4 sm:px-6 py-16 overflow-hidden">
+        {/* Animated cyber grid */}
+        <div className="absolute inset-0 opacity-30 pointer-events-none animate-grid-shift"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,107,0,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,107,0,0.08) 1px, transparent 1px)",
+            backgroundSize: "40px 40px",
+          }}
+        />
+        {/* Drifting glow orbs */}
+        <div className="absolute top-1/4 -left-20 w-[420px] h-[420px] rounded-full bg-primary/20 blur-[120px] pointer-events-none animate-orb-drift" />
+        <div className="absolute bottom-0 right-0 w-[360px] h-[360px] rounded-full bg-primary/10 blur-[100px] pointer-events-none animate-orb-drift [animation-delay:-4s]" />
+        {/* Scanline */}
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent shadow-[0_0_18px_var(--color-primary)] pointer-events-none animate-scanline" />
+        {/* Subtle diagonal stripes & code echo */}
         <div className="absolute inset-0 opacity-20 pointer-events-none">
           <div className="absolute top-0 right-0 w-1/2 h-full border-l border-primary/20 bg-[linear-gradient(45deg,transparent_25%,rgba(255,107,0,0.05)_50%,transparent_75%)] bg-[length:20px_20px]" />
           <div className="absolute bottom-10 left-4 font-mono text-[80px] sm:text-[100px] leading-none opacity-10 select-none">010101</div>
         </div>
 
         <div className="max-w-7xl mx-auto w-full relative z-10 grid lg:grid-cols-[1.2fr_0.8fr] gap-12 items-center">
-          <div>
+          <div className="relative">
+            {/* HUD corner brackets */}
+            <span className="absolute -top-3 -left-3 w-5 h-5 border-t-2 border-l-2 border-primary/70" />
+            <span className="absolute -top-3 -right-3 w-5 h-5 border-t-2 border-r-2 border-primary/70" />
+            <span className="absolute -bottom-3 -left-3 w-5 h-5 border-b-2 border-l-2 border-primary/70" />
+            <span className="absolute -bottom-3 -right-3 w-5 h-5 border-b-2 border-r-2 border-primary/70" />
+
             <div className="flex items-center gap-3 font-mono text-primary text-xs sm:text-sm mb-6 animate-slide-up flex-wrap">
-              <span className="px-2 py-0.5 border border-primary">WORLD CUP 2026</span>
+              <span className="px-2 py-0.5 border border-primary inline-flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                WORLD CUP 2026
+              </span>
               <span className="opacity-50">MIRA-BHAYANDER, MAHARASHTRA</span>
             </div>
 
-            <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black italic tracking-tighter uppercase leading-[0.9] mb-6 animate-slide-up [animation-delay:100ms]">
+            <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black italic tracking-tighter uppercase leading-[0.9] mb-6 animate-slide-up [animation-delay:100ms] drop-shadow-[0_0_25px_rgba(255,255,255,0.15)]">
               RIRO <br />
-              <span className="text-primary">World Cup</span> <br />
+              <span className="text-primary drop-shadow-[0_0_25px_rgba(255,107,0,0.6)] transition-all duration-500 hover:drop-shadow-[0_0_45px_rgba(255,107,0,0.95)]">World Cup</span> <br />
               <span className="[-webkit-text-stroke:2px_white] text-transparent">2026</span>
             </h1>
 
@@ -72,8 +95,9 @@ function Home() {
               4-Day Mega Event • October–November 2026
             </p>
 
-            <div className="max-w-xl mb-8 animate-slide-up [animation-delay:280ms]">
-              <div className="relative inline-flex items-center gap-3 px-5 py-3 bg-gradient-to-r from-primary/20 via-primary/10 to-transparent border-l-4 border-primary rounded-r">
+            <div className="max-w-xl mb-8 animate-slide-up [animation-delay:280ms] animate-float-y">
+              <div className="group relative inline-flex items-center gap-3 px-5 py-3 bg-gradient-to-r from-primary/25 via-primary/10 to-transparent border-l-4 border-primary rounded-r overflow-hidden backdrop-blur-sm transition-all duration-300 hover:from-primary/35 hover:shadow-[0_0_30px_rgba(255,107,0,0.45)]">
+                <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/15 to-transparent pointer-events-none" />
                 <span className="text-2xl">🎓</span>
                 <span className="text-xl sm:text-2xl font-black uppercase tracking-tight text-primary leading-tight">
                   50 FREE COURSES TO ALL PARTICIPANTS
@@ -81,28 +105,45 @@ function Home() {
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-4 animate-slide-up [animation-delay:300ms]">
-              <Link to="/register" className="px-6 sm:px-8 py-3 sm:py-4 bg-primary text-primary-foreground font-mono font-bold uppercase tracking-widest text-xs sm:text-sm hover:bg-white transition-colors cursor-pointer rounded-sm">
-                Register Now
+            <div className="flex flex-wrap gap-4 items-center animate-slide-up [animation-delay:300ms]">
+              <Link to="/register" className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-primary text-primary-foreground font-mono font-bold uppercase tracking-widest text-xs sm:text-sm rounded-sm cursor-pointer overflow-hidden animate-glow-pulse transition-transform duration-300 hover:scale-[1.04] active:scale-95">
+                <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+                <span className="relative">Register Now</span>
               </Link>
               <div className="flex flex-col justify-center">
                 <span className="font-mono text-xs uppercase tracking-widest text-primary font-bold">Register for Free</span>
               </div>
-              <Link to="/competitions" className="px-6 sm:px-8 py-3 sm:py-4 border border-white/20 font-mono font-bold uppercase tracking-widest text-xs sm:text-sm hover:border-primary transition-colors cursor-pointer rounded-sm">
-                View Competitions
+              <Link to="/competitions" className="group px-6 sm:px-8 py-3 sm:py-4 border border-white/20 font-mono font-bold uppercase tracking-widest text-xs sm:text-sm rounded-sm cursor-pointer transition-all duration-300 hover:border-primary hover:bg-primary/10 hover:shadow-[0_0_25px_rgba(255,107,0,0.35)]">
+                <span className="inline-flex items-center gap-2">
+                  View Competitions
+                  <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                </span>
               </Link>
+            </div>
+
+            {/* HUD telemetry footer */}
+            <div className="mt-10 flex items-center gap-3 opacity-50 font-mono text-[10px] tracking-[0.3em] text-muted-foreground">
+              <div className="h-px w-8 bg-muted-foreground/40" />
+              <span>SYS.RIRO_2026 // STATUS: ONLINE</span>
+              <div className="h-px flex-1 bg-muted-foreground/20" />
             </div>
           </div>
 
-          <div className="relative animate-slide-up [animation-delay:400ms]">
+          <div className="relative animate-slide-up [animation-delay:400ms] group">
+            <div className="absolute -inset-2 bg-gradient-to-tr from-primary/40 via-primary/10 to-transparent rounded-sm blur-xl opacity-60 group-hover:opacity-90 transition-opacity duration-500" />
             <img
               src={heroRobot}
               alt="High-tech robotic arm with orange accents — RIRO World Cup 2026"
               width={1024}
               height={1024}
-              className="w-full aspect-square object-cover rounded-sm border border-white/10"
+              className="relative w-full aspect-square object-cover rounded-sm border border-white/10 transition-transform duration-700 group-hover:scale-[1.02] group-hover:border-primary/50"
             />
-            <div className="absolute -bottom-4 -left-4 sm:-left-6 bg-primary text-primary-foreground p-4 sm:p-5 rounded-sm shadow-2xl">
+            {/* Image corner brackets */}
+            <span className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-primary" />
+            <span className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-primary" />
+            <span className="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-primary" />
+            <span className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-primary" />
+            <div className="absolute -bottom-4 -left-4 sm:-left-6 bg-primary text-primary-foreground p-4 sm:p-5 rounded-sm shadow-2xl transition-transform duration-300 hover:scale-105 hover:rotate-[-2deg]">
               <div className="font-mono font-black text-2xl sm:text-3xl">17+</div>
               <div className="font-mono text-[10px] uppercase tracking-widest opacity-80">Competitions</div>
             </div>
