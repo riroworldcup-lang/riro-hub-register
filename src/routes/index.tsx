@@ -48,8 +48,19 @@ function Home() {
     <SiteShell>
       {/* Hero */}
       <header id="top" className="relative min-h-[90vh] flex flex-col justify-center px-4 sm:px-6 py-16 overflow-hidden">
+        {/* Video backdrop */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover z-0"
+          src={riroIntro.url}
+        />
+        {/* Dark overlay for readability */}
+        <div className="absolute inset-0 bg-background/80 z-[1]" />
         {/* Animated cyber grid */}
-        <div className="absolute inset-0 opacity-30 pointer-events-none animate-grid-shift"
+        <div className="absolute inset-0 opacity-30 pointer-events-none animate-grid-shift z-[2]"
           style={{
             backgroundImage:
               "linear-gradient(rgba(255,107,0,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,107,0,0.08) 1px, transparent 1px)",
@@ -57,12 +68,12 @@ function Home() {
           }}
         />
         {/* Drifting glow orbs */}
-        <div className="absolute top-1/4 -left-20 w-[420px] h-[420px] rounded-full bg-primary/20 blur-[120px] pointer-events-none animate-orb-drift" />
-        <div className="absolute bottom-0 right-0 w-[360px] h-[360px] rounded-full bg-primary/10 blur-[100px] pointer-events-none animate-orb-drift [animation-delay:-4s]" />
+        <div className="absolute top-1/4 -left-20 w-[420px] h-[420px] rounded-full bg-primary/20 blur-[120px] pointer-events-none animate-orb-drift z-[2]" />
+        <div className="absolute bottom-0 right-0 w-[360px] h-[360px] rounded-full bg-primary/10 blur-[100px] pointer-events-none animate-orb-drift [animation-delay:-4s] z-[2]" />
         {/* Scanline */}
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent shadow-[0_0_18px_var(--color-primary)] pointer-events-none animate-scanline" />
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent shadow-[0_0_18px_var(--color-primary)] pointer-events-none animate-scanline z-[2]" />
         {/* Subtle diagonal stripes & code echo */}
-        <div className="absolute inset-0 opacity-20 pointer-events-none">
+        <div className="absolute inset-0 opacity-20 pointer-events-none z-[2]">
           <div className="absolute top-0 right-0 w-1/2 h-full border-l border-primary/20 bg-[linear-gradient(45deg,transparent_25%,rgba(255,107,0,0.05)_50%,transparent_75%)] bg-[length:20px_20px]" />
           <div className="absolute bottom-10 left-4 font-mono text-[80px] sm:text-[100px] leading-none opacity-10 select-none">010101</div>
         </div>
