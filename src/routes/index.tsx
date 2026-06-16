@@ -90,6 +90,13 @@ function Home() {
               <span className="[-webkit-text-stroke:2px_white] text-transparent">2026</span>
             </h1>
 
+            <div className="mb-6 animate-slide-up [animation-delay:120ms]">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/10 border border-primary/40 rounded-sm">
+                <span className="font-mono font-black text-xl sm:text-2xl text-primary">17+</span>
+                <span className="font-mono text-[10px] uppercase tracking-widest text-primary/80">Competitions</span>
+              </div>
+            </div>
+
             <p className="max-w-xl text-base sm:text-lg text-muted-foreground mb-3 animate-slide-up [animation-delay:200ms]">
               International Robotics, Innovation & Technology Championship.
             </p>
@@ -148,10 +155,6 @@ function Home() {
             <span className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-primary" />
             <span className="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-primary" />
             <span className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-primary" />
-            <div className="absolute -bottom-4 -left-4 sm:-left-6 bg-primary text-primary-foreground p-4 sm:p-5 rounded-sm shadow-2xl transition-transform duration-300 hover:scale-105 hover:rotate-[-2deg]">
-              <div className="font-mono font-black text-2xl sm:text-3xl">17+</div>
-              <div className="font-mono text-[10px] uppercase tracking-widest opacity-80">Competitions</div>
-            </div>
           </div>
         </div>
       </header>
