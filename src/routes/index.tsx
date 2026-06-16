@@ -155,10 +155,6 @@ function Home() {
             <span className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-primary" />
             <span className="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-primary" />
             <span className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-primary" />
-            <div className="absolute -bottom-4 -left-4 sm:-left-6 bg-primary text-primary-foreground p-4 sm:p-5 rounded-sm shadow-2xl transition-transform duration-300 hover:scale-105 hover:rotate-[-2deg]">
-              <div className="font-mono font-black text-2xl sm:text-3xl">17+</div>
-              <div className="font-mono text-[10px] uppercase tracking-widest opacity-80">Competitions</div>
-            </div>
           </div>
         </div>
       </header>
