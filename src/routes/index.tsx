@@ -90,6 +90,13 @@ function Home() {
               <span className="[-webkit-text-stroke:2px_white] text-transparent">2026</span>
             </h1>
 
+            <div className="mb-6 animate-slide-up [animation-delay:120ms]">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/10 border border-primary/40 rounded-sm">
+                <span className="font-mono font-black text-xl sm:text-2xl text-primary">17+</span>
+                <span className="font-mono text-[10px] uppercase tracking-widest text-primary/80">Competitions</span>
+              </div>
+            </div>
+
             <p className="max-w-xl text-base sm:text-lg text-muted-foreground mb-3 animate-slide-up [animation-delay:200ms]">
               International Robotics, Innovation & Technology Championship.
             </p>
