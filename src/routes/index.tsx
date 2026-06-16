@@ -1,6 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import heroRobot from "@/assets/hero-robot.jpg";
 import riro1 from "@/assets/riro-1.webp.asset.json";
 import riro2 from "@/assets/riro-2.webp.asset.json";
 import riro3 from "@/assets/riro-3.webp.asset.json";
