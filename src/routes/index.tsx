@@ -1,11 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import heroRobot from "@/assets/hero-robot.jpg";
 import riro1 from "@/assets/riro-1.webp.asset.json";
 import riro2 from "@/assets/riro-2.webp.asset.json";
 import riro3 from "@/assets/riro-3.webp.asset.json";
 import riro4 from "@/assets/riro-4.webp.asset.json";
-import riroIntro from "@/assets/riro-intro.mp4.asset.json";
+import heroVideo from "@/assets/hero-video.mp4.asset.json";
 import { SiteShell } from "@/components/SiteNav";
 import { CompetitionsGrid } from "@/components/CompetitionsGrid";
 import { Leaderboard } from "@/components/Leaderboard";
@@ -48,15 +47,6 @@ function Home() {
     <SiteShell>
       {/* Hero */}
       <header id="top" className="relative min-h-[90vh] flex flex-col justify-center px-4 sm:px-6 py-16 overflow-hidden">
-        {/* Video backdrop */}
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover z-0"
-          src={riroIntro.url}
-        />
         {/* Dark overlay for readability */}
         <div className="absolute inset-0 bg-background/80 z-[1]" />
         {/* Animated cyber grid */}
@@ -143,14 +133,17 @@ function Home() {
 
           <div className="relative animate-slide-up [animation-delay:400ms] group">
             <div className="absolute -inset-2 bg-gradient-to-tr from-primary/40 via-primary/10 to-transparent rounded-sm blur-xl opacity-60 group-hover:opacity-90 transition-opacity duration-500" />
-            <img
-              src={heroRobot}
-              alt="High-tech robotic arm with orange accents — RIRO World Cup 2026"
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              src={heroVideo.url}
               width={1024}
               height={1024}
               className="relative w-full aspect-square object-cover rounded-sm border border-white/10 transition-transform duration-700 group-hover:scale-[1.02] group-hover:border-primary/50"
             />
-            {/* Image corner brackets */}
+            {/* Video corner brackets */}
             <span className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-primary" />
             <span className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-primary" />
             <span className="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-primary" />
