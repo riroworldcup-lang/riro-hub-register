@@ -104,12 +104,22 @@ function Home() {
               4-Day Mega Event • October–November 2026
             </p>
 
-            <div className="max-w-xl mb-8 animate-slide-up [animation-delay:280ms] animate-float-y">
+            <div className="max-w-xl mb-6 animate-slide-up [animation-delay:280ms] animate-float-y">
               <div className="group relative inline-flex items-center gap-3 px-5 py-3 bg-gradient-to-r from-primary/25 via-primary/10 to-transparent border-l-4 border-primary rounded-r overflow-hidden backdrop-blur-sm transition-all duration-300 hover:from-primary/35 hover:shadow-[0_0_30px_rgba(255,107,0,0.45)]">
                 <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/15 to-transparent pointer-events-none" />
                 <span className="text-2xl">🎓</span>
                 <span className="text-xl sm:text-2xl font-black uppercase tracking-tight text-primary leading-tight">
-                  50 FREE COURSES TO ALL PARTICIPANTS
+                  50+ FREE COURSES TO ALL PARTICIPANTS
+                </span>
+              </div>
+            </div>
+
+            <div className="max-w-xl mb-8 animate-slide-up [animation-delay:290ms] animate-float-y">
+              <div className="group relative inline-flex items-center gap-3 px-5 py-3 bg-white/10 border-l-4 border-white rounded-r overflow-hidden backdrop-blur-sm transition-all duration-300 hover:bg-white/15 hover:shadow-[0_0_30px_rgba(255,255,255,0.35)]">
+                <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
+                <span className="text-2xl">🚀</span>
+                <span className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white leading-tight">
+                  Register for Free
                 </span>
               </div>
             </div>
@@ -123,9 +133,6 @@ function Home() {
                 <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
                 <span className="relative">Visitors Registration</span>
               </Link>
-              <div className="flex flex-col justify-center">
-                <span className="font-mono text-xs uppercase tracking-widest text-primary font-bold">Register for Free</span>
-              </div>
               <Link to="/competitions" className="group px-6 sm:px-8 py-3 sm:py-4 border border-white/20 font-mono font-bold uppercase tracking-widest text-xs sm:text-sm rounded-sm cursor-pointer transition-all duration-300 hover:border-primary hover:bg-primary/10 hover:shadow-[0_0_25px_rgba(255,107,0,0.35)]">
                 <span className="inline-flex items-center gap-2">
                   View Competitions
