@@ -8,7 +8,7 @@ export function MarqueeBanner() {
       <div className="flex animate-marquee gap-8">
         {Array.from({ length: 4 }).map((_, i) => (
           <span key={i} className="font-mono font-bold text-xs sm:text-sm uppercase tracking-tighter shrink-0">
-            Registration Charges & Rulebook Coming Soon • October–November 2026 • Mira-Bhayander, Maharashtra •
+            RIRO World Cup 2026 • October–November 2026 • Mira-Bhayander, Maharashtra •
           </span>
         ))}
       </div>
