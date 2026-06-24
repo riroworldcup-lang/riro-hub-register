@@ -213,9 +213,6 @@ export function RegistrationForm() {
         >
           {mutation.isPending ? "Submitting..." : "Submit Registration"}
         </button>
-        <p className="mt-3 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-          Registration charges & rulebook coming soon. Payment will be enabled later.
-        </p>
       </div>
     </form>
   );
