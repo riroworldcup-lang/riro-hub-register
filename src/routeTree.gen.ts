@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VisitorsRegisterRouteImport } from './routes/visitors-register'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as GalleryRouteImport } from './routes/gallery'
@@ -21,6 +22,11 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 
+const VisitorsRegisterRoute = VisitorsRegisterRouteImport.update({
+  id: '/visitors-register',
+  path: '/visitors-register',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -85,6 +91,7 @@ export interface FileRoutesByFullPath {
   '/gallery': typeof GalleryRoute
   '/register': typeof RegisterRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/visitors-register': typeof VisitorsRegisterRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
 }
@@ -97,6 +104,7 @@ export interface FileRoutesByTo {
   '/gallery': typeof GalleryRoute
   '/register': typeof RegisterRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/visitors-register': typeof VisitorsRegisterRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
 }
@@ -111,6 +119,7 @@ export interface FileRoutesById {
   '/gallery': typeof GalleryRoute
   '/register': typeof RegisterRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/visitors-register': typeof VisitorsRegisterRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
 }
@@ -125,6 +134,7 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/register'
     | '/sitemap.xml'
+    | '/visitors-register'
     | '/admin'
     | '/dashboard'
   fileRoutesByTo: FileRoutesByTo
@@ -137,6 +147,7 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/register'
     | '/sitemap.xml'
+    | '/visitors-register'
     | '/admin'
     | '/dashboard'
   id:
@@ -150,6 +161,7 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/register'
     | '/sitemap.xml'
+    | '/visitors-register'
     | '/_authenticated/admin'
     | '/_authenticated/dashboard'
   fileRoutesById: FileRoutesById
@@ -164,10 +176,18 @@ export interface RootRouteChildren {
   GalleryRoute: typeof GalleryRoute
   RegisterRoute: typeof RegisterRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  VisitorsRegisterRoute: typeof VisitorsRegisterRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/visitors-register': {
+      id: '/visitors-register'
+      path: '/visitors-register'
+      fullPath: '/visitors-register'
+      preLoaderRoute: typeof VisitorsRegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -271,17 +291,8 @@ const rootRouteChildren: RootRouteChildren = {
   GalleryRoute: GalleryRoute,
   RegisterRoute: RegisterRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  VisitorsRegisterRoute: VisitorsRegisterRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

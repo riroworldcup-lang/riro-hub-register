@@ -117,7 +117,11 @@ function Home() {
             <div className="flex flex-wrap gap-4 items-center animate-slide-up [animation-delay:300ms]">
               <Link to="/register" className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-primary text-primary-foreground font-mono font-bold uppercase tracking-widest text-xs sm:text-sm rounded-sm cursor-pointer overflow-hidden animate-glow-pulse transition-transform duration-300 hover:scale-[1.04] active:scale-95">
                 <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/40 to-transparent" />
-                <span className="relative">Register Now</span>
+                <span className="relative">Participants Register</span>
+              </Link>
+              <Link to="/visitors-register" className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-white text-background font-mono font-bold uppercase tracking-widest text-xs sm:text-sm rounded-sm cursor-pointer overflow-hidden transition-all duration-300 hover:scale-[1.04] active:scale-95 hover:shadow-[0_0_25px_rgba(255,255,255,0.35)]">
+                <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+                <span className="relative">Visitors Registration</span>
               </Link>
               <div className="flex flex-col justify-center">
                 <span className="font-mono text-xs uppercase tracking-widest text-primary font-bold">Register for Free</span>
