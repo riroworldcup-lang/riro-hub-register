@@ -69,14 +69,14 @@ function Home() {
         </div>
 
         <div className="max-w-7xl mx-auto w-full relative z-10 grid lg:grid-cols-[1fr_1fr] gap-12 items-center place-items-center">
-          <div className="relative">
+          <div className="relative text-center">
             {/* HUD corner brackets */}
             <span className="absolute -top-3 -left-3 w-5 h-5 border-t-2 border-l-2 border-primary/70" />
             <span className="absolute -top-3 -right-3 w-5 h-5 border-t-2 border-r-2 border-primary/70" />
             <span className="absolute -bottom-3 -left-3 w-5 h-5 border-b-2 border-l-2 border-primary/70" />
             <span className="absolute -bottom-3 -right-3 w-5 h-5 border-b-2 border-r-2 border-primary/70" />
 
-            <div className="flex items-center gap-3 font-mono text-primary text-xs sm:text-sm mb-6 animate-slide-up flex-wrap">
+            <div className="inline-flex items-center gap-3 font-mono text-primary text-xs sm:text-sm mb-6 animate-slide-up flex-wrap justify-center">
               <span className="px-2 py-0.5 border border-primary inline-flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
                 WORLD CUP 2026
@@ -90,21 +90,21 @@ function Home() {
               <span className="[-webkit-text-stroke:2px_white] text-transparent">2026</span>
             </h1>
 
-            <div className="mb-6 animate-slide-up [animation-delay:120ms]">
+            <div className="mb-6 animate-slide-up [animation-delay:120ms] flex justify-center">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/10 border border-primary/40 rounded-sm">
                 <span className="font-mono font-black text-xl sm:text-2xl text-primary">17+</span>
                 <span className="font-mono text-[10px] uppercase tracking-widest text-primary/80">Competitions</span>
               </div>
             </div>
 
-            <p className="max-w-xl text-base sm:text-lg text-muted-foreground mb-3 animate-slide-up [animation-delay:200ms]">
+            <p className="text-base sm:text-lg text-muted-foreground mb-3 animate-slide-up [animation-delay:200ms]">
               International Robotics, Innovation & Technology Championship.
             </p>
-            <p className="max-w-xl text-sm font-mono uppercase tracking-wider text-foreground/80 mb-4 animate-slide-up [animation-delay:250ms]">
+            <p className="text-sm font-mono uppercase tracking-wider text-foreground/80 mb-4 animate-slide-up [animation-delay:250ms]">
               4-Day Mega Event • October–November 2026
             </p>
 
-            <div className="max-w-xl mb-6 animate-slide-up [animation-delay:280ms] animate-float-y">
+            <div className="mb-6 animate-slide-up [animation-delay:280ms] animate-float-y flex justify-center">
               <div className="group relative inline-flex items-center gap-3 px-5 py-3 bg-gradient-to-r from-primary/25 via-primary/10 to-transparent border-l-4 border-primary rounded-r overflow-hidden backdrop-blur-sm transition-all duration-300 hover:from-primary/35 hover:shadow-[0_0_30px_rgba(255,107,0,0.45)]">
                 <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/15 to-transparent pointer-events-none" />
                 <span className="text-2xl">🎓</span>
@@ -114,7 +114,7 @@ function Home() {
               </div>
             </div>
 
-            <div className="max-w-xl mb-8 animate-slide-up [animation-delay:290ms] animate-float-y">
+            <div className="mb-8 animate-slide-up [animation-delay:290ms] animate-float-y flex justify-center">
               <div className="group relative inline-flex items-center gap-3 px-5 py-3 bg-white/10 border-l-4 border-white rounded-r overflow-hidden backdrop-blur-sm transition-all duration-300 hover:bg-white/15 hover:shadow-[0_0_30px_rgba(255,255,255,0.35)]">
                 <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
                 <span className="text-2xl">🚀</span>
@@ -124,7 +124,7 @@ function Home() {
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-4 items-center animate-slide-up [animation-delay:300ms]">
+            <div className="flex flex-wrap justify-center gap-4 items-center animate-slide-up [animation-delay:300ms]">
               <Link to="/register" className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-primary text-primary-foreground font-mono font-bold uppercase tracking-widest text-xs sm:text-sm rounded-sm cursor-pointer overflow-hidden animate-glow-pulse transition-transform duration-300 hover:scale-[1.04] active:scale-95">
                 <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/40 to-transparent" />
                 <span className="relative">Participants Register</span>
@@ -142,14 +142,14 @@ function Home() {
             </div>
 
             {/* HUD telemetry footer */}
-            <div className="mt-10 flex items-center gap-3 opacity-50 font-mono text-[10px] tracking-[0.3em] text-muted-foreground">
+            <div className="mt-10 flex items-center justify-center gap-3 opacity-50 font-mono text-[10px] tracking-[0.3em] text-muted-foreground">
               <div className="h-px w-8 bg-muted-foreground/40" />
               <span>SYS.RIRO_2026 // STATUS: ONLINE</span>
-              <div className="h-px flex-1 bg-muted-foreground/20" />
+              <div className="h-px w-8 bg-muted-foreground/40" />
             </div>
           </div>
 
-          <div className="relative animate-slide-up [animation-delay:400ms] group">
+          <div className="relative animate-slide-up [animation-delay:400ms] group mx-auto">
             <div className="absolute -inset-2 bg-gradient-to-tr from-primary/40 via-primary/10 to-transparent rounded-sm blur-xl opacity-60 group-hover:opacity-90 transition-opacity duration-500" />
             <video
               autoPlay
@@ -159,7 +159,7 @@ function Home() {
               src={heroVideo.url}
               width={1024}
               height={1024}
-              className="relative w-full aspect-square object-cover rounded-sm border border-white/10 transition-transform duration-700 group-hover:scale-[1.02] group-hover:border-primary/50"
+              className="relative w-full max-w-lg aspect-square object-cover rounded-sm border border-white/10 transition-transform duration-700 group-hover:scale-[1.02] group-hover:border-primary/50"
             />
             {/* Video corner brackets */}
             <span className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-primary" />
