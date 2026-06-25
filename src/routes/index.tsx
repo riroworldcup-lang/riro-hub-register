@@ -68,7 +68,7 @@ function Home() {
           <div className="absolute bottom-10 left-4 font-mono text-[80px] sm:text-[100px] leading-none opacity-10 select-none">010101</div>
         </div>
 
-        <div className="max-w-7xl mx-auto w-full relative z-10 grid lg:grid-cols-[1.2fr_0.8fr] gap-12 items-center">
+        <div className="max-w-7xl mx-auto w-full relative z-10 grid lg:grid-cols-[1fr_1fr] gap-12 items-center place-items-center">
           <div className="relative">
             {/* HUD corner brackets */}
             <span className="absolute -top-3 -left-3 w-5 h-5 border-t-2 border-l-2 border-primary/70" />
