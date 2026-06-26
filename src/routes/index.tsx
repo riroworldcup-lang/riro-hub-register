@@ -150,16 +150,20 @@ function Home() {
           </div>
 
           <div className="relative animate-slide-up [animation-delay:400ms] group mx-auto">
-  <div className="absolute -inset-2 bg-gradient-to-tr from-primary/40 via-primary/10 to-transparent rounded-sm blur-xl opacity-60 group-hover:opacity-90 transition-opacity duration-500" />
+  <div className="absolute -inset-2 bg-gradient-to-tr from-primary/40 via-primary/10 to-transparent rounded-sm blur-xl opacity-60" />
 
   <video
-    src="/videos/VID_20260615_131310_875.mp4"
+    className="relative w-full max-w-lg aspect-square object-cover rounded-sm border border-white/10"
     autoPlay
     loop
+    muted
     playsInline
-    preload="auto"
-    className="relative w-full max-w-lg aspect-square object-cover rounded-sm border border-white/10 transition-transform duration-700 group-hover:scale-[1.02] group-hover:border-primary/50"
-  />
+  >
+    <source
+      src="/videos/VID_20260615_131310_875.mp4"
+      type="video/mp4"
+    />
+  </video>
 
   <span className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-primary" />
   <span className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-primary" />
