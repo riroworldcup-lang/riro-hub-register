@@ -163,7 +163,7 @@ function Home() {
     playsInline
   >
     <source
-      src="/video/VID_20260615_131310_875.mp4"
+      src="/videos/VID_20260615_131310_875.mp4"
       type="video/mp4"
     />
   </video>
