@@ -151,12 +151,12 @@ function Home() {
 
           <div className="relative animate-slide-up [animation-delay:400ms] group mx-auto">
             <div className="absolute -inset-2 bg-gradient-to-tr from-primary/40 via-primary/10 to-transparent rounded-sm blur-xl opacity-60 group-hover:opacity-90 transition-opacity duration-500" />
-            <video
+            source
               autoPlay
               loop
-              muted
+              unmuted
               playsInline
-              src={heroVideo.url}
+              src="/videos/VID_20260615_131310_875.mp4"}
               width={1024}
               height={1024}
               className="relative w-full max-w-lg aspect-square object-cover rounded-sm border border-white/10 transition-transform duration-700 group-hover:scale-[1.02] group-hover:border-primary/50"
