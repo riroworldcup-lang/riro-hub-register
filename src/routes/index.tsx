@@ -155,7 +155,7 @@ function Home() {
           <div className="relative animate-slide-up [animation-delay:400ms] group mx-auto">
   <div className="absolute -inset-2 bg-gradient-to-tr from-primary/40 via-primary/10 to-transparent rounded-sm blur-xl opacity-60" />
 
-  <videos
+  <video
     className="relative w-full max-w-lg aspect-square object-cover rounded-sm border border-white/10"
     autoPlay
     loop
@@ -166,7 +166,7 @@ function Home() {
       src="/video/VID_20260615_131310_875.mp4"
       type="video/mp4"
     />
-  </videos>
+  </video>
 
   <span className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-primary" />
   <span className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-primary" />
