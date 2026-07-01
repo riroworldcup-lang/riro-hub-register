@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteShell } from "@/components/SiteNav";
+import { TeamGrid } from "@/components/TeamGrid";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -56,6 +57,8 @@ function AboutPage() {
           ))}
         </div>
       </section>
+
+      <TeamGrid />
     </SiteShell>
   );
 }

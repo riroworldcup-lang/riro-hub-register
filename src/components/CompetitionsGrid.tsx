@@ -39,6 +39,23 @@ export function CompetitionsGrid({ limit }: { limit?: number }) {
             </div>
             <h4 className="text-lg sm:text-xl font-bold uppercase mb-2 leading-tight">{c.name}</h4>
             <p className="text-xs sm:text-sm text-muted-foreground flex-1">{c.description}</p>
+            {c.participants && c.participants.length > 0 && (
+              <div className="mt-4 pt-3 border-t border-border">
+                <div className="font-mono text-[9px] uppercase tracking-widest text-primary mb-1.5">
+                  Participants
+                </div>
+                <div className="flex flex-wrap gap-1">
+                  {c.participants.map((p: string, idx: number) => (
+                    <span
+                      key={idx}
+                      className="text-[10px] font-mono bg-white/5 border border-border px-1.5 py-0.5 rounded-sm"
+                    >
+                      {p}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
             <div className="mt-4 pt-4 border-t border-border font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
               Rules → Soon
             </div>
