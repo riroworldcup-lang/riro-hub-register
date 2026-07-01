@@ -21,6 +21,12 @@ import {
   updateCompetition,
   deleteCompetition,
 } from "@/lib/content.functions";
+import {
+  listTeamMembers,
+  createTeamMember,
+  updateTeamMember,
+  deleteTeamMember,
+} from "@/lib/team.functions";
 
 
 export const Route = createFileRoute("/_authenticated/admin")({
@@ -142,6 +148,7 @@ function AdminPage() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-10">
         <ChargesPanel updateCharges={updateCharges} />
         <GalleryPanel />
+        <TeamPanel />
         <CompetitionsPanel />
 
 
@@ -465,6 +472,7 @@ function CompetitionRow({ comp, onSave, onDelete }: any) {
     name: comp.name, category: comp.category, description: comp.description,
     levels: (comp.levels || []).join(", "), sort_order: comp.sort_order ?? 0,
     image_url: comp.image_url || "",
+    participants: (comp.participants || []).join(", "),
   });
   return (
     <div className="border border-border rounded-sm p-3 grid sm:grid-cols-2 lg:grid-cols-6 gap-2">
@@ -488,6 +496,7 @@ function CompetitionRow({ comp, onSave, onDelete }: any) {
           levels: v.levels.split(",").map((x: string) => x.trim()).filter(Boolean),
           sort_order: v.sort_order,
           image_url: v.image_url || null,
+          participants: v.participants.split(",").map((x: string) => x.trim()).filter(Boolean),
         })}
           className="flex-1 px-3 py-1.5 bg-primary text-primary-foreground font-mono font-bold uppercase tracking-widest text-[10px] rounded-sm">
           Save
@@ -501,8 +510,124 @@ function CompetitionRow({ comp, onSave, onDelete }: any) {
         placeholder="Image URL"
         className="lg:col-span-3 bg-white/5 border border-border rounded-sm px-2 py-1.5 text-xs" />
       <textarea value={v.description} onChange={(e) => setV({ ...v, description: e.target.value })}
-        rows={2}
+        rows={2} placeholder="Description"
         className="lg:col-span-6 bg-white/5 border border-border rounded-sm px-2 py-1.5 text-xs" />
+      <textarea value={v.participants} onChange={(e) => setV({ ...v, participants: e.target.value })}
+        rows={2} placeholder="Participants (comma separated names)"
+        className="lg:col-span-6 bg-white/5 border border-border rounded-sm px-2 py-1.5 text-xs" />
+    </div>
+  );
+}
+
+function TeamPanel() {
+  const qc = useQueryClient();
+  const fetchList = useServerFn(listTeamMembers);
+  const create = useServerFn(createTeamMember);
+  const update = useServerFn(updateTeamMember);
+  const del = useServerFn(deleteTeamMember);
+
+  const q = useQuery({ queryKey: ["admin-team"], queryFn: () => fetchList() });
+  const [form, setForm] = useState({ name: "", designation: "", image_url: "", sort_order: 0 });
+
+  const invalidate = () => {
+    qc.invalidateQueries({ queryKey: ["admin-team"] });
+    qc.invalidateQueries({ queryKey: ["team-members"] });
+  };
+
+  const addMut = useMutation({
+    mutationFn: () => create({ data: form }),
+    onSuccess: () => {
+      toast.success("Member added.");
+      setForm({ name: "", designation: "", image_url: "", sort_order: 0 });
+      invalidate();
+    },
+    onError: (e: Error) => toast.error(e.message),
+  });
+
+  const delMut = useMutation({
+    mutationFn: (id: string) => del({ data: { id } }),
+    onSuccess: () => { toast.success("Removed."); invalidate(); },
+    onError: (e: Error) => toast.error(e.message),
+  });
+
+  const updMut = useMutation({
+    mutationFn: (v: any) => update({ data: v }),
+    onSuccess: () => { toast.success("Saved."); invalidate(); },
+    onError: (e: Error) => toast.error(e.message),
+  });
+
+  const members = q.data?.members ?? [];
+
+  return (
+    <section className="border border-border rounded-sm p-6">
+      <h2 className="font-mono text-primary text-sm mb-2">[ TEAM MEMBERS ]</h2>
+      <p className="text-sm text-muted-foreground mb-5">
+        Passport-size photos shown on the About page. Paste any public image URL.
+      </p>
+      <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-3 mb-6">
+        <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })}
+          placeholder="Full name" className="bg-white/5 border border-border rounded-sm px-3 py-2 text-sm" />
+        <input value={form.designation} onChange={(e) => setForm({ ...form, designation: e.target.value })}
+          placeholder="Designation" className="bg-white/5 border border-border rounded-sm px-3 py-2 text-sm" />
+        <input value={form.image_url} onChange={(e) => setForm({ ...form, image_url: e.target.value })}
+          placeholder="Photo URL" className="lg:col-span-2 bg-white/5 border border-border rounded-sm px-3 py-2 text-sm" />
+        <div className="flex gap-2">
+          <input type="number" value={form.sort_order}
+            onChange={(e) => setForm({ ...form, sort_order: Number(e.target.value) })}
+            placeholder="Order" className="w-20 bg-white/5 border border-border rounded-sm px-3 py-2 text-sm" />
+          <button onClick={() => form.name && form.designation && form.image_url && addMut.mutate()}
+            disabled={addMut.isPending}
+            className="flex-1 px-4 py-2 bg-primary text-primary-foreground font-mono font-bold uppercase tracking-widest text-[10px] rounded-sm disabled:opacity-50">
+            {addMut.isPending ? "Adding..." : "Add"}
+          </button>
+        </div>
+      </div>
+      {q.isLoading ? (
+        <div className="p-6 text-center text-muted-foreground font-mono">Loading...</div>
+      ) : members.length === 0 ? (
+        <div className="p-8 text-center text-muted-foreground font-mono border border-border rounded-sm">No team members yet.</div>
+      ) : (
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+          {members.map((m: any) => (
+            <TeamEditCard key={m.id} m={m}
+              onSave={(v: any) => updMut.mutate({ id: m.id, ...v })}
+              onDelete={() => { if (confirm(`Remove "${m.name}"?`)) delMut.mutate(m.id); }}
+            />
+          ))}
+        </div>
+      )}
+    </section>
+  );
+}
+
+function TeamEditCard({ m, onSave, onDelete }: any) {
+  const [v, setV] = useState({
+    name: m.name, designation: m.designation, image_url: m.image_url, sort_order: m.sort_order ?? 0,
+  });
+  return (
+    <div className="border border-border rounded-sm overflow-hidden bg-background">
+      <img src={v.image_url} alt={v.name} className="w-full aspect-square object-cover" />
+      <div className="p-2 space-y-1.5">
+        <input value={v.name} onChange={(e) => setV({ ...v, name: e.target.value })}
+          className="w-full bg-white/5 border border-border rounded-sm px-2 py-1 text-xs" />
+        <input value={v.designation} onChange={(e) => setV({ ...v, designation: e.target.value })}
+          className="w-full bg-white/5 border border-border rounded-sm px-2 py-1 text-xs" />
+        <input value={v.image_url} onChange={(e) => setV({ ...v, image_url: e.target.value })}
+          className="w-full bg-white/5 border border-border rounded-sm px-2 py-1 text-[10px]" />
+        <div className="flex gap-1">
+          <input type="number" value={v.sort_order}
+            onChange={(e) => setV({ ...v, sort_order: Number(e.target.value) })}
+            className="w-14 bg-white/5 border border-border rounded-sm px-2 py-1 text-xs" />
+          <button onClick={() => onSave(v)}
+            className="flex-1 px-2 py-1 bg-primary text-primary-foreground font-mono font-bold uppercase tracking-widest text-[10px] rounded-sm">
+            Save
+          </button>
+          <button onClick={onDelete}
+            className="px-2 py-1 border border-destructive text-destructive font-mono font-bold uppercase tracking-widest text-[10px] rounded-sm">
+            X
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
