@@ -41,6 +41,7 @@ export type Database = {
           image_url: string | null
           levels: string[]
           name: string
+          participants: string[]
           sort_order: number
           updated_at: string
         }
@@ -52,6 +53,7 @@ export type Database = {
           image_url?: string | null
           levels?: string[]
           name: string
+          participants?: string[]
           sort_order?: number
           updated_at?: string
         }
@@ -63,6 +65,7 @@ export type Database = {
           image_url?: string | null
           levels?: string[]
           name?: string
+          participants?: string[]
           sort_order?: number
           updated_at?: string
         }
@@ -209,6 +212,36 @@ export type Database = {
           team_name?: string | null
           updated_at?: string
           user_id?: string | null
+        }
+        Relationships: []
+      }
+      team_members: {
+        Row: {
+          created_at: string
+          designation: string
+          id: string
+          image_url: string
+          name: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          designation: string
+          id?: string
+          image_url: string
+          name: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          designation?: string
+          id?: string
+          image_url?: string
+          name?: string
+          sort_order?: number
+          updated_at?: string
         }
         Relationships: []
       }
