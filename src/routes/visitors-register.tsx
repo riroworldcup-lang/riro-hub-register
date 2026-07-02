@@ -67,6 +67,11 @@ function VisitorsRegisterPage() {
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!authed) {
+      toast.error("Please sign in to submit a visitor registration.");
+      navigate({ to: "/auth", search: { next: "/visitors-register" } as never });
+      return;
+    }
     if (!form.full_name.trim() || !form.contact_number.trim()) {
       toast.error("Full name and contact number are required.");
       return;
