@@ -40,7 +40,18 @@ const labelCls =
 
 function VisitorsRegisterPage() {
   const [form, setForm] = useState<VisitorInput>(initial);
+  const [authed, setAuthed] = useState<boolean | null>(null);
+  const navigate = useNavigate();
   const submit = useServerFn(submitVisitorRegistration);
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => setAuthed(!!data.user));
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) =>
+      setAuthed(!!session?.user),
+    );
+    return () => sub.subscription.unsubscribe();
+  }, []);
+
   const mutation = useMutation({
     mutationFn: (data: VisitorInput) => submit({ data }),
     onSuccess: () => {
