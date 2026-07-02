@@ -107,7 +107,7 @@ function Home() {
               International Robotics, Innovation & Technology Championship.
             </p>
             <p className="text-sm font-mono uppercase tracking-wider text-foreground/80 mb-4 animate-slide-up [animation-delay:250ms]">
-              4-Day Mega Event • October–November 2026
+              4-Day Mega Event • November 2026
             </p>
 
             <div className="mb-6 animate-slide-up [animation-delay:280ms] animate-float-y flex justify-center">
