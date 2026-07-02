@@ -49,7 +49,7 @@ function AboutPage() {
         <h2 className="font-mono text-primary text-sm mb-3">[ STATS ]</h2>
         <h3 className="text-2xl sm:text-4xl font-black uppercase tracking-tighter italic mb-10">By The Numbers</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border border border-border">
-          {[["4","DAYS"],["17+","EVENTS"],["5000+","EXPECTED"],["2026","OCT–NOV"]].map(([n,l]) => (
+          {[["4","DAYS"],["17+","EVENTS"],["5000+","EXPECTED"],["2026","NOV"]].map(([n,l]) => (
             <div key={l} className="bg-background p-6 sm:p-8">
               <div className="font-mono font-black text-3xl sm:text-4xl text-primary">{n}</div>
               <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mt-2">{l}</div>
