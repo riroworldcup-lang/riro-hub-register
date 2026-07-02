@@ -284,6 +284,7 @@ export type Database = {
           school_college_name: string | null
           standard: string | null
           updated_at: string
+          user_id: string | null
         }
         Insert: {
           address_line_1?: string | null
@@ -302,6 +303,7 @@ export type Database = {
           school_college_name?: string | null
           standard?: string | null
           updated_at?: string
+          user_id?: string | null
         }
         Update: {
           address_line_1?: string | null
@@ -320,6 +322,7 @@ export type Database = {
           school_college_name?: string | null
           standard?: string | null
           updated_at?: string
+          user_id?: string | null
         }
         Relationships: []
       }

@@ -1,7 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
-import { createClient } from "@supabase/supabase-js";
 import { z } from "zod";
-import type { Database } from "@/integrations/supabase/types";
+import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
 const VisitorSchema = z.object({
   full_name: z.string().trim().min(1).max(120),
@@ -22,14 +21,11 @@ const VisitorSchema = z.object({
 export type VisitorInput = z.infer<typeof VisitorSchema>;
 
 export const submitVisitorRegistration = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
   .inputValidator((data: unknown) => VisitorSchema.parse(data))
-  .handler(async ({ data }) => {
-    const supabase = createClient<Database>(
-      process.env.SUPABASE_URL!,
-      process.env.SUPABASE_PUBLISHABLE_KEY!,
-      { auth: { storage: undefined, persistSession: false, autoRefreshToken: false } },
-    );
-    const row: Record<string, unknown> = { ...data };
+  .handler(async ({ data, context }) => {
+    const { supabase, userId } = context;
+    const row: Record<string, unknown> = { ...data, user_id: userId };
     for (const k of Object.keys(row)) {
       if (typeof row[k] === "string" && (row[k] as string).trim() === "") row[k] = null;
     }

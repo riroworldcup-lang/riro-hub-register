@@ -1,9 +1,10 @@
-import { useState } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useMutation } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 import { SiteShell } from "@/components/SiteNav";
+import { supabase } from "@/integrations/supabase/client";
 import { submitVisitorRegistration, type VisitorInput } from "@/lib/visitors.functions";
 
 export const Route = createFileRoute("/visitors-register")({
@@ -39,7 +40,18 @@ const labelCls =
 
 function VisitorsRegisterPage() {
   const [form, setForm] = useState<VisitorInput>(initial);
+  const [authed, setAuthed] = useState<boolean | null>(null);
+  const navigate = useNavigate();
   const submit = useServerFn(submitVisitorRegistration);
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => setAuthed(!!data.user));
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) =>
+      setAuthed(!!session?.user),
+    );
+    return () => sub.subscription.unsubscribe();
+  }, []);
+
   const mutation = useMutation({
     mutationFn: (data: VisitorInput) => submit({ data }),
     onSuccess: () => {
@@ -55,6 +67,11 @@ function VisitorsRegisterPage() {
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!authed) {
+      toast.error("Please sign in to submit a visitor registration.");
+      navigate({ to: "/auth", search: { next: "/visitors-register" } as never });
+      return;
+    }
     if (!form.full_name.trim() || !form.contact_number.trim()) {
       toast.error("Full name and contact number are required.");
       return;
