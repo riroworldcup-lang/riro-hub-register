@@ -21,6 +21,12 @@ const GALLERY_SLIDES = [
   { src: riro2.url, alt: "Robotics World Cup stadium with cheering crowd" },
   { src: riro3.url, alt: "RIRO Robotics World Cup team of robots" },
   { src: riro4.url, alt: "RIRO World Cup champion robot with trophy" },
+  { src: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&w=1600&q=80", alt: "Humanoid robot portrait" },
+  { src: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1600&q=80", alt: "White humanoid robot" },
+  { src: "https://images.unsplash.com/photo-1563209259-9ac06bfd0aa2?auto=format&fit=crop&w=1600&q=80", alt: "Humanoid robot close-up" },
+  { src: "https://images.unsplash.com/photo-1546776310-eef45dd6d63c?auto=format&fit=crop&w=1600&q=80", alt: "Humanoid robot expressive face" },
+  { src: "https://images.unsplash.com/photo-1535378917042-10a22c95931a?auto=format&fit=crop&w=1600&q=80", alt: "Futuristic humanoid robot" },
+  { src: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1600&q=80", alt: "AI humanoid robot glowing" },
 ];
 
 export const Route = createFileRoute("/")({
