@@ -25,7 +25,6 @@ export const COMPETITIONS: Competition[] = [
 ];
 
 export const COMPETITION_OPTIONS: string[] = [
-  "Chakravyuh",
   "Innovation Challenge (Junior)",
   "Innovation Challenge (Senior)",
   "Sumo Bot",
@@ -45,10 +44,10 @@ export const COMPETITION_OPTIONS: string[] = [
   "FPV Car Racing (Senior)",
   "Aeromodelling Racing (Junior)",
   "Aeromodelling Racing (Senior)",
-  "Web / IT Technology",
   "ROBOWAR (Junior)",
   "ROBOWAR (Senior)",
   "Reel Making Challenge",
   "BGMI Championship",
   "Amateur Astronomer Conference",
+  "World Record Attempt",
 ];
