@@ -6,7 +6,6 @@ export type Competition = {
 };
 
 export const COMPETITIONS: Competition[] = [
-  { name: "Chakravyuh", category: "Robotics", description: "Navigate the autonomous maze gauntlet." },
   { name: "Innovation Challenge", category: "Innovation", description: "Showcase original STEM solutions.", levels: ["Junior", "Senior"] },
   { name: "Sumo Bot", category: "Robotics", description: "High-torque combat in the ring." },
   { name: "Robo Soccer", category: "Robotics", description: "Tactical robotic football matches.", levels: ["Junior", "Senior"] },
@@ -18,15 +17,14 @@ export const COMPETITIONS: Competition[] = [
   { name: "Aero Modeling Challenge", category: "Aerospace", description: "Custom fixed-wing precision flight.", levels: ["Junior", "Senior"] },
   { name: "FPV Car Racing", category: "Robotics", description: "First-person view ground racing.", levels: ["Junior", "Senior"] },
   { name: "Aeromodelling Racing", category: "Aerospace", description: "RC aircraft head-to-head time trials.", levels: ["Junior", "Senior"] },
-  { name: "Web / IT Technology", category: "Innovation", description: "Web dev sprint and code battles." },
   { name: "ROBOWAR", category: "Robotics", description: "Full-contact mechanical combat.", levels: ["Junior", "Senior"] },
   { name: "Reel Making Challenge", category: "Media", description: "Short-form video storytelling." },
   { name: "BGMI Championship", category: "Gaming", description: "Squad-based mobile esports battle." },
   { name: "Amateur Astronomer Conference", category: "STEM", description: "Present celestial research findings." },
+  { name: "World Record Attempt", category: "Special", description: "Be part of a mass participation world record attempt. ₹99/- per participant." },
 ];
 
 export const COMPETITION_OPTIONS: string[] = [
-  "Chakravyuh",
   "Innovation Challenge (Junior)",
   "Innovation Challenge (Senior)",
   "Sumo Bot",
@@ -46,10 +44,10 @@ export const COMPETITION_OPTIONS: string[] = [
   "FPV Car Racing (Senior)",
   "Aeromodelling Racing (Junior)",
   "Aeromodelling Racing (Senior)",
-  "Web / IT Technology",
   "ROBOWAR (Junior)",
   "ROBOWAR (Senior)",
   "Reel Making Challenge",
   "BGMI Championship",
   "Amateur Astronomer Conference",
+  "World Record Attempt",
 ];
