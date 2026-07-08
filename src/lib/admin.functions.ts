@@ -89,3 +89,40 @@ export const checkIsAdmin = createServerFn({ method: "GET" })
     });
     return { isAdmin: !!data };
   });
+
+export const listAuthUsers = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    await assertAdmin(context);
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data, error } = await supabaseAdmin.auth.admin.listUsers({ page: 1, perPage: 200 });
+    if (error) throw new Error(error.message);
+    const users = (data?.users ?? []).map((u) => ({
+      id: u.id,
+      email: u.email ?? "",
+      created_at: u.created_at,
+      last_sign_in_at: u.last_sign_in_at ?? null,
+      email_confirmed_at: u.email_confirmed_at ?? null,
+    }));
+    return { users };
+  });
+
+export const sendPasswordResetForUser = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d: unknown) =>
+    z.object({ email: z.string().trim().email(), redirectTo: z.string().url() }).parse(d),
+  )
+  .handler(async ({ data, context }) => {
+    await assertAdmin(context);
+    const { createClient } = await import("@supabase/supabase-js");
+    const client = createClient(
+      process.env.SUPABASE_URL!,
+      process.env.SUPABASE_PUBLISHABLE_KEY!,
+      { auth: { persistSession: false, autoRefreshToken: false } },
+    );
+    const { error } = await client.auth.resetPasswordForEmail(data.email, {
+      redirectTo: data.redirectTo,
+    });
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
