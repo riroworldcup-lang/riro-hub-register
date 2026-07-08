@@ -10,6 +10,8 @@ import {
   claimFirstAdmin,
   checkIsAdmin,
   updateChargesSetting,
+  listAuthUsers,
+  sendPasswordResetForUser,
 } from "@/lib/admin.functions";
 import {
   listGallery,
@@ -150,6 +152,9 @@ function AdminPage() {
         <GalleryPanel />
         <TeamPanel />
         <CompetitionsPanel />
+        <UsersPanel />
+
+
 
 
         <section>
@@ -631,3 +636,79 @@ function TeamEditCard({ m, onSave, onDelete }: any) {
     </div>
   );
 }
+
+function UsersPanel() {
+  const fetchList = useServerFn(listAuthUsers);
+  const sendReset = useServerFn(sendPasswordResetForUser);
+  const q = useQuery({ queryKey: ["admin-users"], queryFn: () => fetchList() });
+
+  const resetMut = useMutation({
+    mutationFn: (email: string) =>
+      sendReset({ data: { email, redirectTo: `${window.location.origin}/reset-password` } }),
+    onSuccess: () => toast.success("Password reset email sent."),
+    onError: (e: Error) => toast.error(e.message),
+  });
+
+  const users = q.data?.users ?? [];
+
+  return (
+    <section className="border border-border rounded-sm p-6">
+      <div className="flex items-center justify-between mb-4">
+        <div>
+          <h2 className="font-mono text-primary text-sm mb-1">[ USERS ]</h2>
+          <p className="text-sm text-muted-foreground">
+            Registered accounts. Passwords are stored securely and cannot be viewed. Send a reset link to let a user set a new one.
+          </p>
+        </div>
+        <span className="font-mono text-xs text-muted-foreground">{users.length} total</span>
+      </div>
+      {q.isLoading ? (
+        <div className="p-6 text-center text-muted-foreground font-mono">Loading...</div>
+      ) : users.length === 0 ? (
+        <div className="p-8 text-center text-muted-foreground font-mono border border-border rounded-sm">No users yet.</div>
+      ) : (
+        <div className="overflow-x-auto border border-border rounded-sm">
+          <table className="w-full text-sm">
+            <thead className="bg-white/[0.03] font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+              <tr>
+                <th className="text-left p-3">Email</th>
+                <th className="text-left p-3">Confirmed</th>
+                <th className="text-left p-3">Created</th>
+                <th className="text-left p-3">Last Sign-In</th>
+                <th className="p-3"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {users.map((u: any) => (
+                <tr key={u.id} className="border-t border-border hover:bg-white/[0.02]">
+                  <td className="p-3 font-medium break-all">{u.email}</td>
+                  <td className="p-3 font-mono text-[10px] text-muted-foreground">
+                    {u.email_confirmed_at ? "Yes" : "No"}
+                  </td>
+                  <td className="p-3 font-mono text-[10px] text-muted-foreground">
+                    {new Date(u.created_at).toLocaleDateString()}
+                  </td>
+                  <td className="p-3 font-mono text-[10px] text-muted-foreground">
+                    {u.last_sign_in_at ? new Date(u.last_sign_in_at).toLocaleString() : "—"}
+                  </td>
+                  <td className="p-3 text-right">
+                    <button
+                      onClick={() => {
+                        if (confirm(`Send password reset email to ${u.email}?`)) resetMut.mutate(u.email);
+                      }}
+                      disabled={resetMut.isPending}
+                      className="font-mono text-[10px] uppercase tracking-widest text-primary hover:underline disabled:opacity-50"
+                    >
+                      Send Reset Link
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </section>
+  );
+}
+
