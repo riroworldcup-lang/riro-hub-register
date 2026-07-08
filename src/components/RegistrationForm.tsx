@@ -168,9 +168,21 @@ export function RegistrationForm() {
           [ 03 ] Team Details (Optional)
         </h4>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          <div className="md:col-span-2">
+          <div>
             <label className={labelCls}>Team Name</label>
             <input className={inputCls} value={form.team_name} onChange={update("team_name")} />
+          </div>
+          <div>
+            <label className={labelCls}>Team Size</label>
+            <input
+              type="number"
+              min={1}
+              max={10}
+              className={inputCls}
+              placeholder="Number of members (incl. you)"
+              value={(form as any).team_size ?? ""}
+              onChange={update("team_size" as keyof FormState)}
+            />
           </div>
         </div>
         <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-3">
