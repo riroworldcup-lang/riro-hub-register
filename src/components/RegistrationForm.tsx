@@ -17,6 +17,8 @@ type FormState = {
   science_teacher_contact: string;
   competition_name: string;
   team_name: string;
+  club_name: string;
+  team_size: string;
   comments: string;
 } & Record<`team_mate_${number}_name` | `team_mate_${number}_contact`, string>;
 
