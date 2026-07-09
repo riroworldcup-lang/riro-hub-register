@@ -58,7 +58,7 @@ export function CompetitionsGrid({ limit }: { limit?: number }) {
               Rules → Soon
             </div>
           </div>
-        </article>
+        </Link>
       ))}
     </div>
   );
