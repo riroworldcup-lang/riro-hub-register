@@ -28,7 +28,8 @@ export const COMPETITIONS: Competition[] = [
 export const COMPETITION_OPTIONS: string[] = [
   "Innovation Challenge (Junior)",
   "Innovation Challenge (Senior)",
-  "Sumo Bot",
+  "Sumo Bot (Junior)",
+  "Sumo Bot (Senior)",
   "Robo Soccer (Junior)",
   "Robo Soccer (Senior)",
   "Robo Race (Junior)",
@@ -43,8 +44,6 @@ export const COMPETITION_OPTIONS: string[] = [
   "Aero Modeling Challenge (Senior)",
   "FPV Car Racing (Junior)",
   "FPV Car Racing (Senior)",
-  "Aeromodelling Racing (Junior)",
-  "Aeromodelling Racing (Senior)",
   "ROBOWAR (Junior)",
   "ROBOWAR (Senior)",
   "Reel Making Challenge",
