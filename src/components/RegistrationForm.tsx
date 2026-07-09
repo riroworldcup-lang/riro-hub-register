@@ -192,51 +192,84 @@ export function RegistrationForm({ defaultCompetition }: { defaultCompetition?: 
 
       <section>
         <h4 className="font-mono text-xs uppercase tracking-widest text-primary mb-4">
-          [ 03 ] Team Details (Optional)
+          [ 03 ] Team Details
         </h4>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
           <div>
-            <label className={labelCls}>Team Name</label>
-            <input className={inputCls} value={form.team_name} onChange={update("team_name")} />
+            <label className={labelCls}>Team Name *</label>
+            <input className={inputCls} value={form.team_name} onChange={update("team_name")} required />
           </div>
           <div>
-            <label className={labelCls}>Team Size</label>
+            <label className={labelCls}>Club Name *</label>
+            <input
+              className={inputCls}
+              placeholder="Suffixed after team name"
+              value={form.club_name}
+              onChange={update("club_name")}
+              required
+            />
+          </div>
+          <div>
+            <label className={labelCls}>Team Size *</label>
             <input
               type="number"
               min={1}
               max={10}
               className={inputCls}
-              placeholder="Number of members (incl. you)"
-              value={(form as any).team_size ?? ""}
-              onChange={update("team_size" as keyof FormState)}
+              placeholder="Members (incl. you)"
+              value={form.team_size}
+              onChange={update("team_size")}
+              required
             />
           </div>
         </div>
-        <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-3">
-          Add up to 10 teammates (leave blank if not applicable)
-        </p>
-        <div className="space-y-3">
-          {Array.from({ length: 10 }, (_, i) => i + 1).map((i) => (
-            <div key={i} className="grid grid-cols-[2.25rem_1fr_1fr] gap-2 sm:gap-3 items-center">
-              <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground text-center">
-                #{i}
-              </span>
-              <input
-                className={inputCls}
-                placeholder={`Teammate ${i} full name`}
-                value={(form as any)[`team_mate_${i}_name`]}
-                onChange={update(`team_mate_${i}_name` as keyof FormState)}
-              />
-              <input
-                type="tel"
-                className={inputCls}
-                placeholder="Contact number"
-                value={(form as any)[`team_mate_${i}_contact`]}
-                onChange={update(`team_mate_${i}_contact` as keyof FormState)}
-              />
-            </div>
-          ))}
-        </div>
+        {(() => {
+          const size = Math.max(1, Math.min(10, parseInt(form.team_size, 10) || 1));
+          const need = size - 1;
+          return (
+            <>
+              <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-3">
+                {need === 0
+                  ? "Solo entry — no teammates required."
+                  : `Enter details for ${need} teammate${need > 1 ? "s" : ""} (required)`}
+              </p>
+              <div className="space-y-3">
+                {Array.from({ length: 10 }, (_, i) => i + 1).map((i) => {
+                  const isRequired = i <= need;
+                  const isDisabled = i > need;
+                  return (
+                    <div
+                      key={i}
+                      className={`grid grid-cols-[2.25rem_1fr_1fr] gap-2 sm:gap-3 items-center ${isDisabled ? "opacity-40" : ""}`}
+                    >
+                      <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground text-center">
+                        #{i}
+                        {isRequired ? "*" : ""}
+                      </span>
+                      <input
+                        className={inputCls}
+                        placeholder={`Teammate ${i} full name`}
+                        value={(form as any)[`team_mate_${i}_name`]}
+                        onChange={update(`team_mate_${i}_name` as keyof FormState)}
+                        disabled={isDisabled}
+                        required={isRequired}
+                      />
+                      <input
+                        type="tel"
+                        className={inputCls}
+                        placeholder="Contact number"
+                        value={(form as any)[`team_mate_${i}_contact`]}
+                        onChange={update(`team_mate_${i}_contact` as keyof FormState)}
+                        disabled={isDisabled}
+                        required={isRequired}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            </>
+          );
+        })()}
       </section>
 
       <section>
