@@ -49,7 +49,7 @@ function RegisterPage() {
           <FeesTable />
         </div>
         <div className="bg-surface border border-border p-6 sm:p-8 rounded-sm">
-          <RegistrationForm />
+          <RegistrationForm defaultCompetition={competition} />
         </div>
       </section>
     </SiteShell>
