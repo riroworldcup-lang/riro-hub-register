@@ -19,6 +19,8 @@ export const Route = createFileRoute("/register")({
 });
 
 function RegisterPage() {
+  const { competition } = Route.useSearch();
+
   return (
     <SiteShell>
       <section className="px-4 sm:px-6 py-20 sm:py-24 max-w-6xl mx-auto grid lg:grid-cols-[1fr_1.4fr] gap-12 lg:gap-16">
