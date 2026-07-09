@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
+import { Link } from "@tanstack/react-router";
 import { listCompetitions } from "@/lib/content.functions";
 import { COMPETITIONS as FALLBACK_COMPETITIONS } from "@/lib/competitions";
 
