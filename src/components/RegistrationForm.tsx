@@ -33,6 +33,8 @@ const buildInitial = (): FormState => {
     science_teacher_contact: "",
     competition_name: "",
     team_name: "",
+    club_name: "",
+    team_size: "1",
     comments: "",
   } as FormState;
   for (let i = 1; i <= 10; i++) {
