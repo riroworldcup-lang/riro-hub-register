@@ -45,8 +45,17 @@ const inputCls =
 const labelCls =
   "block font-mono text-[10px] uppercase tracking-widest text-primary mb-1.5";
 
-export function RegistrationForm() {
-  const [form, setForm] = useState<FormState>(buildInitial);
+export function RegistrationForm({ defaultCompetition }: { defaultCompetition?: string } = {}) {
+  const [form, setForm] = useState<FormState>(() => {
+    const base = buildInitial();
+    if (defaultCompetition) {
+      const match = COMPETITION_OPTIONS.find(
+        (o) => o === defaultCompetition || o.startsWith(defaultCompetition + " "),
+      );
+      base.competition_name = match ?? defaultCompetition;
+    }
+    return base;
+  });
   const [authed, setAuthed] = useState<boolean | null>(null);
   const navigate = useNavigate();
   const submit = useServerFn(submitRegistration);

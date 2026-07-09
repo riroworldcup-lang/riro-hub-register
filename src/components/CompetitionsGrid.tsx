@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
+import { Link } from "@tanstack/react-router";
 import { listCompetitions } from "@/lib/content.functions";
 import { COMPETITIONS as FALLBACK_COMPETITIONS } from "@/lib/competitions";
 
@@ -14,9 +15,11 @@ export function CompetitionsGrid({ limit }: { limit?: number }) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
       {competitions.map((c: any, i: number) => (
-        <article
+        <Link
           key={c.id ?? c.name}
-          className="bg-background border border-border h-full flex flex-col hover:bg-primary/5 hover:border-primary/40 transition-colors rounded-sm overflow-hidden"
+          to="/register"
+          search={{ competition: c.name } as any}
+          className="bg-background border border-border h-full flex flex-col hover:bg-primary/5 hover:border-primary/40 transition-colors rounded-sm overflow-hidden cursor-pointer group"
         >
           {c.image_url && (
             <img
@@ -55,7 +58,7 @@ export function CompetitionsGrid({ limit }: { limit?: number }) {
               Rules → Soon
             </div>
           </div>
-        </article>
+        </Link>
       ))}
     </div>
   );
