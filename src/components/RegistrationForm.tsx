@@ -96,6 +96,9 @@ export function RegistrationForm({ defaultCompetition }: { defaultCompetition?: 
       "science_teacher_name",
       "science_teacher_contact",
       "competition_name",
+      "team_name",
+      "club_name",
+      "team_size",
     ];
     for (const k of required) {
       if (!String(form[k]).trim()) {
@@ -103,7 +106,18 @@ export function RegistrationForm({ defaultCompetition }: { defaultCompetition?: 
         return;
       }
     }
-    mutation.mutate(form);
+    const size = Math.max(1, Math.min(10, parseInt(form.team_size, 10) || 1));
+    const teammatesNeeded = size - 1;
+    for (let i = 1; i <= teammatesNeeded; i++) {
+      const n = String((form as any)[`team_mate_${i}_name`] ?? "").trim();
+      const c = String((form as any)[`team_mate_${i}_contact`] ?? "").trim();
+      if (!n || !c) {
+        toast.error(`Please fill teammate #${i} name and contact (team size is ${size})`);
+        return;
+      }
+    }
+    const composedTeamName = `${form.team_name.trim()} - ${form.club_name.trim()}`;
+    mutation.mutate({ ...form, team_name: composedTeamName });
   };
 
   if (authed === false) {
