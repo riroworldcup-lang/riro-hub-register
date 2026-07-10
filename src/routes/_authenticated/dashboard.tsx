@@ -146,7 +146,7 @@ function RegistrationCard({ reg }: { reg: Registration }) {
         <div className="grid sm:grid-cols-2 gap-x-6 gap-y-3 text-sm">
           <Field label="Participant" value={reg.full_name} />
           <Field label="School" value={reg.school_name} />
-          <Field label="Team Name" value={reg.team_name || "—"} />
+          <Field label="Team / Club Name" value={reg.team_name || "—"} />
           <Field label="Mobile" value={reg.mobile_number} />
           <div className="sm:col-span-2">
             <p className={labelCls}>Teammates</p>
@@ -188,7 +188,7 @@ function RegistrationCard({ reg }: { reg: Registration }) {
               </select>
             </div>
             <div>
-              <label className={labelCls}>Team Name</label>
+              <label className={labelCls}>Team / Club Name</label>
               <input
                 className={inputCls}
                 value={form.team_name}
