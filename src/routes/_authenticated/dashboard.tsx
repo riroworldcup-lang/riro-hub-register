@@ -125,7 +125,12 @@ function RegistrationCard({ reg }: { reg: Registration }) {
       <header className="flex justify-between items-start gap-4 flex-wrap mb-4">
         <div>
           <h3 className="text-xl font-bold uppercase tracking-tight">{reg.competition_name}</h3>
-          <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mt-1">
+          {reg.registration_number && (
+            <p className="mt-2 inline-block font-mono text-xs sm:text-sm text-primary border border-primary/40 bg-primary/5 px-2.5 py-1 rounded-sm tracking-widest">
+              {reg.registration_number}
+            </p>
+          )}
+          <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mt-2">
             Submitted {new Date(reg.created_at).toLocaleDateString()}
           </p>
         </div>
