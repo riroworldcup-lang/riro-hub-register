@@ -45,7 +45,7 @@ export const submitRegistration = createServerFn({ method: "POST" })
     const { data: inserted, error } = await context.supabase
       .from("registrations")
       .insert(row)
-      .select("id")
+      .select("id, registration_number")
       .single();
 
     if (error) {
@@ -66,7 +66,7 @@ export const submitRegistration = createServerFn({ method: "POST" })
       }
     }
 
-    return { ok: true, id: inserted.id };
+    return { ok: true, id: inserted.id, registration_number: inserted.registration_number };
   });
 
 export const listMyRegistrations = createServerFn({ method: "GET" })
