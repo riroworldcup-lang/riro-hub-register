@@ -190,18 +190,14 @@ export function RegistrationForm({ defaultCompetition }: { defaultCompetition?: 
         <h4 className="font-mono text-xs uppercase tracking-widest text-primary mb-4">
           [ 03 ] Team Details
         </h4>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <div>
-            <label className={labelCls}>Team Name *</label>
-            <input className={inputCls} value={form.team_name} onChange={update("team_name")} required />
-          </div>
-          <div>
-            <label className={labelCls}>Club Name *</label>
+            <label className={labelCls}>Team / Club Name *</label>
             <input
               className={inputCls}
-              placeholder="Suffixed after team name"
-              value={form.club_name}
-              onChange={update("club_name")}
+              placeholder="Enter team or club name"
+              value={form.team_name}
+              onChange={update("team_name")}
               required
             />
           </div>
