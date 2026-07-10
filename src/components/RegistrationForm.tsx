@@ -95,7 +95,6 @@ export function RegistrationForm({ defaultCompetition }: { defaultCompetition?: 
       "science_teacher_contact",
       "competition_name",
       "team_name",
-      "club_name",
       "team_size",
     ];
     for (const k of required) {
@@ -114,8 +113,7 @@ export function RegistrationForm({ defaultCompetition }: { defaultCompetition?: 
         return;
       }
     }
-    const composedTeamName = `${form.team_name.trim()} - ${form.club_name.trim()}`;
-    mutation.mutate({ ...form, team_name: composedTeamName });
+    mutation.mutate(form);
   };
 
   if (authed === false) {
