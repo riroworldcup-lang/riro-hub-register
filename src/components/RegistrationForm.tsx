@@ -72,8 +72,13 @@ export function RegistrationForm({ defaultCompetition }: { defaultCompetition?: 
 
   const mutation = useMutation({
     mutationFn: (data: FormState) => submit({ data }),
-    onSuccess: () => {
-      toast.success("Registration submitted. We'll be in touch.");
+    onSuccess: (res: any) => {
+      const regNo = res?.registration_number;
+      toast.success(
+        regNo
+          ? `Registered! Your RIRO ID: ${regNo}`
+          : "Registration submitted. We'll be in touch.",
+      );
       setForm(buildInitial());
       navigate({ to: "/dashboard" });
     },
