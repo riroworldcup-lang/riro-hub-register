@@ -225,6 +225,9 @@ export function RegistrationForm({ defaultCompetition }: { defaultCompetition?: 
           const need = size - 1;
           return (
             <>
+              <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-1">
+                Note: The 1st participant (you) is the Captain of the team / club.
+              </p>
               <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-3">
                 {need === 0
                   ? "Solo entry — no teammates required."
