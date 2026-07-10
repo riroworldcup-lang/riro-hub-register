@@ -107,6 +107,7 @@ export type Database = {
           id: string
           mobile_number: string
           participant_email: string | null
+          registration_number: string | null
           school_name: string
           science_teacher_contact: string
           science_teacher_name: string
@@ -145,6 +146,7 @@ export type Database = {
           id?: string
           mobile_number: string
           participant_email?: string | null
+          registration_number?: string | null
           school_name: string
           science_teacher_contact: string
           science_teacher_name: string
@@ -183,6 +185,7 @@ export type Database = {
           id?: string
           mobile_number?: string
           participant_email?: string | null
+          registration_number?: string | null
           school_name?: string
           science_teacher_contact?: string
           science_teacher_name?: string
