@@ -83,22 +83,24 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "RIRO World Cup 2026 — 4-day international robotics, innovation, drone, aerospace, gaming & STEM championship in Mira-Bhayander, Maharashtra. Register now.",
+          "4-day mega event Oct–Nov 2026 in Mira-Bhayander. Robotics, drones, aerospace, gaming, STEM. Register your team now.",
       },
       { name: "author", content: "RIRO World Cup" },
-      { property: "og:title", content: "RIRO World Cup 2026" },
+      { property: "og:title", content: "RIRO World Cup 2026 | International Robotics & Innovation Championship" },
       {
         property: "og:description",
         content:
-          "International Robotics, Innovation & Technology Championship — Oct–Nov 2026, Mira-Bhayander.",
+          "4-day mega event Oct–Nov 2026 in Mira-Bhayander. Robotics, drones, aerospace, gaming, STEM. Register your team now.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "RIRO World Cup 2026" },
+      { name: "twitter:title", content: "RIRO World Cup 2026 | International Robotics & Innovation Championship" },
       {
         name: "twitter:description",
-        content: "International Robotics & STEM Championship. Mira-Bhayander, Oct–Nov 2026.",
+        content: "4-day mega event Oct–Nov 2026 in Mira-Bhayander. Robotics, drones, aerospace, gaming, STEM. Register your team now.",
       },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/bd0ad745-5ec0-4d6b-b997-8b015dda7189/id-preview-196b9f38--ff4d6678-3de8-4972-b78d-fe0e786252eb.lovable.app-1783719305801.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/bd0ad745-5ec0-4d6b-b997-8b015dda7189/id-preview-196b9f38--ff4d6678-3de8-4972-b78d-fe0e786252eb.lovable.app-1783719305801.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

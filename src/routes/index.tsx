@@ -38,10 +38,10 @@ export const Route = createFileRoute("/")({
         content:
           "4-day mega event Oct–Nov 2026 in Mira-Bhayander. Robotics, drones, aerospace, gaming, STEM. Register your team now.",
       },
-      { property: "og:title", content: "RIRO World Cup 2026" },
+      { property: "og:title", content: "RIRO World Cup 2026 | International Robotics & Innovation Championship" },
       {
         property: "og:description",
-        content: "International Robotics, Innovation & Technology Championship.",
+        content: "4-day mega event Oct–Nov 2026 in Mira-Bhayander. Robotics, drones, aerospace, gaming, STEM. Register your team now.",
       },
     ],
   }),
