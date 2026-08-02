@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { isBlockedEntry, BLOCKED_MESSAGE } from "@/lib/blocklist";
 
 const VisitorSchema = z.object({
   full_name: z.string().trim().min(1).max(120),
@@ -24,6 +25,17 @@ export const submitVisitorRegistration = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((data: unknown) => VisitorSchema.parse(data))
   .handler(async ({ data, context }) => {
+    if (
+      isBlockedEntry(
+        data.school_college_name,
+        data.address_line_1,
+        data.address_line_2,
+        data.address_line_3,
+        data.address_line_4,
+      )
+    ) {
+      throw new Error(BLOCKED_MESSAGE);
+    }
     const { supabase, userId } = context;
     const row: Record<string, unknown> = { ...data, user_id: userId };
     for (const k of Object.keys(row)) {
