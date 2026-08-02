@@ -6,6 +6,8 @@ import { toast } from "sonner";
 import { submitRegistration } from "@/lib/registrations.functions";
 import { COMPETITION_OPTIONS } from "@/lib/competitions";
 import { supabase } from "@/integrations/supabase/client";
+import { ConsentCheckboxes, UndertakingNote, emptyConsents, type Consents } from "@/components/ConsentFields";
+import { isBlockedEntry, BLOCKED_MESSAGE } from "@/lib/blocklist";
 
 type FormState = {
   full_name: string;
@@ -59,6 +61,7 @@ export function RegistrationForm({ defaultCompetition }: { defaultCompetition?: 
     return base;
   });
   const [authed, setAuthed] = useState<boolean | null>(null);
+  const [consents, setConsents] = useState<Consents>(emptyConsents);
   const navigate = useNavigate();
   const submit = useServerFn(submitRegistration);
 
@@ -80,6 +83,7 @@ export function RegistrationForm({ defaultCompetition }: { defaultCompetition?: 
           : "Registration submitted. We'll be in touch.",
       );
       setForm(buildInitial());
+      setConsents(emptyConsents);
       navigate({ to: "/dashboard" });
     },
     onError: (err: Error) => toast.error(err.message || "Submission failed."),
@@ -107,6 +111,14 @@ export function RegistrationForm({ defaultCompetition }: { defaultCompetition?: 
         toast.error(`Please fill in ${String(k).replace(/_/g, " ")}`);
         return;
       }
+    }
+    if (isBlockedEntry(form.school_name)) {
+      toast.error(BLOCKED_MESSAGE);
+      return;
+    }
+    if (!consents.terms) {
+      toast.error("Please agree to the event terms and privacy policy.");
+      return;
     }
     const size = Math.max(1, Math.min(10, parseInt(form.team_size, 10) || 1));
     const teammatesNeeded = size - 1;
@@ -275,6 +287,14 @@ export function RegistrationForm({ defaultCompetition }: { defaultCompetition?: 
       <section>
         <label className={labelCls}>Comments / Special Requirements</label>
         <textarea rows={3} className={inputCls} value={form.comments} onChange={update("comments")} />
+      </section>
+
+      <section className="space-y-4">
+        <h4 className="font-mono text-xs uppercase tracking-widest text-primary">
+          [ 04 ] Declarations
+        </h4>
+        <UndertakingNote />
+        <ConsentCheckboxes value={consents} onChange={setConsents} />
       </section>
 
       <div className="pt-2">
