@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { z } from "zod";
+import { isBlockedEntry, BLOCKED_MESSAGE } from "@/lib/blocklist";
 
 const teammateName = z.string().trim().max(120).optional().or(z.literal(""));
 const teammateContact = z.string().trim().max(20).optional().or(z.literal(""));
@@ -40,6 +41,10 @@ export const submitRegistration = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((data: unknown) => BaseSchema.parse(data))
   .handler(async ({ data, context }) => {
+    if (isBlockedEntry(data.school_name)) {
+      throw new Error(BLOCKED_MESSAGE);
+    }
+
     const row = emptyToNull({ ...data, user_id: context.userId });
 
     const { data: inserted, error } = await context.supabase

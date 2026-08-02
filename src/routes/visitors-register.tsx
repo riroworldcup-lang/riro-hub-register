@@ -6,6 +6,8 @@ import { toast } from "sonner";
 import { SiteShell } from "@/components/SiteNav";
 import { supabase } from "@/integrations/supabase/client";
 import { submitVisitorRegistration, type VisitorInput } from "@/lib/visitors.functions";
+import { ConsentCheckboxes, UndertakingNote, emptyConsents, type Consents } from "@/components/ConsentFields";
+import { isBlockedEntry, BLOCKED_MESSAGE } from "@/lib/blocklist";
 
 export const Route = createFileRoute("/visitors-register")({
   head: () => ({
@@ -41,6 +43,7 @@ const labelCls =
 function VisitorsRegisterPage() {
   const [form, setForm] = useState<VisitorInput>(initial);
   const [authed, setAuthed] = useState<boolean | null>(null);
+  const [consents, setConsents] = useState<Consents>(emptyConsents);
   const navigate = useNavigate();
   const submit = useServerFn(submitVisitorRegistration);
 
@@ -57,6 +60,7 @@ function VisitorsRegisterPage() {
     onSuccess: () => {
       toast.success("Visitor registration submitted. See you at the event!");
       setForm(initial);
+      setConsents(emptyConsents);
     },
     onError: (err: Error) => toast.error(err.message || "Submission failed."),
   });
@@ -74,6 +78,22 @@ function VisitorsRegisterPage() {
     }
     if (!form.full_name.trim() || !form.contact_number.trim()) {
       toast.error("Full name and contact number are required.");
+      return;
+    }
+    if (
+      isBlockedEntry(
+        form.school_college_name,
+        form.address_line_1,
+        form.address_line_2,
+        form.address_line_3,
+        form.address_line_4,
+      )
+    ) {
+      toast.error(BLOCKED_MESSAGE);
+      return;
+    }
+    if (!consents.terms) {
+      toast.error("Please agree to the event terms and privacy policy.");
       return;
     }
     mutation.mutate(form);
@@ -159,6 +179,12 @@ function VisitorsRegisterPage() {
                 <input className={inputCls} value={form.school_college_name} onChange={update("school_college_name")} />
               </div>
             </div>
+          </section>
+
+          <section className="space-y-4">
+            <h4 className="font-mono text-xs uppercase tracking-widest text-primary">[ 05 ] Declarations</h4>
+            <UndertakingNote />
+            <ConsentCheckboxes value={consents} onChange={setConsents} />
           </section>
 
           <button

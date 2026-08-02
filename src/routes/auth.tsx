@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { ConsentCheckboxes, emptyConsents, type Consents } from "@/components/ConsentFields";
 
 export const Route = createFileRoute("/auth")({
   head: () => ({
@@ -21,6 +22,7 @@ function AuthPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [consents, setConsents] = useState<Consents>(emptyConsents);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
@@ -33,10 +35,21 @@ function AuthPage() {
     setLoading(true);
     try {
       if (mode === "signup") {
+        if (!consents.terms) {
+          toast.error("Please agree to the event terms and privacy policy.");
+          return;
+        }
         const { error } = await supabase.auth.signUp({
           email,
           password,
-          options: { emailRedirectTo: `${window.location.origin}/dashboard` },
+          options: {
+            emailRedirectTo: `${window.location.origin}/dashboard`,
+            data: {
+              consent_terms: consents.terms,
+              consent_updates: consents.updates,
+              consent_partners: consents.partners,
+            },
+          },
         });
         if (error) throw error;
         toast.success("Account created. Signing you in...");
@@ -100,6 +113,9 @@ function AuthPage() {
                   className="w-full bg-white/5 border border-white/10 rounded-sm px-3 py-2.5 text-sm focus:outline-none focus:border-primary"
                 />
               </div>
+            )}
+            {mode === "signup" && (
+              <ConsentCheckboxes value={consents} onChange={setConsents} />
             )}
             <button
               type="submit"

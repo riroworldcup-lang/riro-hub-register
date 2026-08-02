@@ -20,5 +20,7 @@ export const PARTICIPATION_FEES: FeeRow[] = [
   { name: "Reel Making Challenge", fees: "₹99/-", teamSize: "1–3", age: "OTA" },
   { name: "BGMI", fees: "₹499/-", teamSize: "1–5", age: "OTA" },
   { name: "Astro Conference", fees: "₹199/-", teamSize: "1", age: "OTA" },
+  { name: "Poster Making", fees: "₹99/-", teamSize: "1–2", age: "OTA" },
+  { name: "Jr. Poster Making", fees: "₹99/-", teamSize: "1–2", age: "6–14" },
   { name: "World Record Attempt", fees: "₹99/-", teamSize: "1", age: "OTA" },
 ];
