@@ -1,0 +1,1 @@
+UPDATE public.competitions SET name = 'Poster Making', category = 'Creative', description = 'Themed STEM poster design on the spot.', levels = ARRAY['Junior','Senior'], image_url = '/poster-making.jpg', updated_at = now() WHERE name = 'Aeromodelling Racing';
