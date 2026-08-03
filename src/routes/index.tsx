@@ -4,6 +4,8 @@ import riro1 from "@/assets/riro-1.webp.asset.json";
 import riro2 from "@/assets/riro-2.webp.asset.json";
 import riro3 from "@/assets/riro-3.webp.asset.json";
 import riro4 from "@/assets/riro-4.webp.asset.json";
+import nasaLogo from "@/assets/nasa-space-apps.png.asset.json";
+import isroLogo from "@/assets/isro.png.asset.json";
 
 import { SiteShell } from "@/components/SiteNav";
 import { CompetitionsGrid } from "@/components/CompetitionsGrid";
