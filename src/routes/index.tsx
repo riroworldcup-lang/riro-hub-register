@@ -4,6 +4,8 @@ import riro1 from "@/assets/riro-1.webp.asset.json";
 import riro2 from "@/assets/riro-2.webp.asset.json";
 import riro3 from "@/assets/riro-3.webp.asset.json";
 import riro4 from "@/assets/riro-4.webp.asset.json";
+import nasaLogo from "@/assets/nasa-space-apps.png.asset.json";
+import isroLogo from "@/assets/isro.png.asset.json";
 
 import { SiteShell } from "@/components/SiteNav";
 import { CompetitionsGrid } from "@/components/CompetitionsGrid";
@@ -107,8 +109,24 @@ function Home() {
               International Robotics, Innovation & Technology Championship.
             </p>
             <p className="text-sm font-mono uppercase tracking-wider text-foreground/80 mb-4 animate-slide-up [animation-delay:250ms]">
-              4-Day Mega Event • November 2026
+              4-Day Mega Event • 14 - 18 November 2026
             </p>
+
+            {/* Official affiliations */}
+            <div className="mb-6 animate-slide-up [animation-delay:260ms] flex flex-wrap justify-center gap-3">
+              <div className="flex items-center gap-3 px-4 py-2 bg-white/90 border border-primary/30 rounded-sm backdrop-blur-sm transition-transform duration-300 hover:scale-[1.03]">
+                <img src={isroLogo.url} alt="ISRO logo" loading="lazy" className="h-10 w-auto" />
+                <span className="text-left font-mono text-[10px] sm:text-xs uppercase tracking-wider text-background leading-tight">
+                  Official Registered<br />ISRO Space Tutor
+                </span>
+              </div>
+              <div className="flex items-center gap-3 px-4 py-2 bg-white/90 border border-primary/30 rounded-sm backdrop-blur-sm transition-transform duration-300 hover:scale-[1.03]">
+                <img src={nasaLogo.url} alt="NASA Space Apps Challenge Mira-Bhayander logo" loading="lazy" className="h-10 w-auto" />
+                <span className="text-left font-mono text-[10px] sm:text-xs uppercase tracking-wider text-background leading-tight">
+                  Official NASA Space Apps<br />Challenge Organizer
+                </span>
+              </div>
+            </div>
 
             <div className="mb-6 animate-slide-up [animation-delay:280ms] animate-float-y flex justify-center">
               <div className="group relative inline-flex items-center gap-3 px-5 py-3 bg-gradient-to-r from-primary/25 via-primary/10 to-transparent border-l-4 border-primary rounded-r overflow-hidden backdrop-blur-sm transition-all duration-300 hover:from-primary/35 hover:shadow-[0_0_30px_rgba(255,107,0,0.45)]">
