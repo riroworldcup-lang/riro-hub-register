@@ -6,6 +6,7 @@ import riro3 from "@/assets/riro-3.webp.asset.json";
 import riro4 from "@/assets/riro-4.webp.asset.json";
 import nasaLogo from "@/assets/nasa-space-apps.png.asset.json";
 import isroLogo from "@/assets/isro.png.asset.json";
+import riroLogo from "@/assets/riro-logo.png.asset.json";
 
 import { SiteShell } from "@/components/SiteNav";
 import { CompetitionsGrid } from "@/components/CompetitionsGrid";
@@ -74,6 +75,28 @@ function Home() {
         <div className="absolute inset-0 opacity-20 pointer-events-none z-[2]">
           <div className="absolute top-0 right-0 w-1/2 h-full border-l border-primary/20 bg-[linear-gradient(45deg,transparent_25%,rgba(255,107,0,0.05)_50%,transparent_75%)] bg-[length:20px_20px]" />
           <div className="absolute bottom-10 left-4 font-mono text-[80px] sm:text-[100px] leading-none opacity-10 select-none">010101</div>
+        </div>
+
+        {/* Official logos strip */}
+        <div className="max-w-7xl mx-auto w-full relative z-10 mb-10 sm:mb-14 animate-slide-up">
+          <div className="flex items-center justify-center gap-4 sm:gap-10">
+            <div className="shrink-0 p-2 sm:p-3 bg-white/90 border border-primary/30 rounded-sm backdrop-blur-sm transition-transform duration-300 hover:scale-105">
+              <img src={isroLogo.url} alt="ISRO logo" className="h-14 sm:h-20 w-auto" />
+            </div>
+
+            <div className="relative shrink-0">
+              <div className="absolute -inset-4 bg-primary/25 blur-2xl rounded-full pointer-events-none" />
+              <img
+                src={riroLogo.url}
+                alt="RIRO World Cup 2026 shield logo"
+                className="relative h-32 sm:h-52 lg:h-64 w-auto drop-shadow-[0_0_35px_rgba(255,107,0,0.45)] transition-transform duration-500 hover:scale-[1.04]"
+              />
+            </div>
+
+            <div className="shrink-0 p-2 sm:p-3 bg-white/90 border border-primary/30 rounded-sm backdrop-blur-sm transition-transform duration-300 hover:scale-105">
+              <img src={nasaLogo.url} alt="NASA Space Apps Challenge Mira-Bhayander logo" className="h-14 sm:h-20 w-auto" />
+            </div>
+          </div>
         </div>
 
         <div className="max-w-7xl mx-auto w-full relative z-10 grid lg:grid-cols-[1fr_1fr] gap-12 items-center place-items-center">
