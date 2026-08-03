@@ -22,7 +22,7 @@ export const COMPETITIONS: Competition[] = [
   { name: "Reel Making Challenge", category: "Media", description: "Short-form video storytelling.", teamSize: "1–3", age: "OTA" },
   { name: "BGMI Championship", category: "Gaming", description: "Squad-based mobile esports battle.", teamSize: "1–5", age: "OTA" },
   { name: "Amateur Astronomer Conference", category: "STEM", description: "Present celestial research findings.", teamSize: "1", age: "OTA" },
-  { name: "Poster Making", category: "Creative", description: "Themed STEM poster design on the spot.", levels: ["Junior", "Senior"], teamSize: "1–2", age: "6–14 / OTA" },
+  { name: "Poster Making", category: "Creative", description: "Themed STEM poster design on the spot. FREE entry.", levels: ["Junior", "Senior"], teamSize: "1", age: "6–14 / OTA" },
   { name: "World Record Attempt", category: "Special", description: "Be part of a mass participation world record attempt. ₹99/- per participant.", teamSize: "1", age: "OTA" },
 ];
 
