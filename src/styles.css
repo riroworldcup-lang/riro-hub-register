@@ -45,30 +45,30 @@
 :root {
   --radius: 0.375rem;
 
-  /* Brand palette */
-  --navy: #0B1020;
-  --deep-black: #02040A;
-  --gold: #C89B3C;
+  /* Brand palette — sampled from the RIRO WORLD CUP shield logo */
+  --navy: #000716;
+  --deep-black: #00030C;
+  --gold: #D5A94A;
   --gold-dark: #8E6D2F;
-  --electric: #1EA8FF;
-  --cyan: #00D8FF;
-  --silver: #E7E8EA;
-  --gunmetal: #5A6472;
+  --electric: #1E9BFF;
+  --cyan: #45D2FF;
+  --silver: #CACBCE;
+  --gunmetal: #4E5866;
 
   --background: var(--navy);
-  --foreground: var(--silver);
-  --surface: #121829;
-  --surface-foreground: var(--silver);
-  --card: #121829;
-  --card-foreground: var(--silver);
-  --popover: #121829;
-  --popover-foreground: var(--silver);
+  --foreground: #E4E6E9;
+  --surface: #061027;
+  --surface-foreground: var(--foreground);
+  --card: #061027;
+  --card-foreground: var(--foreground);
+  --popover: #061027;
+  --popover-foreground: var(--foreground);
   --primary: var(--gold);
   --primary-foreground: var(--deep-black);
-  --secondary: #1B2236;
-  --secondary-foreground: var(--silver);
-  --muted: #1B2236;
-  --muted-foreground: #9AA3B2;
+  --secondary: #0B1830;
+  --secondary-foreground: var(--foreground);
+  --muted: #0B1830;
+  --muted-foreground: #94A0B2;
   --accent: var(--electric);
   --accent-foreground: var(--deep-black);
   --destructive: oklch(0.6 0.22 25);
