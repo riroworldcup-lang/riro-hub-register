@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VisitorsRegisterRouteImport } from './routes/visitors-register'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as RulebookRouteImport } from './routes/rulebook'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as GalleryRouteImport } from './routes/gallery'
@@ -31,6 +32,11 @@ const VisitorsRegisterRoute = VisitorsRegisterRouteImport.update({
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RulebookRoute = RulebookRouteImport.update({
+  id: '/rulebook',
+  path: '/rulebook',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResetPasswordRoute = ResetPasswordRouteImport.update({
@@ -97,6 +103,7 @@ export interface FileRoutesByFullPath {
   '/gallery': typeof GalleryRoute
   '/register': typeof RegisterRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/rulebook': typeof RulebookRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/visitors-register': typeof VisitorsRegisterRoute
   '/admin': typeof AuthenticatedAdminRoute
@@ -111,6 +118,7 @@ export interface FileRoutesByTo {
   '/gallery': typeof GalleryRoute
   '/register': typeof RegisterRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/rulebook': typeof RulebookRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/visitors-register': typeof VisitorsRegisterRoute
   '/admin': typeof AuthenticatedAdminRoute
@@ -127,6 +135,7 @@ export interface FileRoutesById {
   '/gallery': typeof GalleryRoute
   '/register': typeof RegisterRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/rulebook': typeof RulebookRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/visitors-register': typeof VisitorsRegisterRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
@@ -143,6 +152,7 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/register'
     | '/reset-password'
+    | '/rulebook'
     | '/sitemap.xml'
     | '/visitors-register'
     | '/admin'
@@ -157,6 +167,7 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/register'
     | '/reset-password'
+    | '/rulebook'
     | '/sitemap.xml'
     | '/visitors-register'
     | '/admin'
@@ -172,6 +183,7 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/register'
     | '/reset-password'
+    | '/rulebook'
     | '/sitemap.xml'
     | '/visitors-register'
     | '/_authenticated/admin'
@@ -188,6 +200,7 @@ export interface RootRouteChildren {
   GalleryRoute: typeof GalleryRoute
   RegisterRoute: typeof RegisterRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
+  RulebookRoute: typeof RulebookRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   VisitorsRegisterRoute: typeof VisitorsRegisterRoute
 }
@@ -206,6 +219,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rulebook': {
+      id: '/rulebook'
+      path: '/rulebook'
+      fullPath: '/rulebook'
+      preLoaderRoute: typeof RulebookRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/reset-password': {
@@ -311,6 +331,7 @@ const rootRouteChildren: RootRouteChildren = {
   GalleryRoute: GalleryRoute,
   RegisterRoute: RegisterRoute,
   ResetPasswordRoute: ResetPasswordRoute,
+  RulebookRoute: RulebookRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   VisitorsRegisterRoute: VisitorsRegisterRoute,
 }
