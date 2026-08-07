@@ -45,13 +45,13 @@
 :root {
   --radius: 0.375rem;
 
-  /* Brand palette — sampled from the RIRO WORLD CUP shield logo */
+  /* Brand palette — logo-sampled base with brand gold/blue accents */
   --navy: #000716;
   --deep-black: #00030C;
-  --gold: #D5A94A;
+  --gold: #C89B3C;
   --gold-dark: #8E6D2F;
-  --electric: #1E9BFF;
-  --cyan: #45D2FF;
+  --electric: #1EA8FF;
+  --cyan: #00D8FF;
   --silver: #CACBCE;
   --gunmetal: #4E5866;
 
