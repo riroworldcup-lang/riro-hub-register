@@ -80,8 +80,8 @@
 
 
 .dark {
-  --background: oklch(0.18 0.05 265);
-  --foreground: oklch(1 0 0);
+  --background: var(--navy);
+  --foreground: var(--silver);
 }
 
 @keyframes slideUp {
