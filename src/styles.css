@@ -102,6 +102,19 @@
   animation: marquee 30s linear infinite;
 }
 
+@utility neon-edge {
+  border: 1px solid color-mix(in oklab, var(--electric) 85%, transparent);
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--cyan) 45%, transparent),
+    0 0 14px rgba(30, 168, 255, 0.45),
+    0 0 30px rgba(0, 216, 255, 0.22);
+}
+
+@utility neon-text {
+  color: var(--cyan);
+  text-shadow: 0 0 10px rgba(30, 168, 255, 0.55), 0 0 22px rgba(0, 216, 255, 0.3);
+}
+
 @layer base {
   html { scroll-behavior: smooth; }
   * { border-color: var(--color-border); }
@@ -110,7 +123,36 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
   }
+
+  /* Electric-blue / neon-cyan outer edge on all solid CTA buttons & links */
+  a.bg-primary,
+  button.bg-primary,
+  a.bg-transparent.border,
+  button.bg-white\/5 {
+    outline: 1px solid color-mix(in oklab, var(--electric) 80%, transparent);
+    outline-offset: 2px;
+    box-shadow: 0 0 12px rgba(30, 168, 255, 0.4), 0 0 26px rgba(0, 216, 255, 0.18);
+    transition: outline-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  a.bg-primary:hover,
+  button.bg-primary:hover {
+    outline-color: var(--cyan);
+    box-shadow: 0 0 18px rgba(0, 216, 255, 0.65), 0 0 40px rgba(30, 168, 255, 0.3);
+  }
+
+  /* Neon glow on gold accent wording */
+  .text-primary {
+    text-shadow: 0 0 12px rgba(30, 168, 255, 0.35), 0 0 24px rgba(0, 216, 255, 0.18);
+  }
+
+  /* Inputs pick up an electric edge on focus */
+  input:focus, select:focus, textarea:focus {
+    outline: 1px solid color-mix(in oklab, var(--cyan) 70%, transparent);
+    outline-offset: 1px;
+    box-shadow: 0 0 12px rgba(30, 168, 255, 0.35);
+  }
 }
+
 
 @keyframes scanline {
   0% { transform: translateY(-100%); }
