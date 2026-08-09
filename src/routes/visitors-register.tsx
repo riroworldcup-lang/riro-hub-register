@@ -102,8 +102,8 @@ function VisitorsRegisterPage() {
   return (
     <SiteShell>
       <section className="px-4 sm:px-6 py-20 sm:py-24 max-w-3xl mx-auto">
-        <h2 className="font-mono text-primary text-sm mb-2">[ VISITOR REGISTRATION ]</h2>
-        <h1 className="text-4xl sm:text-5xl font-black uppercase tracking-tighter italic mb-6 leading-tight">
+        <h2 className="label-mono block mb-2">[ VISITOR REGISTRATION ]</h2>
+        <h1 className="text-4xl sm:text-5xl font-display font-bold uppercase tracking-[-0.03em] mb-6 leading-tight">
           Come Witness the Championship.
         </h1>
         <p className="text-muted-foreground mb-10">

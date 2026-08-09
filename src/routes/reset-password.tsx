@@ -54,8 +54,8 @@ function ResetPasswordPage() {
           ← Back to site
         </Link>
         <div className="bg-surface border border-border p-8 rounded-sm">
-          <h1 className="font-mono text-primary text-sm mb-2">[ RESET PASSWORD ]</h1>
-          <h2 className="text-3xl font-black uppercase tracking-tighter italic mb-6">Set new password</h2>
+          <h1 className="label-mono block mb-2">[ RESET PASSWORD ]</h1>
+          <h2 className="text-3xl font-display font-bold uppercase tracking-[-0.03em] mb-6">Set new password</h2>
           <form onSubmit={onSubmit} className="space-y-4">
             <div>
               <label className="block font-mono text-[10px] uppercase tracking-widest text-primary mb-1.5">New password</label>

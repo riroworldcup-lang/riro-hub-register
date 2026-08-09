@@ -18,8 +18,8 @@ function CompetitionsPage() {
   return (
     <SiteShell>
       <section className="px-4 sm:px-6 py-20 sm:py-24 max-w-7xl mx-auto">
-        <h2 className="font-mono text-primary text-sm mb-3">[ CATEGORIES ]</h2>
-        <h1 className="text-4xl sm:text-6xl font-black uppercase tracking-tighter italic leading-[0.95] mb-6">
+        <h2 className="label-mono block mb-3">[ CATEGORIES ]</h2>
+        <h1 className="text-4xl sm:text-6xl font-display font-bold uppercase tracking-[-0.03em] leading-[0.95] mb-6">
           Championship Grid
         </h1>
         <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mb-12">
@@ -27,7 +27,7 @@ function CompetitionsPage() {
         </p>
         <CompetitionsGrid />
         <div className="mt-16 text-center">
-          <Link to="/register" className="inline-block px-8 py-4 bg-primary text-primary-foreground font-mono font-bold uppercase tracking-widest text-sm hover:bg-white transition-colors rounded-sm">
+          <Link to="/register" search={{}} className="inline-block px-8 py-4 bg-primary text-primary-foreground font-mono font-bold uppercase tracking-widest text-sm hover:bg-white transition-colors rounded-sm">
             Register Now
           </Link>
         </div>

@@ -51,8 +51,8 @@ function DashboardPage() {
   return (
     <SiteShell>
       <section className="px-4 sm:px-6 py-16 sm:py-20 max-w-5xl mx-auto">
-        <h2 className="font-mono text-primary text-sm mb-2">[ MY DASHBOARD ]</h2>
-        <h1 className="text-3xl sm:text-5xl font-black uppercase tracking-tighter italic mb-3">
+        <h2 className="label-mono block mb-2">[ MY DASHBOARD ]</h2>
+        <h1 className="text-3xl sm:text-5xl font-display font-bold uppercase tracking-[-0.03em] mb-3">
           Your Registrations
         </h1>
         <p className="text-muted-foreground mb-10">
@@ -66,7 +66,7 @@ function DashboardPage() {
           <div className="p-8 border border-border rounded-sm bg-surface text-center">
             <p className="text-muted-foreground mb-4">You haven't registered for any competitions yet.</p>
             <Link
-              to="/register"
+              to="/register" search={{}}
               className="inline-block px-6 py-3 bg-primary text-primary-foreground font-mono font-bold uppercase tracking-widest text-xs rounded-sm hover:bg-white transition-colors"
             >
               Register Now

@@ -25,8 +25,8 @@ export function Leaderboard() {
     <section className="py-20 sm:py-28 px-4 sm:px-6 bg-white/[0.02] border-y border-border">
       <div className="max-w-5xl mx-auto">
         <div className="mb-10 sm:mb-14 text-center">
-          <h2 className="font-mono text-primary text-sm mb-2">[ LEADERBOARD ]</h2>
-          <h3 className="text-3xl sm:text-5xl font-black uppercase tracking-tighter italic">
+          <h2 className="label-mono block mb-2">[ LEADERBOARD ]</h2>
+          <h3 className="text-3xl sm:text-5xl font-display font-bold uppercase tracking-[-0.03em]">
             Schools & Clubs
           </h3>
           <p className="text-muted-foreground mt-3 text-sm sm:text-base max-w-2xl mx-auto">
