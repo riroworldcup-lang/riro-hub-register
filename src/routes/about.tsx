@@ -18,8 +18,8 @@ function AboutPage() {
   return (
     <SiteShell>
       <section className="px-4 sm:px-6 py-20 sm:py-28 max-w-5xl mx-auto">
-        <h2 className="font-mono text-primary text-sm mb-3">[ ABOUT ]</h2>
-        <h1 className="text-4xl sm:text-6xl font-black uppercase tracking-tighter italic leading-[0.95] mb-8">
+        <h2 className="label-mono block mb-3">[ ABOUT ]</h2>
+        <h1 className="text-4xl sm:text-6xl font-display font-bold uppercase tracking-[-0.03em] leading-[0.95] mb-8">
           Where India Builds <br /> The Future.
         </h1>
         <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-3xl">
@@ -46,8 +46,8 @@ function AboutPage() {
       </section>
 
       <section className="px-4 sm:px-6 py-20 max-w-5xl mx-auto">
-        <h2 className="font-mono text-primary text-sm mb-3">[ STATS ]</h2>
-        <h3 className="text-2xl sm:text-4xl font-black uppercase tracking-tighter italic mb-10">By The Numbers</h3>
+        <h2 className="label-mono block mb-3">[ STATS ]</h2>
+        <h3 className="text-2xl sm:text-4xl font-display font-bold uppercase tracking-[-0.03em] mb-10">By The Numbers</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border border border-border">
           {[["4","DAYS"],["17+","EVENTS"],["5000+","EXPECTED"],["2026","NOV"]].map(([n,l]) => (
             <div key={l} className="bg-background p-6 sm:p-8">

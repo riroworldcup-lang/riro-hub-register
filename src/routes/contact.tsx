@@ -17,8 +17,8 @@ function ContactPage() {
   return (
     <SiteShell>
       <section className="px-4 sm:px-6 py-20 sm:py-28 max-w-5xl mx-auto text-center">
-        <h2 className="font-mono text-primary text-sm mb-2">[ CONTACT ]</h2>
-        <h1 className="text-4xl sm:text-6xl font-black uppercase tracking-tighter italic mb-10">
+        <h2 className="label-mono block mb-2">[ CONTACT ]</h2>
+        <h1 className="text-4xl sm:text-6xl font-display font-bold uppercase tracking-[-0.03em] mb-10">
           Mission Control
         </h1>
         <div className="grid sm:grid-cols-2 gap-px bg-border border border-border max-w-2xl mx-auto">
@@ -45,7 +45,7 @@ function ContactPage() {
         </div>
 
         <div className="mt-20 text-left max-w-3xl mx-auto">
-          <h3 className="font-mono text-primary text-sm mb-3">[ NOTICE ]</h3>
+          <h3 className="label-mono block mb-3">[ NOTICE ]</h3>
           <div className="grid sm:grid-cols-2 gap-px bg-border border border-border">
             {[
               ["01", "Registration fees will be announced later."],

@@ -24,8 +24,8 @@ function GalleryPage() {
   return (
     <SiteShell>
       <section className="px-4 sm:px-6 py-20 sm:py-24 max-w-7xl mx-auto">
-        <h2 className="font-mono text-primary text-sm mb-3">[ GALLERY ]</h2>
-        <h1 className="text-4xl sm:text-6xl font-black uppercase tracking-tighter italic leading-[0.95] mb-6">
+        <h2 className="label-mono block mb-3">[ GALLERY ]</h2>
+        <h1 className="text-4xl sm:text-6xl font-display font-bold uppercase tracking-[-0.03em] leading-[0.95] mb-6">
           From The Arena
         </h1>
         <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mb-12">

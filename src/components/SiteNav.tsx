@@ -4,11 +4,16 @@ import { supabase } from "@/integrations/supabase/client";
 
 export function MarqueeBanner() {
   return (
-    <div className="bg-primary text-primary-foreground py-3 overflow-hidden whitespace-nowrap border-b border-white/10 sticky top-0 z-50">
-      <div className="flex animate-marquee gap-8">
+    <div className="bg-deep-black text-white-soft py-2.5 overflow-hidden whitespace-nowrap border-b border-white/10">
+      <div className="flex animate-marquee gap-10">
         {Array.from({ length: 4 }).map((_, i) => (
-          <span key={i} className="font-mono font-bold text-xs sm:text-sm uppercase tracking-tighter shrink-0">
-            RIRO World Cup 2026 • 14 - 18 November 2026 • Mira-Bhayander, Maharashtra •
+          <span
+            key={i}
+            className="font-mono font-medium text-[10px] sm:text-xs uppercase tracking-[0.28em] shrink-0 text-silver"
+          >
+            RIRO World Cup 2026 <span className="text-cyan">•</span> 14 – 18 November 2026{" "}
+            <span className="text-cyan">•</span> Mira-Bhayander, Maharashtra{" "}
+            <span className="text-primary">•</span>
           </span>
         ))}
       </div>
@@ -18,13 +23,11 @@ export function MarqueeBanner() {
 
 const NAV_LINKS = [
   { to: "/", label: "Home" },
-  { to: "/about", label: "About" },
+  { to: "/about", label: "Championship" },
   { to: "/competitions", label: "Competitions" },
   { to: "/rulebook", label: "Rulebook" },
-  { to: "/gallery", label: "Gallery" },
-
-  { to: "/register", label: "Register" },
-  { to: "/contact", label: "Contact" },
+  { to: "/gallery", label: "Exhibition" },
+  { to: "/contact", label: "Visit" },
 ] as const;
 
 function useAuthed() {
@@ -41,8 +44,16 @@ function useAuthed() {
 
 export function SiteNav() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const authed = useAuthed();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const signOut = async () => {
     await supabase.auth.signOut();
@@ -50,21 +61,44 @@ export function SiteNav() {
   };
 
   return (
-    <nav className="px-4 sm:px-6 py-5 border-b border-border max-w-7xl mx-auto">
-      <div className="flex justify-between items-center">
-        <Link to="/" className="flex items-center gap-2" onClick={() => setOpen(false)}>
-          <div className="size-8 bg-primary rounded-sm rotate-45 flex items-center justify-center shrink-0">
-            <div className="size-3.5 bg-background -rotate-45" />
-          </div>
-          <span className="font-mono font-bold text-sm sm:text-lg tracking-tighter uppercase">RIRO 2026</span>
+    <header
+      className={`sticky top-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-background/70 backdrop-blur-xl border-b border-white/10 shadow-[0_10px_30px_-20px_rgba(0,0,0,0.9)]"
+          : "bg-transparent border-b border-white/5"
+      }`}
+    >
+      <div className="absolute inset-x-0 bottom-0 h-px hairline-cyan opacity-40 pointer-events-none" />
+      <nav
+        aria-label="Main"
+        className="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 lg:flex lg:justify-between"
+      >
+        <Link
+          to="/"
+          className="flex min-w-0 items-center gap-2.5 group"
+          onClick={() => setOpen(false)}
+        >
+          <span className="relative size-8 shrink-0 grid place-items-center">
+            <span className="absolute inset-0 rotate-45 rounded-sm bg-linear-to-br from-primary to-gold-dark transition-transform duration-500 group-hover:rotate-[135deg]" />
+            <span className="relative size-2.5 rounded-sm bg-deep-black" />
+          </span>
+          <span className="min-w-0 leading-none">
+            <span className="block font-display text-sm sm:text-base font-bold uppercase tracking-tight truncate">
+              RIRO World Cup
+            </span>
+            <span className="block font-mono text-[9px] uppercase tracking-[0.3em] text-cyan/80">
+              2026
+            </span>
+          </span>
         </Link>
-        <div className="hidden md:flex gap-8 font-mono text-xs uppercase tracking-widest text-muted-foreground items-center">
+
+        <div className="hidden lg:flex gap-7 font-mono text-[11px] uppercase tracking-[0.18em] text-silver/70 items-center">
           {NAV_LINKS.map((l) => (
             <Link
               key={l.to}
               to={l.to}
-              className="hover:text-primary transition-colors"
-              activeProps={{ className: "text-primary" }}
+              className="relative py-1 transition-colors hover:text-white-soft after:absolute after:left-0 after:-bottom-0.5 after:h-px after:w-0 after:bg-cyan after:transition-all after:duration-300 hover:after:w-full"
+              activeProps={{ className: "text-cyan after:w-full" }}
               activeOptions={{ exact: l.to === "/" }}
             >
               {l.label}
@@ -72,77 +106,165 @@ export function SiteNav() {
           ))}
           {authed ? (
             <>
-              <Link to="/dashboard" className="hover:text-primary transition-colors" activeProps={{ className: "text-primary" }}>
+              <Link
+                to="/dashboard"
+                className="transition-colors hover:text-white-soft"
+                activeProps={{ className: "text-cyan" }}
+              >
                 Dashboard
               </Link>
-              <button onClick={signOut} className="hover:text-primary transition-colors">
+              <button onClick={signOut} className="transition-colors hover:text-white-soft">
                 Sign Out
               </button>
             </>
           ) : (
-            <Link to="/auth" className="hover:text-primary transition-colors">Sign In</Link>
+            <Link to="/auth" className="transition-colors hover:text-white-soft">
+              Sign In
+            </Link>
           )}
+          <Link
+            to="/register"
+            search={{}}
+            className="px-4 py-2.5 bg-primary text-primary-foreground font-bold tracking-[0.18em] rounded-sm transition-transform duration-300 hover:scale-[1.03]"
+          >
+            Register Now
+          </Link>
         </div>
+
         <button
-          className="md:hidden font-mono text-xs uppercase tracking-widest text-foreground border border-border px-3 py-2 rounded-sm"
+          className="lg:hidden font-mono text-[10px] uppercase tracking-[0.25em] text-white-soft border border-white/15 bg-white/[0.04] backdrop-blur-md px-3.5 py-2.5 rounded-sm min-h-11"
           onClick={() => setOpen((o) => !o)}
-          aria-label="Toggle menu"
+          aria-expanded={open}
+          aria-label="Toggle navigation menu"
         >
           {open ? "Close" : "Menu"}
         </button>
-      </div>
+      </nav>
+
       {open && (
-        <div className="md:hidden mt-4 flex flex-col gap-3 font-mono text-xs uppercase tracking-widest text-muted-foreground border-t border-border pt-4">
-          {NAV_LINKS.map((l) => (
-            <Link
-              key={l.to}
-              to={l.to}
-              onClick={() => setOpen(false)}
-              className="hover:text-primary transition-colors"
-              activeProps={{ className: "text-primary" }}
-              activeOptions={{ exact: l.to === "/" }}
-            >
-              {l.label}
-            </Link>
-          ))}
-          {authed ? (
-            <>
-              <Link to="/dashboard" onClick={() => setOpen(false)} className="hover:text-primary transition-colors">
-                Dashboard
+        <div className="lg:hidden border-t border-white/10 bg-background/95 backdrop-blur-xl px-4 sm:px-6 pb-6 pt-4">
+          <div className="flex flex-col divide-y divide-white/5 font-mono text-xs uppercase tracking-[0.2em] text-silver/80">
+            {NAV_LINKS.map((l) => (
+              <Link
+                key={l.to}
+                to={l.to}
+                onClick={() => setOpen(false)}
+                className="py-3.5 transition-colors hover:text-cyan"
+                activeProps={{ className: "text-cyan" }}
+                activeOptions={{ exact: l.to === "/" }}
+              >
+                {l.label}
               </Link>
-              <button onClick={() => { setOpen(false); signOut(); }} className="text-left hover:text-primary transition-colors">
-                Sign Out
-              </button>
-            </>
-          ) : (
-            <Link to="/auth" onClick={() => setOpen(false)} className="hover:text-primary transition-colors">Sign In</Link>
-          )}
+            ))}
+            {authed ? (
+              <>
+                <Link
+                  to="/dashboard"
+                  onClick={() => setOpen(false)}
+                  className="py-3.5 transition-colors hover:text-cyan"
+                >
+                  Dashboard
+                </Link>
+                <button
+                  onClick={() => {
+                    setOpen(false);
+                    signOut();
+                  }}
+                  className="py-3.5 text-left transition-colors hover:text-cyan"
+                >
+                  Sign Out
+                </button>
+              </>
+            ) : (
+              <Link
+                to="/auth"
+                onClick={() => setOpen(false)}
+                className="py-3.5 transition-colors hover:text-cyan"
+              >
+                Sign In
+              </Link>
+            )}
+          </div>
+          <Link
+            to="/register"
+            search={{}}
+            onClick={() => setOpen(false)}
+            className="mt-5 block text-center px-5 py-4 bg-primary text-primary-foreground font-mono font-bold uppercase tracking-[0.2em] text-xs rounded-sm"
+          >
+            Register Now
+          </Link>
         </div>
       )}
-    </nav>
+    </header>
   );
 }
 
 export function SiteFooter() {
   return (
-    <footer className="py-12 px-4 sm:px-6 border-t border-border">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-8">
+    <footer className="relative overflow-hidden border-t border-white/10 bg-deep-black">
+      <div className="absolute inset-x-0 top-0 h-px hairline-cyan opacity-60" />
+      <div className="absolute inset-0 tech-grid opacity-[0.35] pointer-events-none" />
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-14 grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
-          <div className="flex items-center gap-2 mb-3">
-            <div className="size-6 bg-primary rounded-sm" />
-            <span className="font-mono font-bold uppercase tracking-tight">RIRO World Cup 2026</span>
+          <div className="flex items-center gap-2.5 mb-3">
+            <span className="size-6 rotate-45 rounded-sm bg-linear-to-br from-primary to-gold-dark" />
+            <span className="font-display font-bold uppercase tracking-tight text-lg">
+              RIRO World Cup 2026
+            </span>
           </div>
-          <p className="text-sm text-muted-foreground">Mira-Bhayander, Maharashtra, India</p>
+          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-cyan/80 mb-4">
+            Robotics • Innovation • Science • Technology
+          </p>
+          <p className="text-sm text-muted-foreground max-w-sm">
+            A four-day international championship and technology exhibition in Mira-Bhayander,
+            Maharashtra, India. 14 – 18 November 2026.
+          </p>
         </div>
-        <div className="flex flex-wrap gap-6 text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
-          {NAV_LINKS.map((l) => (
-            <Link key={l.to} to={l.to} className="hover:text-primary">{l.label}</Link>
-          ))}
-          <Link to="/auth" className="hover:text-primary">Sign In</Link>
+
+        <nav aria-label="Footer">
+          <h2 className="label-mono mb-4">Navigate</h2>
+          <ul className="flex flex-col gap-2.5 text-sm text-silver/75">
+            {NAV_LINKS.map((l) => (
+              <li key={l.to}>
+                <Link to={l.to} className="transition-colors hover:text-cyan">
+                  {l.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div>
+          <h2 className="label-mono mb-4">Participate</h2>
+          <ul className="flex flex-col gap-2.5 text-sm text-silver/75">
+            <li>
+              <Link to="/register" search={{}} className="transition-colors hover:text-cyan">
+                Team Registration
+              </Link>
+            </li>
+            <li>
+              <Link to="/visitors-register" className="transition-colors hover:text-cyan">
+                Visitor Registration
+              </Link>
+            </li>
+            <li>
+              <Link to="/contact" className="transition-colors hover:text-cyan">
+                Become a Sponsor
+              </Link>
+            </li>
+            <li>
+              <Link to="/auth" className="transition-colors hover:text-cyan">
+                Sign In
+              </Link>
+            </li>
+          </ul>
         </div>
       </div>
-      <div className="max-w-7xl mx-auto mt-10 pt-6 border-t border-border text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground text-center">
-        © 2026 RIRO World Cup. All Rights Reserved.
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 pb-8">
+        <div className="h-px w-full bg-linear-to-r from-transparent via-primary/50 to-transparent" />
+        <p className="mt-6 text-center font-mono text-[10px] uppercase tracking-[0.28em] text-muted-foreground">
+          © 2026 RIRO World Cup — All Rights Reserved
+        </p>
       </div>
     </footer>
   );
@@ -150,7 +272,7 @@ export function SiteFooter() {
 
 export function SiteShell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="bg-background text-foreground font-sans selection:bg-primary selection:text-primary-foreground min-h-screen flex flex-col">
+    <div className="relative bg-background text-foreground font-sans selection:bg-cyan selection:text-deep-black min-h-screen flex flex-col">
       <MarqueeBanner />
       <SiteNav />
       <main className="flex-1">{children}</main>

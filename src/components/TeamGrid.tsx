@@ -11,8 +11,8 @@ export function TeamGrid() {
 
   return (
     <section className="px-4 sm:px-6 py-20 max-w-6xl mx-auto">
-      <h2 className="font-mono text-primary text-sm mb-3">[ TEAM ]</h2>
-      <h3 className="text-2xl sm:text-4xl font-black uppercase tracking-tighter italic mb-10">
+      <h2 className="label-mono block mb-3">[ TEAM ]</h2>
+      <h3 className="text-2xl sm:text-4xl font-display font-bold uppercase tracking-[-0.03em] mb-10">
         The People Behind RIRO
       </h3>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
