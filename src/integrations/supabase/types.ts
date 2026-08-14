@@ -135,6 +135,7 @@ export type Database = {
           team_mate_numbers: string | null
           team_mates: string | null
           team_name: string | null
+          team_size: string | null
           updated_at: string
           user_id: string | null
         }
@@ -174,6 +175,7 @@ export type Database = {
           team_mate_numbers?: string | null
           team_mates?: string | null
           team_name?: string | null
+          team_size?: string | null
           updated_at?: string
           user_id?: string | null
         }
@@ -213,6 +215,7 @@ export type Database = {
           team_mate_numbers?: string | null
           team_mates?: string | null
           team_name?: string | null
+          team_size?: string | null
           updated_at?: string
           user_id?: string | null
         }
