@@ -235,6 +235,32 @@ export function SiteFooter() {
         </nav>
 
         <div>
+          <h2 className="label-mono mb-4">Contact</h2>
+          <ul className="flex flex-col gap-2.5 text-sm text-silver/75">
+            <li>
+              <a href="mailto:info@riroworldcup.in" className="transition-colors hover:text-cyan">
+                info@riroworldcup.in
+              </a>
+            </li>
+            <li>
+              <a href="mailto:Nikhil.jadhav@riroworldcup.in" className="transition-colors hover:text-cyan">
+                Nikhil.jadhav@riroworldcup.in
+              </a>
+            </li>
+            <li>
+              <a href="tel:+918097070383" className="transition-colors hover:text-cyan">
+                +91 80970 70383
+              </a>
+            </li>
+            <li>
+              <Link to="/contact" className="transition-colors hover:text-cyan">
+                Visit / Contact
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        <div>
           <h2 className="label-mono mb-4">Participate</h2>
           <ul className="flex flex-col gap-2.5 text-sm text-silver/75">
             <li>
