@@ -21,22 +21,36 @@ function ContactPage() {
         <h1 className="text-4xl sm:text-6xl font-display font-bold uppercase tracking-[-0.03em] mb-10">
           Mission Control
         </h1>
-        <div className="grid sm:grid-cols-2 gap-px bg-border border border-border max-w-2xl mx-auto">
+        <div className="grid sm:grid-cols-2 gap-px bg-border border border-border max-w-2xl mx-auto mb-6">
           <div className="bg-background p-8">
-            <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-2">Email</div>
-            <a href="mailto:riroworldcup@gmail.com" className="font-mono text-sm sm:text-base text-primary break-all">
-              riroworldcup@gmail.com
+            <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-2">General Inquiries</div>
+            <a href="mailto:info@riroworldcup.in" className="font-mono text-sm sm:text-base text-primary break-all">
+              info@riroworldcup.in
             </a>
           </div>
+          <div className="bg-background p-8">
+            <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-2">Organiser</div>
+            <a href="mailto:Nikhil.jadhav@riroworldcup.in" className="font-mono text-sm sm:text-base text-primary break-all">
+              Nikhil.jadhav@riroworldcup.in
+            </a>
+          </div>
+        </div>
+        <div className="grid sm:grid-cols-2 gap-px bg-border border border-border max-w-2xl mx-auto">
           <div className="bg-background p-8">
             <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-2">WhatsApp</div>
             <a href="https://wa.me/918097070383" target="_blank" rel="noopener" className="font-mono text-sm sm:text-base text-primary">
               +91 80970 70383
             </a>
           </div>
+          <div className="bg-background p-8">
+            <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-2">Call Us</div>
+            <a href="tel:+918097070383" className="font-mono text-sm sm:text-base text-primary">
+              +91 80970 70383
+            </a>
+          </div>
         </div>
         <div className="flex flex-wrap justify-center gap-4 mt-10">
-          <a href="mailto:riroworldcup@gmail.com" className="px-6 py-3 bg-primary text-primary-foreground font-mono font-bold uppercase tracking-widest text-xs hover:bg-white transition-colors rounded-sm">
+          <a href="mailto:info@riroworldcup.in" className="px-6 py-3 bg-primary text-primary-foreground font-mono font-bold uppercase tracking-widest text-xs hover:bg-white transition-colors rounded-sm">
             Email Us
           </a>
           <a href="https://wa.me/918097070383" target="_blank" rel="noopener" className="px-6 py-3 border border-white/20 font-mono font-bold uppercase tracking-widest text-xs hover:border-primary transition-colors rounded-sm">
