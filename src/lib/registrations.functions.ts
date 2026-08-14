@@ -66,6 +66,9 @@ export const submitRegistration = createServerFn({ method: "POST" })
           to: data.participant_email,
           name: data.full_name,
           competition: data.competition_name,
+          registrationNumber: inserted.registration_number ?? undefined,
+          teamName: data.team_name,
+          teamSize: data.team_size,
         });
       } catch (e) {
         console.warn("Confirmation email skipped:", (e as Error).message);
