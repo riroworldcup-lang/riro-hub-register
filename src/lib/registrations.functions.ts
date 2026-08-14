@@ -22,7 +22,8 @@ const BaseSchema = z.object({
   science_teacher_name: z.string().trim().min(1).max(120),
   science_teacher_contact: z.string().trim().min(7).max(20),
   competition_name: z.string().trim().min(1).max(120),
-  team_name: z.string().trim().max(120).optional().or(z.literal("")),
+  team_name: z.string().trim().min(1).max(120),
+  team_size: z.string().trim().min(1).max(2),
   comments: z.string().trim().max(1000).optional().or(z.literal("")),
   ...teammateFields,
 });
@@ -65,6 +66,9 @@ export const submitRegistration = createServerFn({ method: "POST" })
           to: data.participant_email,
           name: data.full_name,
           competition: data.competition_name,
+          registrationNumber: inserted.registration_number ?? undefined,
+          teamName: data.team_name,
+          teamSize: data.team_size,
         });
       } catch (e) {
         console.warn("Confirmation email skipped:", (e as Error).message);

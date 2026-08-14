@@ -204,7 +204,7 @@ export function SiteFooter() {
     <footer className="relative overflow-hidden border-t border-white/10 bg-deep-black">
       <div className="absolute inset-x-0 top-0 h-px hairline-cyan opacity-60" />
       <div className="absolute inset-0 tech-grid opacity-[0.35] pointer-events-none" />
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-14 grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-14 grid gap-10 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
           <div className="flex items-center gap-2.5 mb-3">
             <span className="size-6 rotate-45 rounded-sm bg-linear-to-br from-primary to-gold-dark" />
@@ -233,6 +233,32 @@ export function SiteFooter() {
             ))}
           </ul>
         </nav>
+
+        <div>
+          <h2 className="label-mono mb-4">Contact</h2>
+          <ul className="flex flex-col gap-2.5 text-sm text-silver/75">
+            <li>
+              <a href="mailto:info@riroworldcup.in" className="transition-colors hover:text-cyan">
+                info@riroworldcup.in
+              </a>
+            </li>
+            <li>
+              <a href="mailto:Nikhil.jadhav@riroworldcup.in" className="transition-colors hover:text-cyan">
+                Nikhil.jadhav@riroworldcup.in
+              </a>
+            </li>
+            <li>
+              <a href="tel:+918097070383" className="transition-colors hover:text-cyan">
+                +91 80970 70383
+              </a>
+            </li>
+            <li>
+              <Link to="/contact" className="transition-colors hover:text-cyan">
+                Visit / Contact
+              </Link>
+            </li>
+          </ul>
+        </div>
 
         <div>
           <h2 className="label-mono mb-4">Participate</h2>
