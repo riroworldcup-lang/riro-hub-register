@@ -22,7 +22,7 @@ const BaseSchema = z.object({
   science_teacher_name: z.string().trim().min(1).max(120),
   science_teacher_contact: z.string().trim().min(7).max(20),
   competition_name: z.string().trim().min(1).max(120),
-  team_name: z.string().trim().max(120).min(1),
+  team_name: z.string().trim().min(1).max(120),
   team_size: z.string().trim().min(1).max(2),
   comments: z.string().trim().max(1000).optional().or(z.literal("")),
   ...teammateFields,
