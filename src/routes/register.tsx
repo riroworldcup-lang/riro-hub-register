@@ -1,12 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { z } from "zod";
 import { SiteShell } from "@/components/SiteNav";
 import { RegistrationForm } from "@/components/RegistrationForm";
 import { FeesTable } from "@/components/FeesTable";
 
 export const Route = createFileRoute("/register")({
-  validateSearch: (s: Record<string, unknown>) => ({
-    competition: typeof s.competition === "string" ? s.competition : undefined,
-  }),
+  validateSearch: z.object({
+    competition: z.string().optional(),
+  }).parse,
+
   head: () => ({
     meta: [
       { title: "Register | RIRO World Cup 2026" },
