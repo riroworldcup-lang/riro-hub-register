@@ -204,7 +204,7 @@ export function SiteFooter() {
     <footer className="relative overflow-hidden border-t border-white/10 bg-deep-black">
       <div className="absolute inset-x-0 top-0 h-px hairline-cyan opacity-60" />
       <div className="absolute inset-0 tech-grid opacity-[0.35] pointer-events-none" />
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-14 grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-14 grid gap-10 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
           <div className="flex items-center gap-2.5 mb-3">
             <span className="size-6 rotate-45 rounded-sm bg-linear-to-br from-primary to-gold-dark" />
