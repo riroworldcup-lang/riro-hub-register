@@ -50,5 +50,27 @@ export const submitVisitorRegistration = createServerFn({ method: "POST" })
       console.error("Visitor registration insert failed", error);
       throw new Error(error.message || "Could not submit visitor registration.");
     }
+
+    try {
+      const { sendVisitorRegistrationNotification } = await import("./email.server");
+      await sendVisitorRegistrationNotification({
+        fullName: data.full_name,
+        contactNumber: data.contact_number,
+        schoolCollegeName: data.school_college_name,
+        standard: data.standard,
+        division: data.division,
+        addressLine1: data.address_line_1,
+        addressLine2: data.address_line_2,
+        addressLine3: data.address_line_3,
+        addressLine4: data.address_line_4,
+        fatherName: data.father_name,
+        fatherMobile: data.father_mobile,
+        motherName: data.mother_name,
+        motherMobile: data.mother_mobile,
+      });
+    } catch (e) {
+      console.warn("Visitor notification email skipped:", (e as Error).message);
+    }
+
     return { ok: true, id: inserted.id };
   });
