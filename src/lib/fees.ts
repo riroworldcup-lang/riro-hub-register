@@ -23,4 +23,5 @@ export const PARTICIPATION_FEES: FeeRow[] = [
   { name: "Poster Making", fees: "FREE", teamSize: "1", age: "OTA" },
   { name: "Jr. Poster Making", fees: "FREE", teamSize: "1", age: "6–14" },
   { name: "World Record Attempt", fees: "₹99/-", teamSize: "1", age: "OTA" },
+  { name: "Startup Expo", fees: "₹3000/-", teamSize: "1–10", age: "OTA" },
 ];

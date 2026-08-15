@@ -11,7 +11,7 @@ export function MarqueeBanner() {
             key={i}
             className="font-mono font-medium text-[10px] sm:text-xs uppercase tracking-[0.28em] shrink-0 text-silver"
           >
-            RIRO World Cup 2026 <span className="text-cyan">•</span> 14 – 18 November 2026{" "}
+            RIRO World Cup 2026 <span className="text-cyan">•</span> 14 – 17 November 2026{" "}
             <span className="text-cyan">•</span> Mira-Bhayander, Maharashtra{" "}
             <span className="text-primary">•</span>
           </span>
@@ -25,6 +25,8 @@ const NAV_LINKS = [
   { to: "/", label: "Home" },
   { to: "/about", label: "Championship" },
   { to: "/competitions", label: "Competitions" },
+  { to: "/judges", label: "Judges" },
+  { to: "/sponsors", label: "Sponsors" },
   { to: "/rulebook", label: "Rulebook" },
   { to: "/gallery", label: "Exhibition" },
   { to: "/contact", label: "Visit" },
@@ -92,7 +94,7 @@ export function SiteNav() {
           </span>
         </Link>
 
-        <div className="hidden lg:flex gap-7 font-mono text-[11px] uppercase tracking-[0.18em] text-silver/70 items-center">
+        <div className="hidden lg:flex gap-5 font-mono text-[11px] uppercase tracking-[0.18em] text-silver/70 items-center">
           {NAV_LINKS.map((l) => (
             <Link
               key={l.to}
@@ -217,7 +219,7 @@ export function SiteFooter() {
           </p>
           <p className="text-sm text-muted-foreground max-w-sm">
             A four-day international championship and technology exhibition in Mira-Bhayander,
-            Maharashtra, India. 14 – 18 November 2026.
+            Maharashtra, India. 14 – 17 November 2026.
           </p>
         </div>
 
@@ -274,7 +276,7 @@ export function SiteFooter() {
               </Link>
             </li>
             <li>
-              <Link to="/contact" className="transition-colors hover:text-cyan">
+              <Link to="/sponsors" className="transition-colors hover:text-cyan">
                 Become a Sponsor
               </Link>
             </li>

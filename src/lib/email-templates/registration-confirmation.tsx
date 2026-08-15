@@ -135,7 +135,7 @@ const Email = ({
         <Hr style={hr} />
 
         <Text style={footer}>
-          Event dates: 14 – 18 November 2026 • Mira-Bhayander, Maharashtra, India
+          Event dates: 14 – 17 November 2026 • Mira-Bhayander, Maharashtra, India
           <br />
           <br />
           This is an automated confirmation. Please carry your school / college ID card at the entry gate.

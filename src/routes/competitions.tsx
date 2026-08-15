@@ -8,7 +8,7 @@ export const Route = createFileRoute("/competitions")({
       { title: "Competitions | RIRO World Cup 2026" },
       { name: "description", content: "Explore all RIRO World Cup 2026 competition categories — robotics, drones, aerospace, gaming, STEM challenges across Junior and Senior divisions." },
       { property: "og:title", content: "RIRO 2026 — Championship Categories" },
-      { property: "og:description", content: "17+ competitions across robotics, drones, gaming and STEM." },
+      { property: "og:description", content: "18+ competitions across robotics, drones, gaming and STEM." },
     ],
   }),
   component: CompetitionsPage,
@@ -23,7 +23,7 @@ function CompetitionsPage() {
           Championship Grid
         </h1>
         <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mb-12">
-          17+ competitions across Senior and Junior divisions. Choose your arena.
+          18+ competitions across Senior and Junior divisions. Choose your arena.
         </p>
         <CompetitionsGrid />
         <div className="mt-16 text-center">

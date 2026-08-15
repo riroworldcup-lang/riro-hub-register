@@ -131,7 +131,7 @@ const Email = ({
         <Hr style={hr} />
 
         <Text style={footer}>
-          Event dates: 14 – 18 November 2026 • Mira-Bhayander, Maharashtra, India
+          Event dates: 14 – 17 November 2026 • Mira-Bhayander, Maharashtra, India
           <br />
           <br />
           This is an automated notification from the RIRO WORLD CUP 2026 registration system.
