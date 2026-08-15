@@ -140,7 +140,7 @@ function Home() {
               International Robotics, Innovation & Technology Championship.
             </p>
             <p className="text-sm font-mono uppercase tracking-wider text-foreground/80 mb-4 animate-slide-up [animation-delay:250ms]">
-              4-Day Mega Event • 14 - 18 November 2026
+              4-Day Mega Event • 14 - 17 November 2026
             </p>
 
             {/* Official affiliations */}
@@ -301,7 +301,7 @@ function Home() {
               ["03", "Championship", "14 Nov"],
               ["04", "Exhibition", "15 – 16 Nov"],
               ["05", "Finals", "17 Nov"],
-              ["06", "Awards", "18 Nov"],
+              ["06", "Awards", "17 Nov"],
             ].map(([n, title, when], i) => (
               <Reveal as="li" key={n} delay={i * 80} className="relative">
                 <div className="glass-card glass-card-hover rounded-md p-5 h-full">
