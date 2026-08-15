@@ -54,4 +54,5 @@ export const COMPETITION_OPTIONS: string[] = [
   "Poster Making (Junior)",
   "Poster Making (Senior)",
   "World Record Attempt",
+  "Startup Expo",
 ];
