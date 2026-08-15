@@ -10,10 +10,12 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VisitorsRegisterRouteImport } from './routes/visitors-register'
+import { Route as SponsorsRouteImport } from './routes/sponsors'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as RulebookRouteImport } from './routes/rulebook'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as RegisterRouteImport } from './routes/register'
+import { Route as JudgesRouteImport } from './routes/judges'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CompetitionsRouteImport } from './routes/competitions'
@@ -27,6 +29,11 @@ import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/
 const VisitorsRegisterRoute = VisitorsRegisterRouteImport.update({
   id: '/visitors-register',
   path: '/visitors-register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SponsorsRoute = SponsorsRouteImport.update({
+  id: '/sponsors',
+  path: '/sponsors',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -47,6 +54,11 @@ const ResetPasswordRoute = ResetPasswordRouteImport.update({
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
   path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JudgesRoute = JudgesRouteImport.update({
+  id: '/judges',
+  path: '/judges',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GalleryRoute = GalleryRouteImport.update({
@@ -101,10 +113,12 @@ export interface FileRoutesByFullPath {
   '/competitions': typeof CompetitionsRoute
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
+  '/judges': typeof JudgesRoute
   '/register': typeof RegisterRoute
   '/reset-password': typeof ResetPasswordRoute
   '/rulebook': typeof RulebookRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sponsors': typeof SponsorsRoute
   '/visitors-register': typeof VisitorsRegisterRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
@@ -116,10 +130,12 @@ export interface FileRoutesByTo {
   '/competitions': typeof CompetitionsRoute
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
+  '/judges': typeof JudgesRoute
   '/register': typeof RegisterRoute
   '/reset-password': typeof ResetPasswordRoute
   '/rulebook': typeof RulebookRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sponsors': typeof SponsorsRoute
   '/visitors-register': typeof VisitorsRegisterRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
@@ -133,10 +149,12 @@ export interface FileRoutesById {
   '/competitions': typeof CompetitionsRoute
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
+  '/judges': typeof JudgesRoute
   '/register': typeof RegisterRoute
   '/reset-password': typeof ResetPasswordRoute
   '/rulebook': typeof RulebookRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sponsors': typeof SponsorsRoute
   '/visitors-register': typeof VisitorsRegisterRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
@@ -150,10 +168,12 @@ export interface FileRouteTypes {
     | '/competitions'
     | '/contact'
     | '/gallery'
+    | '/judges'
     | '/register'
     | '/reset-password'
     | '/rulebook'
     | '/sitemap.xml'
+    | '/sponsors'
     | '/visitors-register'
     | '/admin'
     | '/dashboard'
@@ -165,10 +185,12 @@ export interface FileRouteTypes {
     | '/competitions'
     | '/contact'
     | '/gallery'
+    | '/judges'
     | '/register'
     | '/reset-password'
     | '/rulebook'
     | '/sitemap.xml'
+    | '/sponsors'
     | '/visitors-register'
     | '/admin'
     | '/dashboard'
@@ -181,10 +203,12 @@ export interface FileRouteTypes {
     | '/competitions'
     | '/contact'
     | '/gallery'
+    | '/judges'
     | '/register'
     | '/reset-password'
     | '/rulebook'
     | '/sitemap.xml'
+    | '/sponsors'
     | '/visitors-register'
     | '/_authenticated/admin'
     | '/_authenticated/dashboard'
@@ -198,10 +222,12 @@ export interface RootRouteChildren {
   CompetitionsRoute: typeof CompetitionsRoute
   ContactRoute: typeof ContactRoute
   GalleryRoute: typeof GalleryRoute
+  JudgesRoute: typeof JudgesRoute
   RegisterRoute: typeof RegisterRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   RulebookRoute: typeof RulebookRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  SponsorsRoute: typeof SponsorsRoute
   VisitorsRegisterRoute: typeof VisitorsRegisterRoute
 }
 
@@ -212,6 +238,13 @@ declare module '@tanstack/react-router' {
       path: '/visitors-register'
       fullPath: '/visitors-register'
       preLoaderRoute: typeof VisitorsRegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sponsors': {
+      id: '/sponsors'
+      path: '/sponsors'
+      fullPath: '/sponsors'
+      preLoaderRoute: typeof SponsorsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -240,6 +273,13 @@ declare module '@tanstack/react-router' {
       path: '/register'
       fullPath: '/register'
       preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/judges': {
+      id: '/judges'
+      path: '/judges'
+      fullPath: '/judges'
+      preLoaderRoute: typeof JudgesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/gallery': {
@@ -329,10 +369,12 @@ const rootRouteChildren: RootRouteChildren = {
   CompetitionsRoute: CompetitionsRoute,
   ContactRoute: ContactRoute,
   GalleryRoute: GalleryRoute,
+  JudgesRoute: JudgesRoute,
   RegisterRoute: RegisterRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   RulebookRoute: RulebookRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  SponsorsRoute: SponsorsRoute,
   VisitorsRegisterRoute: VisitorsRegisterRoute,
 }
 export const routeTree = rootRouteImport

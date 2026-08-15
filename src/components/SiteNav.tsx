@@ -94,7 +94,7 @@ export function SiteNav() {
           </span>
         </Link>
 
-        <div className="hidden lg:flex gap-7 font-mono text-[11px] uppercase tracking-[0.18em] text-silver/70 items-center">
+        <div className="hidden lg:flex gap-5 font-mono text-[11px] uppercase tracking-[0.18em] text-silver/70 items-center">
           {NAV_LINKS.map((l) => (
             <Link
               key={l.to}
