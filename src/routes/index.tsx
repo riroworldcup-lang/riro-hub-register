@@ -299,8 +299,8 @@ function Home() {
               ["01", "Registration", "Open now"],
               ["02", "Qualifiers", "Oct 2026"],
               ["03", "Championship", "14 Nov"],
-              ["04", "Exhibition", "15 – 16 Nov"],
-              ["05", "Finals", "17 Nov"],
+              ["04", "Exhibition", "15 Nov"],
+              ["05", "Finals", "16 Nov"],
               ["06", "Awards", "17 Nov"],
             ].map(([n, title, when], i) => (
               <Reveal as="li" key={n} delay={i * 80} className="relative">
