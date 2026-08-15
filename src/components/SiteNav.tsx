@@ -276,7 +276,7 @@ export function SiteFooter() {
               </Link>
             </li>
             <li>
-              <Link to="/contact" className="transition-colors hover:text-cyan">
+              <Link to="/sponsors" className="transition-colors hover:text-cyan">
                 Become a Sponsor
               </Link>
             </li>
