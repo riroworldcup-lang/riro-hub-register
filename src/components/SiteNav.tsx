@@ -25,6 +25,8 @@ const NAV_LINKS = [
   { to: "/", label: "Home" },
   { to: "/about", label: "Championship" },
   { to: "/competitions", label: "Competitions" },
+  { to: "/judges", label: "Judges" },
+  { to: "/sponsors", label: "Sponsors" },
   { to: "/rulebook", label: "Rulebook" },
   { to: "/gallery", label: "Exhibition" },
   { to: "/contact", label: "Visit" },
