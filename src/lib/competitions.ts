@@ -24,6 +24,7 @@ export const COMPETITIONS: Competition[] = [
   { name: "Amateur Astronomer Conference", category: "STEM", description: "Present celestial research findings.", teamSize: "1", age: "OTA" },
   { name: "Poster Making", category: "Creative", description: "Themed STEM poster design on the spot. FREE entry.", levels: ["Junior", "Senior"], teamSize: "1", age: "6–14 / OTA" },
   { name: "World Record Attempt", category: "Special", description: "Be part of a mass participation world record attempt. ₹99/- per participant.", teamSize: "1", age: "OTA" },
+  { name: "Startup Expo", category: "Innovation", description: "Pitch and exhibit your startup to investors, mentors and industry leaders. ₹3000/- per stall.", teamSize: "1–10", age: "OTA" },
 ];
 
 export const COMPETITION_OPTIONS: string[] = [
