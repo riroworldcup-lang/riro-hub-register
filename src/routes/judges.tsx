@@ -101,16 +101,16 @@ const REGIONS = [
   "Kochi, Kerala",
 ];
 
-/* Indian professional studio portraits, gender-matched to names */
-const MALE_PORTRAITS = [judgeM1, judgeM2, judgeM3, judgeM4];
-const FEMALE_PORTRAITS = [judgeF1, judgeF2, judgeF3, judgeF4];
+/* Indian professional studio portraits — one unique portrait per judge */
+const MALE_PORTRAITS = [judgeM1, judgeM2, judgeM3, judgeM4, judgeM5, judgeM6, judgeM7, judgeM8];
+const FEMALE_PORTRAITS = [judgeF1, judgeF2, judgeF3, judgeF4, judgeF5, judgeF6, judgeF7, judgeF8];
 
-const JUDGES = Array.from({ length: 60 }, (_, i) => {
+const JUDGE_COUNT = MALE_PORTRAITS.length + FEMALE_PORTRAITS.length;
+
+const JUDGES = Array.from({ length: JUDGE_COUNT }, (_, i) => {
   const isMale = i % 2 === 0;
   const slot = Math.floor(i / 2);
-  const first = isMale
-    ? MALE_NAMES[slot % MALE_NAMES.length]
-    : FEMALE_NAMES[slot % FEMALE_NAMES.length];
+  const first = isMale ? MALE_NAMES[slot] : FEMALE_NAMES[slot];
   return {
     id: i + 1,
     name: `${first} ${LAST_NAMES[(i * 7) % LAST_NAMES.length]}`,
@@ -119,11 +119,10 @@ const JUDGES = Array.from({ length: 60 }, (_, i) => {
     expertise: EXPERTISE[(i * 5) % EXPERTISE.length],
     region: REGIONS[(i * 2) % REGIONS.length],
     years: 8 + ((i * 3) % 22),
-    image: isMale
-      ? MALE_PORTRAITS[slot % MALE_PORTRAITS.length]
-      : FEMALE_PORTRAITS[slot % FEMALE_PORTRAITS.length],
+    image: isMale ? MALE_PORTRAITS[slot] : FEMALE_PORTRAITS[slot],
   };
 });
+
 
 
 function JudgesPage() {
