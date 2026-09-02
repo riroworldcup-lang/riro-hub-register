@@ -8,6 +8,14 @@ import judgeF1 from "@/assets/judge-f1.jpg";
 import judgeF2 from "@/assets/judge-f2.jpg";
 import judgeF3 from "@/assets/judge-f3.jpg";
 import judgeF4 from "@/assets/judge-f4.jpg";
+import judgeM5 from "@/assets/judge-m5.jpg";
+import judgeM6 from "@/assets/judge-m6.jpg";
+import judgeM7 from "@/assets/judge-m7.jpg";
+import judgeM8 from "@/assets/judge-m8.jpg";
+import judgeF5 from "@/assets/judge-f5.jpg";
+import judgeF6 from "@/assets/judge-f6.jpg";
+import judgeF7 from "@/assets/judge-f7.jpg";
+import judgeF8 from "@/assets/judge-f8.jpg";
 
 export const Route = createFileRoute("/judges")({
   head: () => ({
