@@ -81,6 +81,36 @@ const REGIONS = [
   "Kochi, Kerala",
 ];
 
+/* Professional studio portraits (Unsplash), cropped to passport-style squares */
+const PORTRAITS = [
+  "photo-1560250097-0b93528c311a",
+  "photo-1573496359142-b8d87734a5a2",
+  "photo-1519085360753-af0119f7cbe7",
+  "photo-1580489944761-15a19d654956",
+  "photo-1472099645785-5658abf4ff4e",
+  "photo-1544005313-94ddf0286df2",
+  "photo-1507003211169-0a1dd7228f2d",
+  "photo-1568602471122-7832951cc4c5",
+  "photo-1517841905240-472988babdf9",
+  "photo-1558222218-b7b54eede3f3",
+  "photo-1600180758890-6b94519a8ba6",
+  "photo-1610216705422-caa3fcb6d158",
+  "photo-1607990281513-2c110a25bd8c",
+  "photo-1596075780750-81249df16d19",
+  "photo-1592621385612-4d7129426394",
+  "photo-1623582854588-d60de57fa33f",
+  "photo-1615109398623-88346a601842",
+  "photo-1595152772835-219674b2a8a6",
+  "photo-1633332755192-727a05c4013d",
+  "photo-1573497019940-1c28c88b4f3e",
+  "photo-1598550874175-4d0ef436c909",
+  "photo-1531123897727-8f129e1688ce",
+  "photo-1621905251189-08b45d6a269e",
+];
+
+const portraitUrl = (i: number) =>
+  `https://images.unsplash.com/${PORTRAITS[i % PORTRAITS.length]}?auto=format&fit=facearea&facepad=2.8&w=480&h=480&q=80`;
+
 const JUDGES = Array.from({ length: 60 }, (_, i) => ({
   id: i + 1,
   name: `${FIRST_NAMES[i % FIRST_NAMES.length]} ${LAST_NAMES[(i * 7) % LAST_NAMES.length]}`,
