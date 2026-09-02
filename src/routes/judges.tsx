@@ -1,5 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteShell } from "@/components/SiteNav";
+import judgeM1 from "@/assets/judge-m1.jpg";
+import judgeM2 from "@/assets/judge-m2.jpg";
+import judgeM3 from "@/assets/judge-m3.jpg";
+import judgeM4 from "@/assets/judge-m4.jpg";
+import judgeF1 from "@/assets/judge-f1.jpg";
+import judgeF2 from "@/assets/judge-f2.jpg";
+import judgeF3 from "@/assets/judge-f3.jpg";
+import judgeF4 from "@/assets/judge-f4.jpg";
 
 export const Route = createFileRoute("/judges")({
   head: () => ({
