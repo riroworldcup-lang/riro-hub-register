@@ -23,7 +23,7 @@ export function MarqueeBanner() {
 
 const NAV_LINKS = [
   { to: "/", label: "Home" },
-  { to: "/about", label: "Championship" },
+  { to: "/about", label: "About Us" },
   { to: "/competitions", label: "Competitions" },
   { to: "/judges", label: "Judges" },
   { to: "/sponsors", label: "Sponsors" },
