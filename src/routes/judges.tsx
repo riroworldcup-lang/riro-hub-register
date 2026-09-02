@@ -119,7 +119,7 @@ const JUDGES = Array.from({ length: 60 }, (_, i) => ({
   expertise: EXPERTISE[(i * 5) % EXPERTISE.length],
   region: REGIONS[(i * 2) % REGIONS.length],
   years: 8 + ((i * 3) % 22),
-  image: `https://i.pravatar.cc/400?img=${(i % 70) + 1}`,
+  image: portraitUrl(i),
 }));
 
 function JudgesPage() {
