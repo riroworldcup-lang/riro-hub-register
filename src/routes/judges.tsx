@@ -22,12 +22,16 @@ export const Route = createFileRoute("/judges")({
   component: JudgesPage,
 });
 
-const FIRST_NAMES = [
-  "Aarav", "Priya", "Rohan", "Ananya", "Vikram", "Meera", "Arjun", "Kavya",
-  "Siddharth", "Neha", "Karan", "Divya", "Aditya", "Sneha", "Nikhil", "Pooja",
-  "Rahul", "Ishita", "Manav", "Tanvi", "Yash", "Riya", "Aman", "Shreya",
-  "Dev", "Anjali", "Kabir", "Nisha", "Varun", "Sanya",
+const MALE_NAMES = [
+  "Aarav", "Rohan", "Vikram", "Arjun", "Siddharth", "Karan", "Aditya", "Nikhil",
+  "Rahul", "Manav", "Yash", "Aman", "Dev", "Kabir", "Varun",
 ];
+
+const FEMALE_NAMES = [
+  "Priya", "Ananya", "Meera", "Kavya", "Neha", "Divya", "Sneha", "Pooja",
+  "Ishita", "Tanvi", "Riya", "Shreya", "Anjali", "Nisha", "Sanya",
+];
+
 
 const LAST_NAMES = [
   "Sharma", "Patel", "Iyer", "Deshmukh", "Nair", "Verma", "Joshi", "Reddy",
