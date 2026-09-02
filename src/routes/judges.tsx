@@ -24,12 +24,12 @@ export const Route = createFileRoute("/judges")({
       {
         name: "description",
         content:
-          "Meet the 60-member judging panel of RIRO World Cup 2026 — robotics engineers, aerospace scientists, STEM educators and industry experts evaluating every arena.",
+          "Meet the 16-member judging panel of RIRO World Cup 2026 — robotics engineers, aerospace scientists, STEM educators and industry experts evaluating every arena.",
       },
       { property: "og:title", content: "Judges & Jury Panel — RIRO World Cup 2026" },
       {
         property: "og:description",
-        content: "60 robotics, aerospace and STEM experts on the RIRO 2026 jury panel.",
+        content: "16 robotics, aerospace and STEM experts on the RIRO 2026 jury panel.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -134,7 +134,7 @@ function JudgesPage() {
           Judges & Jury
         </h1>
         <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mb-12">
-          A 60-member independent panel of robotics engineers, aerospace scientists, educators
+          A 16-member independent panel of robotics engineers, aerospace scientists, educators
           and industry leaders evaluating every arena of the RIRO World Cup 2026.
         </p>
 
