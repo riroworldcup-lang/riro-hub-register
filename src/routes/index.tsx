@@ -401,14 +401,20 @@ function Home() {
   );
 }
 
+const FEATURED_VIDEO = "https://youtube.com/shorts/URq2gfdyo7w?feature=shared";
+
 function VideoShowcase() {
   const [url, setUrl] = useState<string>("");
-  const [submitted, setSubmitted] = useState<string | null>(null);
+  const [submitted, setSubmitted] = useState<string>(FEATURED_VIDEO);
 
   function toEmbed(input: string): string | null {
     try {
       const u = new URL(input);
       if (u.hostname.includes("youtube.com")) {
+        if (u.pathname.startsWith("/shorts/")) {
+          const id = u.pathname.split("/").filter(Boolean)[1];
+          if (id) return `https://www.youtube.com/embed/${id}`;
+        }
         const id = u.searchParams.get("v");
         if (id) return `https://www.youtube.com/embed/${id}`;
       }
@@ -427,6 +433,8 @@ function VideoShowcase() {
   }
 
   const embed = submitted ? toEmbed(submitted) : null;
+  const isShort = submitted.includes("/shorts/");
+
 
   return (
     <section className="py-20 sm:py-28 px-4 sm:px-6 bg-white/[0.02] border-y border-border">
@@ -444,7 +452,8 @@ function VideoShowcase() {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            setSubmitted(url.trim() || null);
+            setSubmitted(url.trim() || FEATURED_VIDEO);
+
           }}
           className="flex flex-col sm:flex-row gap-3 mb-8"
         >
