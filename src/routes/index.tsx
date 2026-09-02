@@ -472,7 +472,11 @@ function VideoShowcase() {
           </button>
         </form>
 
-        <div className="aspect-video w-full bg-background border border-border rounded-sm overflow-hidden flex items-center justify-center">
+        <div
+          className={`w-full bg-background border border-border rounded-sm overflow-hidden flex items-center justify-center mx-auto ${
+            isShort ? "aspect-9/16 max-w-sm" : "aspect-video"
+          }`}
+        >
           {embed ? (
             /\.(mp4|webm|ogg)$/i.test(embed) ? (
               <video src={embed} controls className="w-full h-full object-contain" />
