@@ -8,6 +8,14 @@ import judgeF1 from "@/assets/judge-f1.jpg";
 import judgeF2 from "@/assets/judge-f2.jpg";
 import judgeF3 from "@/assets/judge-f3.jpg";
 import judgeF4 from "@/assets/judge-f4.jpg";
+import judgeM5 from "@/assets/judge-m5.jpg";
+import judgeM6 from "@/assets/judge-m6.jpg";
+import judgeM7 from "@/assets/judge-m7.jpg";
+import judgeM8 from "@/assets/judge-m8.jpg";
+import judgeF5 from "@/assets/judge-f5.jpg";
+import judgeF6 from "@/assets/judge-f6.jpg";
+import judgeF7 from "@/assets/judge-f7.jpg";
+import judgeF8 from "@/assets/judge-f8.jpg";
 
 export const Route = createFileRoute("/judges")({
   head: () => ({
@@ -16,12 +24,12 @@ export const Route = createFileRoute("/judges")({
       {
         name: "description",
         content:
-          "Meet the 60-member judging panel of RIRO World Cup 2026 — robotics engineers, aerospace scientists, STEM educators and industry experts evaluating every arena.",
+          "Meet the 16-member judging panel of RIRO World Cup 2026 — robotics engineers, aerospace scientists, STEM educators and industry experts evaluating every arena.",
       },
       { property: "og:title", content: "Judges & Jury Panel — RIRO World Cup 2026" },
       {
         property: "og:description",
-        content: "60 robotics, aerospace and STEM experts on the RIRO 2026 jury panel.",
+        content: "16 robotics, aerospace and STEM experts on the RIRO 2026 jury panel.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -93,16 +101,16 @@ const REGIONS = [
   "Kochi, Kerala",
 ];
 
-/* Indian professional studio portraits, gender-matched to names */
-const MALE_PORTRAITS = [judgeM1, judgeM2, judgeM3, judgeM4];
-const FEMALE_PORTRAITS = [judgeF1, judgeF2, judgeF3, judgeF4];
+/* Indian professional studio portraits — one unique portrait per judge */
+const MALE_PORTRAITS = [judgeM1, judgeM2, judgeM3, judgeM4, judgeM5, judgeM6, judgeM7, judgeM8];
+const FEMALE_PORTRAITS = [judgeF1, judgeF2, judgeF3, judgeF4, judgeF5, judgeF6, judgeF7, judgeF8];
 
-const JUDGES = Array.from({ length: 60 }, (_, i) => {
+const JUDGE_COUNT = MALE_PORTRAITS.length + FEMALE_PORTRAITS.length;
+
+const JUDGES = Array.from({ length: JUDGE_COUNT }, (_, i) => {
   const isMale = i % 2 === 0;
   const slot = Math.floor(i / 2);
-  const first = isMale
-    ? MALE_NAMES[slot % MALE_NAMES.length]
-    : FEMALE_NAMES[slot % FEMALE_NAMES.length];
+  const first = isMale ? MALE_NAMES[slot] : FEMALE_NAMES[slot];
   return {
     id: i + 1,
     name: `${first} ${LAST_NAMES[(i * 7) % LAST_NAMES.length]}`,
@@ -111,11 +119,10 @@ const JUDGES = Array.from({ length: 60 }, (_, i) => {
     expertise: EXPERTISE[(i * 5) % EXPERTISE.length],
     region: REGIONS[(i * 2) % REGIONS.length],
     years: 8 + ((i * 3) % 22),
-    image: isMale
-      ? MALE_PORTRAITS[slot % MALE_PORTRAITS.length]
-      : FEMALE_PORTRAITS[slot % FEMALE_PORTRAITS.length],
+    image: isMale ? MALE_PORTRAITS[slot] : FEMALE_PORTRAITS[slot],
   };
 });
+
 
 
 function JudgesPage() {
@@ -127,7 +134,7 @@ function JudgesPage() {
           Judges & Jury
         </h1>
         <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mb-12">
-          A 60-member independent panel of robotics engineers, aerospace scientists, educators
+          A 16-member independent panel of robotics engineers, aerospace scientists, educators
           and industry leaders evaluating every arena of the RIRO World Cup 2026.
         </p>
 
