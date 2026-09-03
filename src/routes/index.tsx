@@ -413,21 +413,22 @@ function VideoShowcase() {
       if (u.hostname.includes("youtube.com")) {
         if (u.pathname.startsWith("/shorts/")) {
           const id = u.pathname.split("/").filter(Boolean)[1];
-          if (id) return `https://www.youtube.com/embed/${id}`;
+          if (id) return `https://www.youtube.com/embed/${id}?loop=1&playlist=${id}`;
         }
         if (u.pathname.startsWith("/playlist")) {
           const list = u.searchParams.get("list");
-          if (list) return `https://www.youtube.com/embed/videoseries?list=${list}`;
+          if (list) return `https://www.youtube.com/embed/videoseries?list=${list}&loop=1`;
         }
         const id = u.searchParams.get("v");
-        if (id) return `https://www.youtube.com/embed/${id}`;
+        if (id) return `https://www.youtube.com/embed/${id}?loop=1&playlist=${id}`;
       }
       if (u.hostname === "youtu.be") {
-        return `https://www.youtube.com/embed/${u.pathname.slice(1)}`;
+        const id = u.pathname.slice(1);
+        return `https://www.youtube.com/embed/${id}?loop=1&playlist=${id}`;
       }
       if (u.hostname.includes("vimeo.com")) {
         const id = u.pathname.split("/").filter(Boolean)[0];
-        if (id) return `https://player.vimeo.com/video/${id}`;
+        if (id) return `https://player.vimeo.com/video/${id}?loop=1`;
       }
       if (/\.(mp4|webm|ogg)$/i.test(u.pathname)) return input;
       return input;
@@ -449,7 +450,7 @@ function VideoShowcase() {
             Watch The Action
           </h3>
           <p className="text-muted-foreground mt-3 text-sm sm:text-base">
-            Paste a YouTube, Vimeo, or direct video URL to preview it here.
+            Paste a YouTube, Vimeo, or direct video URL to preview it here. Videos play on loop.
           </p>
         </div>
 
@@ -483,7 +484,7 @@ function VideoShowcase() {
         >
           {embed ? (
             /\.(mp4|webm|ogg)$/i.test(embed) ? (
-              <video src={embed} controls className="w-full h-full object-contain" />
+              <video src={embed} controls autoPlay muted loop playsInline className="w-full h-full object-contain" />
             ) : (
               <iframe
                 src={embed}
