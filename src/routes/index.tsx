@@ -401,7 +401,7 @@ function Home() {
   );
 }
 
-const FEATURED_VIDEO = "https://youtube.com/shorts/URq2gfdyo7w?feature=shared";
+const FEATURED_VIDEO = "https://youtube.com/playlist?list=PLI6cwjEqJCAs&si=9-UPL07qWQAn1dmx";
 
 function VideoShowcase() {
   const [url, setUrl] = useState<string>("");
@@ -414,6 +414,10 @@ function VideoShowcase() {
         if (u.pathname.startsWith("/shorts/")) {
           const id = u.pathname.split("/").filter(Boolean)[1];
           if (id) return `https://www.youtube.com/embed/${id}`;
+        }
+        if (u.pathname.startsWith("/playlist")) {
+          const list = u.searchParams.get("list");
+          if (list) return `https://www.youtube.com/embed/videoseries?list=${list}`;
         }
         const id = u.searchParams.get("v");
         if (id) return `https://www.youtube.com/embed/${id}`;

@@ -38,15 +38,25 @@ function ContactPage() {
         <div className="grid sm:grid-cols-2 gap-px bg-border border border-border max-w-2xl mx-auto">
           <div className="bg-background p-8">
             <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-2">WhatsApp</div>
-            <a href="https://wa.me/918097070383" target="_blank" rel="noopener" className="font-mono text-sm sm:text-base text-primary">
-              +91 80970 70383
-            </a>
+            <div className="flex flex-col gap-1">
+              <a href="https://wa.me/918097070383" target="_blank" rel="noopener" className="font-mono text-sm sm:text-base text-primary">
+                +91 80970 70383
+              </a>
+              <a href="https://wa.me/918976719791" target="_blank" rel="noopener" className="font-mono text-sm sm:text-base text-primary">
+                +91 8976 719791
+              </a>
+            </div>
           </div>
           <div className="bg-background p-8">
             <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-2">Call Us</div>
-            <a href="tel:+918097070383" className="font-mono text-sm sm:text-base text-primary">
-              +91 80970 70383
-            </a>
+            <div className="flex flex-col gap-1">
+              <a href="tel:+918097070383" className="font-mono text-sm sm:text-base text-primary">
+                +91 80970 70383
+              </a>
+              <a href="tel:+918976719791" className="font-mono text-sm sm:text-base text-primary">
+                +91 8976 719791
+              </a>
+            </div>
           </div>
         </div>
         <div className="flex flex-wrap justify-center gap-4 mt-10">
