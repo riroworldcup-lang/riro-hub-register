@@ -28,7 +28,7 @@ const NAV_LINKS = [
   { to: "/judges", label: "Judges" },
   { to: "/sponsors", label: "Sponsors" },
   { to: "/rulebook", label: "Rulebook" },
-  { to: "/gallery", label: "Exhibition" },
+  { to: "/gallery", label: "Gallery" },
   { to: "/contact", label: "Visit" },
 ] as const;
 
