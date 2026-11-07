@@ -41,12 +41,12 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "4-day mega event Oct–Nov 2026 in Mira-Bhayander. Robotics, drones, aerospace, gaming, STEM. Register your team now.",
+          "4-day mega event, 19–22 December 2026, in Mira-Bhayander. Robotics, drones, aerospace, gaming, STEM. Register your team now.",
       },
       { property: "og:title", content: "RIRO World Cup 2026 | International Robotics & Innovation Championship" },
       {
         property: "og:description",
-        content: "4-day mega event Oct–Nov 2026 in Mira-Bhayander. Robotics, drones, aerospace, gaming, STEM. Register your team now.",
+        content: "4-day mega event, 19–22 December 2026, in Mira-Bhayander. Robotics, drones, aerospace, gaming, STEM. Register your team now.",
       },
     ],
   }),
@@ -140,7 +140,7 @@ function Home() {
               International Robotics, Innovation & Technology Championship.
             </p>
             <p className="text-sm font-mono uppercase tracking-wider text-foreground/80 mb-4 animate-slide-up [animation-delay:250ms]">
-              4-Day Mega Event • 14 - 17 November 2026
+              4-Day Mega Event • 19 – 22 December 2026
             </p>
 
             {/* Official affiliations */}
@@ -297,11 +297,11 @@ function Home() {
             <div className="hidden lg:block absolute top-6 left-0 right-0 h-px bg-linear-to-r from-transparent via-electric/40 to-transparent" />
             {[
               ["01", "Registration", "Open now"],
-              ["02", "Qualifiers", "Oct 2026"],
-              ["03", "Championship", "14 Nov"],
-              ["04", "Exhibition", "15 Nov"],
-              ["05", "Finals", "16 Nov"],
-              ["06", "Awards", "17 Nov"],
+              ["02", "Qualifiers", "Dec 2026"],
+              ["03", "Championship", "19 Dec"],
+              ["04", "Exhibition", "20 Dec"],
+              ["05", "Finals", "21 Dec"],
+              ["06", "Awards", "22 Dec"],
             ].map(([n, title, when], i) => (
               <Reveal as="li" key={n} delay={i * 80} className="relative">
                 <div className="glass-card glass-card-hover rounded-md p-5 h-full">
