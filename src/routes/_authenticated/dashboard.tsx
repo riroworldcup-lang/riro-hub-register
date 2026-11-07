@@ -21,7 +21,7 @@ export const Route = createFileRoute("/_authenticated/dashboard")({
   errorComponent: ({ error }) => (
     <SiteShell>
       <div className="max-w-2xl mx-auto p-8 font-mono text-sm text-destructive">
-        {error.message}
+        {error instanceof Error ? error.message : String(error)}
       </div>
     </SiteShell>
   ),
