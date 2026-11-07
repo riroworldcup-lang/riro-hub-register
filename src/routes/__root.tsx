@@ -3,6 +3,7 @@ import {
   Outlet,
   Link,
   createRootRouteWithContext,
+  type ErrorComponentProps,
   useRouter,
   HeadContent,
   Scripts,
@@ -36,11 +37,14 @@ function NotFoundComponent() {
   );
 }
 
-function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+function ErrorComponent({ error, reset }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
   useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
+    reportLovableError(
+      error instanceof Error ? error : new Error(String(error)),
+      { boundary: "tanstack_root_error_component" },
+    );
   }, [error]);
 
   return (
@@ -83,21 +87,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "4-day mega event Oct–Nov 2026 in Mira-Bhayander. Robotics, drones, aerospace, gaming, STEM. Register your team now.",
+          "4-day mega event, 19–22 December 2026, in Mira-Bhayander. Robotics, drones, aerospace, gaming, STEM. Register your team now.",
       },
       { name: "author", content: "RIRO World Cup" },
       { property: "og:title", content: "RIRO World Cup 2026 | International Robotics & Innovation Championship" },
       {
         property: "og:description",
         content:
-          "4-day mega event Oct–Nov 2026 in Mira-Bhayander. Robotics, drones, aerospace, gaming, STEM. Register your team now.",
+          "4-day mega event, 19–22 December 2026, in Mira-Bhayander. Robotics, drones, aerospace, gaming, STEM. Register your team now.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "RIRO World Cup 2026 | International Robotics & Innovation Championship" },
       {
         name: "twitter:description",
-        content: "4-day mega event Oct–Nov 2026 in Mira-Bhayander. Robotics, drones, aerospace, gaming, STEM. Register your team now.",
+        content: "4-day mega event, 19–22 December 2026, in Mira-Bhayander. Robotics, drones, aerospace, gaming, STEM. Register your team now.",
       },
       { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/bd0ad745-5ec0-4d6b-b997-8b015dda7189/id-preview-196b9f38--ff4d6678-3de8-4972-b78d-fe0e786252eb.lovable.app-1783719305801.png" },
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/bd0ad745-5ec0-4d6b-b997-8b015dda7189/id-preview-196b9f38--ff4d6678-3de8-4972-b78d-fe0e786252eb.lovable.app-1783719305801.png" },
