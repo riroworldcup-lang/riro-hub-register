@@ -637,7 +637,15 @@ function UsersPanel() {
   const q = useQuery({ queryKey: ["admin-users"], queryFn: () => fetchList() });
 
   const resetMut = useMutation({
-    mutationFn: (email: string) => sendReset({ data: { email } }),
+    mutationFn: (email: string) =>
+      sendReset({
+        data: {
+          email,
+          origin: window.location.origin as
+            | "https://riroworldcup.lovable.app"
+            | "https://id-preview--ff4d6678-3de8-4972-b78d-fe0e786252eb.lovable.app",
+        },
+      }),
     onSuccess: () => toast.success("Password reset email sent."),
     onError: (e: Error) => toast.error(e.message),
   });

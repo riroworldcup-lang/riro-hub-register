@@ -86,7 +86,17 @@ export const listAuthUsers = createServerFn({ method: "GET" })
 
 export const sendPasswordResetForUser = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((d: unknown) => z.object({ email: z.string().trim().email().max(254) }).parse(d))
+  .inputValidator((d: unknown) =>
+    z
+      .object({
+        email: z.string().trim().email().max(254),
+        origin: z.enum([
+          "https://riroworldcup.lovable.app",
+          "https://id-preview--ff4d6678-3de8-4972-b78d-fe0e786252eb.lovable.app",
+        ]),
+      })
+      .parse(d),
+  )
   .handler(async ({ data, context }) => {
     await assertAdmin(context);
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
@@ -109,7 +119,7 @@ export const sendPasswordResetForUser = createServerFn({ method: "POST" })
     if (!registeredEmail) throw new Error("Could not send password reset.");
 
     const { error } = await supabaseAdmin.auth.resetPasswordForEmail(registeredEmail, {
-      redirectTo: "https://riroworldcup.lovable.app/reset-password",
+      redirectTo: `${data.origin}/reset-password`,
     });
     if (error) throw new Error("Could not send password reset.");
     return { ok: true };
