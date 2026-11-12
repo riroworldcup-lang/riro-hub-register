@@ -15,6 +15,13 @@
       "when": 1794502103383,
       "tag": "0001_serve_public_content_through_trusted_readers",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1794502138613,
+      "tag": "0002_grant_trusted_readers_public_content",
+      "breakpoints": true
     }
   ]
 }
