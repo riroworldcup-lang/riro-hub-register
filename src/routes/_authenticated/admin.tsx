@@ -7,7 +7,6 @@ import { supabase } from "@/integrations/supabase/client";
 import {
   listRegistrations,
   deleteRegistration,
-  claimFirstAdmin,
   checkIsAdmin,
   updateChargesSetting,
   listAuthUsers,
@@ -44,7 +43,6 @@ export const Route = createFileRoute("/_authenticated/admin")({
 function AdminPage() {
   const navigate = useNavigate();
   const qc = useQueryClient();
-  const claim = useServerFn(claimFirstAdmin);
   const check = useServerFn(checkIsAdmin);
   const fetchList = useServerFn(listRegistrations);
   const del = useServerFn(deleteRegistration);
@@ -55,21 +53,15 @@ function AdminPage() {
   useEffect(() => {
     (async () => {
       try {
-        const r = await claim();
-        if (!r.ok) {
-          toast.error("Not an admin. Ask the existing admin to grant you access.");
-          setAdminReady(false);
-          return;
-        }
         const { isAdmin } = await check();
         setAdminReady(isAdmin);
-        if (!isAdmin) toast.error("Admin role not active yet. Try refreshing.");
+        if (!isAdmin) toast.error("Not an admin. Ask an existing admin to grant you access.");
       } catch (e: any) {
         toast.error(e.message || "Could not verify admin access.");
         setAdminReady(false);
       }
     })();
-  }, [claim, check]);
+  }, [check]);
 
   const query = useQuery({
     queryKey: ["registrations"],
@@ -97,7 +89,9 @@ function AdminPage() {
     const cols = Object.keys(rows[0]);
     const escape = (v: any) => {
       if (v === null || v === undefined) return "";
-      const s = String(v).replace(/"/g, '""');
+      let value = String(v);
+      if (/^[\s\uFEFF]*[=+\-@]/.test(value)) value = `'${value}`;
+      const s = value.replace(/"/g, '""');
       return /[",\n]/.test(s) ? `"${s}"` : s;
     };
     const csv = [cols.join(","), ...rows.map((r: any) => cols.map((c) => escape(r[c])).join(","))].join("\n");
@@ -644,7 +638,14 @@ function UsersPanel() {
 
   const resetMut = useMutation({
     mutationFn: (email: string) =>
-      sendReset({ data: { email, redirectTo: `${window.location.origin}/reset-password` } }),
+      sendReset({
+        data: {
+          email,
+          origin: window.location.origin as
+            | "https://riroworldcup.lovable.app"
+            | "https://id-preview--ff4d6678-3de8-4972-b78d-fe0e786252eb.lovable.app",
+        },
+      }),
     onSuccess: () => toast.success("Password reset email sent."),
     onError: (e: Error) => toast.error(e.message),
   });

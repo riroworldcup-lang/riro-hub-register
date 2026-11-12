@@ -57,29 +57,6 @@ export const updateChargesSetting = createServerFn({ method: "POST" })
     return { ok: true };
   });
 
-export const claimFirstAdmin = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
-  .handler(async ({ context }) => {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { count, error: countErr } = await supabaseAdmin
-      .from("user_roles")
-      .select("id", { count: "exact", head: true })
-      .eq("role", "admin");
-    if (countErr) throw new Error(countErr.message);
-    if ((count ?? 0) > 0) {
-      const { data: isAdmin } = await context.supabase.rpc("has_role", {
-        _user_id: context.userId,
-        _role: "admin",
-      });
-      return { ok: !!isAdmin, alreadyClaimed: true };
-    }
-    const { error } = await supabaseAdmin
-      .from("user_roles")
-      .insert({ user_id: context.userId, role: "admin" });
-    if (error) throw new Error(error.message);
-    return { ok: true, alreadyClaimed: false };
-  });
-
 export const checkIsAdmin = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
@@ -110,19 +87,40 @@ export const listAuthUsers = createServerFn({ method: "GET" })
 export const sendPasswordResetForUser = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d: unknown) =>
-    z.object({ email: z.string().trim().email(), redirectTo: z.string().url() }).parse(d),
+    z
+      .object({
+        email: z.string().trim().email().max(254),
+        origin: z.enum([
+          "https://riroworldcup.lovable.app",
+          "https://id-preview--ff4d6678-3de8-4972-b78d-fe0e786252eb.lovable.app",
+        ]),
+      })
+      .parse(d),
   )
   .handler(async ({ data, context }) => {
     await assertAdmin(context);
-    const { createClient } = await import("@supabase/supabase-js");
-    const client = createClient(
-      process.env.SUPABASE_URL!,
-      process.env.SUPABASE_PUBLISHABLE_KEY!,
-      { auth: { persistSession: false, autoRefreshToken: false } },
-    );
-    const { error } = await client.auth.resetPasswordForEmail(data.email, {
-      redirectTo: data.redirectTo,
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    let registeredEmail: string | undefined;
+    for (let page = 1; page <= 10; page += 1) {
+      const { data: usersPage, error: listError } = await supabaseAdmin.auth.admin.listUsers({
+        page,
+        perPage: 1000,
+      });
+      if (listError) throw new Error("Could not send password reset.");
+      const matchedUser = usersPage.users.find(
+        (user) => user.email?.toLowerCase() === data.email.toLowerCase(),
+      );
+      if (matchedUser?.email) {
+        registeredEmail = matchedUser.email;
+        break;
+      }
+      if (usersPage.users.length < 1000) break;
+    }
+    if (!registeredEmail) throw new Error("Could not send password reset.");
+
+    const { error } = await supabaseAdmin.auth.resetPasswordForEmail(registeredEmail, {
+      redirectTo: `${data.origin}/reset-password`,
     });
-    if (error) throw new Error(error.message);
+    if (error) throw new Error("Could not send password reset.");
     return { ok: true };
   });

@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1794501996600,
+      "tag": "0000_tighten_public_content_and_role_access",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1794502103383,
+      "tag": "0001_serve_public_content_through_trusted_readers",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1794502138613,
+      "tag": "0002_grant_trusted_readers_public_content",
+      "breakpoints": true
+    }
+  ]
+}
